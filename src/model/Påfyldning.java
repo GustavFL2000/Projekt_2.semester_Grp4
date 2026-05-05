@@ -15,4 +15,13 @@ public class Påfyldning {
         destillat.addPåfyldning(this);
         fad.addPåfyldning(this);
     }
+
+    @Override
+    public String toString() {
+        return "Påfyldning{" +
+                "mængde=" + mængde +
+                ", destillat=" + destillat +
+                ", fad=" + fad +
+                '}';
+    }
 }

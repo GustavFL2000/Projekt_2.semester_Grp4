@@ -34,4 +34,10 @@ public class Fad {
             fyldt = true;
         }
     }
+
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.fadNr);
+    }
 }
