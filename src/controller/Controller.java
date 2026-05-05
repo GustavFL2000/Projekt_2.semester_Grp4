@@ -1,4 +1,27 @@
 package controller;
 
+import model.Destillering;
+import model.Maltbatch;
+import storage.IStorage;
+
+import java.time.LocalDate;
+import java.util.List;
+
+
 public class Controller {
+    IStorage storage;
+
+    public Controller(IStorage storage) {
+        this.storage = storage;
+    }
+
+    public Destillering createDestillering(int destilleringsID,LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch){
+        Destillering destillering = new Destillering(destilleringsID,startDato,slutDato,alkoholProcent, rygematriale,kommentar,væskeMængde,maltbatch);
+        storage.addDestillering(destillering);
+        return destillering;
+    }
+
+    public List<Destillering> getDestilleringer(){
+        return storage.getDestilleringer();
+    }
 }
