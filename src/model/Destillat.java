@@ -34,6 +34,30 @@ public class Destillat {
     }
 
     public Påfyldning createPåfyldning(double mængde, Fad fad) {
+        if (fad == null) {
+            throw new IllegalArgumentException("Fad må ikke være null");
+        }
+        if (mængde <= 0) {
+            throw new IllegalArgumentException("Mængde skal være større end 0");
+        }
+        if (mængde > getRestMængde()) {
+            throw new IllegalArgumentException("Der er ikke nok destillat tilbage");
+        }
+        if (!fad.harPladsTil(mængde)) {
+            throw new IllegalArgumentException("Der er ikke nok plads i fadet");
+        }
         return new Påfyldning(mængde, this, fad);
+    }
+
+    public double getPåfyldtMængde (){
+        double sum = 0;
+        for (Påfyldning påfyldning : påfyldninger) {
+            sum += påfyldning.getMængde();
+        }
+        return sum;
+    }
+
+    public double getRestMængde () {
+        return mængde - getPåfyldtMængde();
     }
 }

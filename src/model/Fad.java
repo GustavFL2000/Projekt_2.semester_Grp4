@@ -9,7 +9,6 @@ public class Fad {
     private double størrelse;
     private String tidligereIndhold;
     private String leverandør;
-    private boolean fyldt;
 
     //linkattributter
     private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
@@ -21,7 +20,6 @@ public class Fad {
         this.størrelse = størrelse;
         this.tidligereIndhold = tidligereIndhold;
         this.leverandør = leverandør;
-        this.fyldt = false;
     }
 
     public ArrayList<Påfyldning> getPåfyldninger() {
@@ -31,7 +29,22 @@ public class Fad {
      void addPåfyldning (Påfyldning påfyldning) {
         if (!påfyldninger.contains(påfyldning) && påfyldning != null){
             påfyldninger.add(påfyldning);
-            fyldt = true;
         }
+     }
+
+    public double getSamletMængde () {
+        double sum = 0;
+        for (Påfyldning påfyldning : påfyldninger) {
+            sum += påfyldning.getMængde();
+        }
+        return sum;
+    }
+
+    public double getRestKapacitet() {
+        return størrelse - getSamletMængde();
+    }
+
+    public boolean harPladsTil(double mængde) {
+        return mængde > 0 && mængde <= getRestKapacitet();
     }
 }
