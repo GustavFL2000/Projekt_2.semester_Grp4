@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Fad {
@@ -83,6 +84,17 @@ public class Fad {
         return mængde > 0 && mængde <= getTilgængeligMængdeTilProdukt();
     }
 
+    //TODO Gå igennem listen og tjek den sidste påfyldningdato om den er over 3 år og return true
+    public boolean erKlarTilAftapning(LocalDate dagsDato) {
+        if (dagsDato == null){
+            throw new RuntimeException("Dato må ikke være null");
+        }
+
+        for (Påfyldning påfyldning : påfyldninger) {
+
+        }
+        return false;
+    }
 
 
     @Override

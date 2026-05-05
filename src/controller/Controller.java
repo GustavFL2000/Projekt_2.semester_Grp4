@@ -20,8 +20,8 @@ public class Controller {
         return destillering;
     }
 
-    public Påfyldning createPåfyldning(double mængde, Fad fad, Destillat destillat) {
-        Påfyldning p = destillat.createPåfyldning(mængde, fad);
+    public Påfyldning createPåfyldning(double mængde, LocalDate dato, Fad fad, Destillat destillat) {
+        Påfyldning p = destillat.createPåfyldning(mængde, dato, fad);
         return p;
     }
 

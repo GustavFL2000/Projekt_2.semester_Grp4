@@ -35,10 +35,7 @@ public class Destillat {
         }
     }
 
-    public Påfyldning createPåfyldning(double mængde, Fad fad) {
-        if (fad == null) {
-            throw new IllegalArgumentException("Fad må ikke være null");
-        }
+    public Påfyldning createPåfyldning(double mængde, LocalDate dato, Fad fad) {
         if (mængde <= 0) {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
@@ -48,7 +45,13 @@ public class Destillat {
         if (!fad.harPladsTil(mængde)) {
             throw new IllegalArgumentException("Der er ikke nok plads i fadet");
         }
-        return new Påfyldning(mængde, this, fad);
+        if (dato == null){
+            throw new IllegalArgumentException("Dato må ikke være null");
+        }
+        if (fad == null) {
+            throw new IllegalArgumentException("Fad må ikke være null");
+        }
+        return new Påfyldning(mængde, dato,this, fad);
     }
 
     public double getPåfyldtMængde (){

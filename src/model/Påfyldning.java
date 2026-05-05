@@ -1,15 +1,21 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Påfyldning {
     private double mængde;
+    private LocalDate dato;
 
     //link attributter
     private Destillat destillat;
     private Fad fad;
 
-    Påfyldning(double mængde, Destillat destillat, Fad fad) {
+    Påfyldning(double mængde, LocalDate dato, Destillat destillat, Fad fad) {
         if (destillat == null) {
             throw new IllegalArgumentException("Destillat må ikke være null");
+        }
+        if (dato == null){
+            throw new IllegalArgumentException("Dato må ikke være null");
         }
         if (fad == null) {
             throw new IllegalArgumentException("Fad må ikke være null");
@@ -18,6 +24,7 @@ public class Påfyldning {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
         this.mængde = mængde;
+        this.dato = dato;
         this.destillat = destillat;
         this.fad = fad;
 
@@ -31,6 +38,7 @@ public class Påfyldning {
                 "mængde=" + mængde +
                 ", destillat=" + destillat +
                 ", fad=" + fad +
+                ", påfyldningsDato=" + dato +
                 '}';
     }
 
@@ -44,5 +52,9 @@ public class Påfyldning {
 
     public Fad getFad() {
         return fad;
+    }
+
+    public LocalDate getDato() {
+        return dato;
     }
 }
