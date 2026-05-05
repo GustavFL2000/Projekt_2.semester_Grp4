@@ -25,6 +25,15 @@ public class Påfyldning {
         fad.addPåfyldning(this);
     }
 
+    @Override
+    public String toString() {
+        return "Påfyldning{" +
+                "mængde=" + mængde +
+                ", destillat=" + destillat +
+                ", fad=" + fad +
+                '}';
+    }
+
     public double getMængde() {
         return mængde;
     }

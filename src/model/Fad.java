@@ -47,4 +47,10 @@ public class Fad {
     public boolean harPladsTil(double mængde) {
         return mængde > 0 && mængde <= getRestKapacitet();
     }
+
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.fadNr);
+    }
 }

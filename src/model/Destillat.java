@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Destillat {
+    private String destilatNavn;
     private LocalDate dato;
     private double mængde;
     private double alkoholProcent;
@@ -11,11 +12,12 @@ public class Destillat {
     private Destillering destillering;
     private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
 
-    public Destillat(LocalDate dato, double mængde, double alkoholProcent, Destillering destillering) {
+    public Destillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent, Destillering destillering) {
         this.dato = dato;
         this.mængde = mængde;
         this.alkoholProcent = alkoholProcent;
         this.destillering = destillering;
+        this.destilatNavn = destilatNavn;
     }
 
     public Destillering getDestillering() {
@@ -59,5 +61,10 @@ public class Destillat {
 
     public double getRestMængde () {
         return mængde - getPåfyldtMængde();
+    }
+
+    @Override
+    public String toString() {
+        return destilatNavn;
     }
 }

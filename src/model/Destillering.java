@@ -32,8 +32,8 @@ public class Destillering {
         return new ArrayList<>(påfyldninger);
     }
 
-    public Destillat createDestillat(LocalDate dato, double mængde, double alkoholProcent){
-        Destillat destillat = new Destillat(dato,mængde,alkoholProcent,this);
+    public Destillat createDestillat(String destilatNavn, LocalDate dato, double mængde, double alkoholProcent){
+        Destillat destillat = new Destillat(destilatNavn,dato,mængde,alkoholProcent,this);
         påfyldninger.add(destillat);
         return destillat;
     }
