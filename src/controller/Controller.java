@@ -1,7 +1,6 @@
 package controller;
 
-import model.Destillering;
-import model.Maltbatch;
+import model.*;
 import storage.IStorage;
 
 import java.time.LocalDate;
@@ -24,4 +23,5 @@ public class Controller {
     public List<Destillering> getDestilleringer(){
         return storage.getDestilleringer();
     }
+
 }

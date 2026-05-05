@@ -15,7 +15,7 @@ public class Destillering {
     Maltbatch maltbatch;
 
     //Composition --> 0..* Påfyldning
-    private List<Påfyldning> påfyldninger = new ArrayList<>();
+    private List<Destillat> påfyldninger = new ArrayList<>();
 
     public Destillering(int destilleringsID, LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
         this.destilleringsID = destilleringsID;
@@ -28,14 +28,14 @@ public class Destillering {
         this.maltbatch = maltbatch;
     }
 
-    public List<Påfyldning> getPåfyldninger() {
+    public List<Destillat> getPåfyldninger() {
         return new ArrayList<>(påfyldninger);
     }
 
-    public Påfyldning createPåfyldning(LocalDate dato, double mængde, double alkoholProcent, Destillering destillering){
-        Påfyldning påfyldning = new Påfyldning(dato,mængde,alkoholProcent,this);
-        påfyldninger.add(påfyldning);
-        return påfyldning;
+    public Destillat createDestillat(LocalDate dato, double mængde, double alkoholProcent){
+        Destillat destillat = new Destillat(dato,mængde,alkoholProcent,this);
+        påfyldninger.add(destillat);
+        return destillat;
     }
 
     public int getDestilleringsID() {

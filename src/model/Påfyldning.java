@@ -1,22 +1,18 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Påfyldning {
-    LocalDate dato;
-    double mængde;
-    double alkoholProcent;
-    private Destillering destillering;
+    private double mængde;
 
-    public Påfyldning(LocalDate dato, double mængde, double alkoholProcent, Destillering destillering) {
-        this.dato = dato;
+    //link attributter
+    private Destillat destillat;
+    private Fad fad;
+
+    public Påfyldning(double mængde, Destillat destillat, Fad fad) {
         this.mængde = mængde;
-        this.alkoholProcent = alkoholProcent;
-        this.destillering = destillering;
-    }
+        this.destillat = destillat;
+        this.fad = fad;
 
-    public Destillering getDestillering(){
-        return destillering;
+        destillat.addPåfyldning(this);
+        fad.addPåfyldning(this);
     }
-
 }
