@@ -89,9 +89,8 @@ public class Fad {
         if (dagsDato == null){
             throw new RuntimeException("Dato må ikke være null");
         }
-
-        for (Påfyldning påfyldning : påfyldninger) {
-
+        if(påfyldninger.getLast().getDato().isBefore(dagsDato.minusYears(3))) {
+            return true;
         }
         return false;
     }

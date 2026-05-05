@@ -42,6 +42,10 @@ public class Destillering {
         return destilleringsID;
     }
 
+    public LocalDate getSlutDato() {
+        return slutDato;
+    }
+
     @Override
     public String toString() {
         return kommentar + " Nr: " + destilleringsID;
