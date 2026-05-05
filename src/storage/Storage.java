@@ -21,16 +21,4 @@ public class Storage implements IStorage{
     public List<Destillering> getDestilleringer() {
         return new ArrayList<>(destilleringer);
     }
-
-    @Override
-    public void addPåfyldning(Påfyldning påfyldning) {
-        if (!påfyldninger.contains(påfyldning)){
-            påfyldninger.add(påfyldning);
-        }
-    }
-
-    @Override
-    public List<Påfyldning> getPåfyldninger() {
-        return new ArrayList<>(påfyldninger);
-    }
 }

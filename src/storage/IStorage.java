@@ -9,8 +9,4 @@ import java.util.List;
 public interface IStorage {
     void addDestillering(Destillering destillering);
     List<Destillering> getDestilleringer();
-
-    //påfyldning
-    void addPåfyldning(Påfyldning påfyldning);
-    List<Påfyldning> getPåfyldninger();
 }
