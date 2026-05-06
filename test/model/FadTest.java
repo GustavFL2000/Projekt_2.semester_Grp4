@@ -1,6 +1,5 @@
 package model;
 
-import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,70 +14,75 @@ class FadTest {
 
     @BeforeEach
     void setUp() {
-        fad = new Fad(1, "DK", "Eg", 100, "Sherry", "Leverandør");
+        // Arrange
+        fad = new Fad(1, "DK", "Eg", 100, "Sherry", "Lev");
 
         destillat = new Destillat(
-                "TestDestillat",
-                LocalDate.now().minusYears(5),
+                "Test",
+                LocalDate.of(2020,1,1),
                 100,
                 60,
-                null // ok hvis ikke brugt
+                null
         );
     }
 
     // ---------------------------
-    // Gyldige cases
+    // erKlarTilAftapning
     // ---------------------------
 
     @Test
-    void erKlarTilAftapning_true_over3År() {
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(4), fad);
+    void T1_klar_over3år() {
+        // Arrange
+        LocalDate dagsDato = LocalDate.of(2026,1,1);
+        destillat.createPåfyldning(50, dagsDato.minusYears(4), fad);
 
-        assertTrue(fad.erKlarTilAftapning(LocalDate.now()));
+        // Act
+        boolean result = fad.erKlarTilAftapning(dagsDato);
+
+        // Assert
+        assertTrue(result);
     }
 
     @Test
-    void erKlarTilAftapning_false_under3År() {
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(2), fad);
+    void T2_klar_præcis3år() {
+        // Arrange
+        LocalDate dagsDato = LocalDate.of(2026,1,1);
+        destillat.createPåfyldning(50, dagsDato.minusYears(3), fad);
 
-        assertFalse(fad.erKlarTilAftapning(LocalDate.now()));
-    }
+        // Act
+        boolean result = fad.erKlarTilAftapning(dagsDato);
 
-    // ---------------------------
-    // Boundary tests
-    // ---------------------------
-
-    @Test
-    void erKlarTilAftapning_præcis3År() {
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(3), fad);
-
-        assertTrue(fad.erKlarTilAftapning(LocalDate.now()));
+        // Assert
+        assertTrue(result);
     }
 
     @Test
-    void erKlarTilAftapning_true_3ÅrPlus1Dag() {
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(3).minusDays(1), fad);
+    void T3_ikkeKlar() {
+        // Arrange
+        LocalDate dagsDato = LocalDate.of(2026,1,1);
+        destillat.createPåfyldning(50, dagsDato.minusYears(2), fad);
 
-        assertTrue(fad.erKlarTilAftapning(LocalDate.now()));
-    }
+        // Act
+        boolean result = fad.erKlarTilAftapning(dagsDato);
 
-    // ---------------------------
-    // Ugyldige cases
-    // ---------------------------
-
-    @Test
-    void erKlarTilAftapning_exception_nårDatoErNull() {
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(4), fad);
-
-        assertThrows(RuntimeException.class, () ->
-                fad.erKlarTilAftapning(null)
-        );
+        // Assert
+        assertFalse(result);
     }
 
     @Test
-    void erKlarTilAftapning_exception_nårIngenPåfyldninger() {
-        assertThrows(Exception.class, () ->
-                fad.erKlarTilAftapning(LocalDate.now())
-        );
+    void T4_exception_datoNull() {
+        // Act + Assert
+        assertThrows(RuntimeException.class,
+                () -> fad.erKlarTilAftapning(null));
+    }
+
+    @Test
+    void T5_exception_ingenPåfyldning() {
+        // Arrange
+        LocalDate dagsDato = LocalDate.of(2026,1,1);
+
+        // Act + Assert
+        assertThrows(Exception.class,
+                () -> fad.erKlarTilAftapning(dagsDato));
     }
 }

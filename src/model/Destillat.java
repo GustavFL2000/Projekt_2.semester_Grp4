@@ -42,14 +42,14 @@ public class Destillat {
         if (mængde > getRestMængde()) {
             throw new IllegalArgumentException("Der er ikke nok destillat tilbage");
         }
+        if (fad == null) {
+            throw new IllegalArgumentException("Fad må ikke være null");
+        }
         if (!fad.harPladsTil(mængde)) {
             throw new IllegalArgumentException("Der er ikke nok plads i fadet");
         }
         if (dato == null){
             throw new IllegalArgumentException("Dato må ikke være null");
-        }
-        if (fad == null) {
-            throw new IllegalArgumentException("Fad må ikke være null");
         }
         return new Påfyldning(mængde, dato,this, fad);
     }
