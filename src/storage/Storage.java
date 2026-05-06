@@ -32,8 +32,8 @@ public class Storage implements IStorage{
     }
 
     @Override
-    public List<Produkt> getProdukt() {
-        return produkter;
+    public List<Produkt> getProdukter() {
+        return new ArrayList<>(produkter);
     }
 
 

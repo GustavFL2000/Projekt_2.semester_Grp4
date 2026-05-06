@@ -12,5 +12,5 @@ public interface IStorage {
     List<Destillering> getDestilleringer();
 
     void addProdukt(Produkt produkt);
-    List<Produkt> getProdukt();
+    List<Produkt> getProdukter();
 }
