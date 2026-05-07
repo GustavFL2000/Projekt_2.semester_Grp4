@@ -145,4 +145,15 @@ class DestillatTest {
         assertThrows(IllegalArgumentException.class,
                 () -> destillat.createPåfyldning(50, LocalDate.now(), null));
     }
+    @Test
+    void T12_createPåfyldning_fadFuld() {
+        // Arrange
+
+        // fylder fadet helt op
+        destillat.createPåfyldning(100, LocalDate.now(), fad);
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class,
+                () -> destillat.createPåfyldning(1, LocalDate.now(), fad));
+    }
 }

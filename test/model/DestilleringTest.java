@@ -33,7 +33,7 @@ class DestilleringTest {
     // ---------------------------
 
     @Test
-    void T1_opretterDestillat() {
+    void T13_opretterDestillat() {
         // Arrange
         String navn = "TestDestillat";
         LocalDate dato = LocalDate.now();
@@ -49,14 +49,14 @@ class DestilleringTest {
     }
 
     @Test
-    void T2_datoNull() {
+    void T14_datoNull() {
         // Act + Assert
         assertThrows(IllegalArgumentException.class,
                 () -> destillering.createDestillat("Test", null, 50, 60));
     }
 
     @Test
-    void T3_mængde0() {
+    void T15_mængde0() {
         // Act + Assert
         assertThrows(IllegalArgumentException.class,
                 () -> destillering.createDestillat("Test", LocalDate.now(), 0, 60));
