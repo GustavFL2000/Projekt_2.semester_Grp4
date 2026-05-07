@@ -20,13 +20,14 @@ public class Controller {
         return destillering;
     }
 
-    public Påfyldning createPåfyldning(double mængde, LocalDate dato, Fad fad, Destillat destillat) {
-        Påfyldning p = destillat.createPåfyldning(mængde, dato, fad);
-        return p;
-    }
-
     public List<Destillering> getDestilleringer(){
         return storage.getDestilleringer();
+    }
+
+    public Produkt createProdukt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel){
+        Produkt produkt = new Produkt(produktNr,vandMængde,vandOprindelse,alkoholProcent,beskrivelse,kvalitetsStempel);
+        storage.addProdukt(produkt);
+        return produkt;
     }
 
 }

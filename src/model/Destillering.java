@@ -14,7 +14,7 @@ public class Destillering {
     String kommentar;
     Maltbatch maltbatch;
 
-    //Composition --> 0..* Påfyldning
+    //Komposition --> 0..* Påfyldning
     private List<Destillat> påfyldninger = new ArrayList<>();
 
     public Destillering(int destilleringsID, LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
@@ -33,6 +33,8 @@ public class Destillering {
     }
 
     public Destillat createDestillat(String destilatNavn, LocalDate dato, double mængde, double alkoholProcent){
+        if (dato == null) throw new IllegalArgumentException("Ugyldig dato");
+        if (mængde <= 0) throw new IllegalArgumentException("Mængde skal være over 0");
         Destillat destillat = new Destillat(destilatNavn,dato,mængde,alkoholProcent,this);
         påfyldninger.add(destillat);
         return destillat;
@@ -40,6 +42,10 @@ public class Destillering {
 
     public int getDestilleringsID() {
         return destilleringsID;
+    }
+
+    public LocalDate getSlutDato() {
+        return slutDato;
     }
 
     @Override

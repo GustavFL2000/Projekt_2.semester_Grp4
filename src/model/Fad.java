@@ -1,13 +1,12 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Fad {
     private int fadNr;
     private String land;
-    private String type;
+    private String træSort;
     private double størrelse;
     private String tidligereIndhold;
     private String leverandør;
@@ -16,10 +15,10 @@ public class Fad {
     private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
     private ArrayList<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
 
-    public Fad(int fadNr, String land, String type, double størrelse, String tidligereIndhold, String leverandør) {
+    public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør) {
         this.fadNr = fadNr;
         this.land = land;
-        this.type = type;
+        this.træSort = "Egetræ";
         this.størrelse = størrelse;
         this.tidligereIndhold = tidligereIndhold;
         this.leverandør = leverandør;
@@ -30,11 +29,11 @@ public class Fad {
         return new ArrayList<>(påfyldninger);
     }
 
-     void addPåfyldning (Påfyldning påfyldning) {
-        if (påfyldning != null && !påfyldninger.contains(påfyldning)){
+    void addPåfyldning(Påfyldning påfyldning) {
+        if (påfyldning != null && !påfyldninger.contains(påfyldning)) {
             påfyldninger.add(påfyldning);
         }
-     }
+    }
 
     // Returnerer den samlede mængde destillat der er påfyldt fadet
     public double getPåfyldtMængde() {
@@ -67,7 +66,7 @@ public class Fad {
     }
 
     // Returnerer den samlede mængde fra fadet, der allerede er brugt i produkter
-    public double getBrugtTilProdukter() {
+    public double getBrugtTilProdukter (){
         double sum = 0;
         for (WhiskySammensætning whiskySammensætning : whiskySammensætninger) {
             sum += whiskySammensætning.getMængdeFraFad();
@@ -87,14 +86,12 @@ public class Fad {
 
     //TODO Gå igennem listen og tjek den sidste påfyldningdato om den er over 3 år og return true
     public boolean erKlarTilAftapning(LocalDate dagsDato) {
-        if (dagsDato == null) {
+        if (dagsDato == null){
             throw new RuntimeException("Dato må ikke være null");
         }
 
         for (Påfyldning påfyldning : påfyldninger) {
-            if(påfyldning.getDato().isBefore(dagsDato.minusYears(3))){
-                return true;
-            }
+
         }
         return false;
     }
