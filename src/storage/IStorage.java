@@ -13,4 +13,7 @@ public interface IStorage {
 
     void addProdukt(Produkt produkt);
     List<Produkt> getProdukter();
+
+    void addFad(Fad fad);
+    List<Fad> getFade();
 }

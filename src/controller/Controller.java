@@ -30,6 +30,16 @@ public class Controller {
         return produkt;
     }
 
+    public Fad createFad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør){
+        Fad fad = new Fad(fadNr,land,størrelse,tidligereIndhold,leverandør);
+        storage.addFad(fad);
+        return fad;
+    }
+
+    public List<Fad> getFade(){
+        return storage.getFade();
+    }
+
     public Destillat createDestillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent){
         Destillat destillat = new Destillat(destilatNavn, dato, mængde, alkoholProcent);
 
