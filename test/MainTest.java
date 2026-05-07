@@ -23,7 +23,7 @@ public class MainTest {
         Destillat destillat1 = destillering1.createDestillat("Destilat 1" ,destillering1.getSlutDato(),1000,70);
         Destillat destillat2 = destillering2.createDestillat("Destilat 2" ,destillering2.getSlutDato(),1000,70);
 
-        Fad fad1 = new Fad(1,"Spanien","Eg",200,"Brandy","Hans");
+        Fad fad1 = new Fad(1,"Spanien",200,"Brandy","Hans");
         Påfyldning påfyldning1 = destillat1.createPåfyldning(100,destillering1.getSlutDato(),fad1);
         Påfyldning påfyldning2 = destillat2.createPåfyldning(100,destillering2.getSlutDato(),fad1);
 

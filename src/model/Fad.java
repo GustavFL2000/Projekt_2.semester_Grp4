@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Fad {
     private int fadNr;
     private String land;
-    private String type;
+    private String træSort;
     private double størrelse;
     private String tidligereIndhold;
     private String leverandør;
@@ -15,10 +15,10 @@ public class Fad {
     private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
     private ArrayList<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
 
-    public Fad(int fadNr, String land, String type, double størrelse, String tidligereIndhold, String leverandør) {
+    public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør) {
         this.fadNr = fadNr;
         this.land = land;
-        this.type = type;
+        this.træSort = "Egetræ";
         this.størrelse = størrelse;
         this.tidligereIndhold = tidligereIndhold;
         this.leverandør = leverandør;
@@ -84,7 +84,7 @@ public class Fad {
         return mængde > 0 && mængde <= getTilgængeligMængdeTilProdukt();
     }
 
-    //TODO Gå igennem listen og tjek den sidste påfyldningdato om den er over 3 år og return true
+    // Returnerer true hvis den seneste påfyldning har lagret i mindst 3 år fra den angivne dato
     public boolean erKlarTilAftapning(LocalDate dagsDato) {
         if (dagsDato == null) {
             throw new RuntimeException("Dato må ikke være null");
