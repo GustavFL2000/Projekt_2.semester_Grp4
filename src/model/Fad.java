@@ -57,10 +57,10 @@ public class Fad {
     // Returnerer true hvis den seneste påfyldning har lagret i mindst 3 år fra den angivne dato
     public boolean erKlarTilAftapning(LocalDate dagsDato) {
         if (dagsDato == null) {
-            throw new RuntimeException("Dato må ikke være null");
+            throw new IllegalArgumentException("Dato må ikke være null");
         }
         if (påfyldninger.isEmpty()) {
-            throw new RuntimeException("Ingen påfyldninger");
+            throw new IllegalArgumentException("Ingen påfyldninger");
         }
             LocalDate sidsteDato = påfyldninger.getLast().getDato();
 
