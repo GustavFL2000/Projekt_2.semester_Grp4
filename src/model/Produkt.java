@@ -22,7 +22,7 @@ public class Produkt {
         this.kvalitetsStempel = kvalitetsStempel;
     }
 
-    public ArrayList<WhiskySammensætning> getWhiskySammensætninger() {
+    public List<WhiskySammensætning> getWhiskySammensætninger() {
         return new ArrayList<>(whiskySammensætninger);
     }
 

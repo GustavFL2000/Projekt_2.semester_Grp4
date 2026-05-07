@@ -25,7 +25,7 @@ public class Fad {
     }
 
     //Påfyldning metoder
-    public ArrayList<Påfyldning> getPåfyldninger() {
+    public List<Påfyldning> getPåfyldninger() {
         return new ArrayList<>(påfyldninger);
     }
 

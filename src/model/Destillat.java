@@ -22,7 +22,7 @@ public class Destillat {
     }
 
     // påfyldning metoder
-    public ArrayList<Påfyldning> getPåfyldninger() {
+    public List<Påfyldning> getPåfyldninger() {
         return new ArrayList<>(påfyldninger);
     }
 
@@ -64,7 +64,7 @@ public class Destillat {
     }
 
     // Whiskysammensætning metoder
-    public ArrayList<WhiskySammensætning> getWhiskySammensætninger() {
+    public List<WhiskySammensætning> getWhiskySammensætninger() {
         return new ArrayList<>(whiskySammensætninger);
     }
 
