@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Fad {
@@ -59,14 +60,14 @@ public class Fad {
         return new ArrayList<>(whiskySammensætninger);
     }
 
-    void addWhiskySammensætning (WhiskySammensætning whiskySammensætning) {
-        if (!whiskySammensætninger.contains(whiskySammensætning)){
+    void addWhiskySammensætning(WhiskySammensætning whiskySammensætning) {
+        if (!whiskySammensætninger.contains(whiskySammensætning)) {
             whiskySammensætninger.add(whiskySammensætning);
         }
     }
 
     // Returnerer den samlede mængde fra fadet, der allerede er brugt i produkter
-    public double getBrugtTilProdukter (){
+    public double getBrugtTilProdukter() {
         double sum = 0;
         for (WhiskySammensætning whiskySammensætning : whiskySammensætninger) {
             sum += whiskySammensætning.getMængdeFraFad();
@@ -86,12 +87,14 @@ public class Fad {
 
     //TODO Gå igennem listen og tjek den sidste påfyldningdato om den er over 3 år og return true
     public boolean erKlarTilAftapning(LocalDate dagsDato) {
-        if (dagsDato == null){
+        if (dagsDato == null) {
             throw new RuntimeException("Dato må ikke være null");
         }
 
         for (Påfyldning påfyldning : påfyldninger) {
-
+            if(påfyldning.getDato().isBefore(dagsDato.minusYears(3))){
+                return true;
+            }
         }
         return false;
     }
