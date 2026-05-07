@@ -44,7 +44,7 @@ class FadTest {
     }
 
     @Test
-    void T2_klar_præcis3år() {
+    void T14_klar_præcis3år() {
         // Arrange
         LocalDate dagsDato = LocalDate.of(2026,1,1);
         destillat.createPåfyldning(50, dagsDato.minusYears(3), fad);

@@ -49,7 +49,7 @@ class DestilleringTest {
     }
 
     @Test
-    void T2_datoNull() {
+    void T19_datoNull() {
         // Act + Assert
         assertThrows(IllegalArgumentException.class,
                 () -> destillering.createDestillat("Test", null, 50, 60));
