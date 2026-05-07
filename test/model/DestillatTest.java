@@ -24,7 +24,7 @@ class DestillatTest {
                 null
         );
 
-        fad = new Fad(1, "DK", "Eg", 100, "Sherry", "Lev");
+        fad = new Fad(1, "DK", 100, "Sherry", "Lev");
     }
 
     // ---------------------------

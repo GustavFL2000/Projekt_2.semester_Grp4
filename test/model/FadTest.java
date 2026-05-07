@@ -15,7 +15,7 @@ class FadTest {
     @BeforeEach
     void setUp() {
         // Arrange
-        fad = new Fad(1, "DK", "Eg", 100, "Sherry", "Lev");
+        fad = new Fad(1, "DK", 100, "Sherry", "Lev");
 
         destillat = new Destillat(
                 "Test",
