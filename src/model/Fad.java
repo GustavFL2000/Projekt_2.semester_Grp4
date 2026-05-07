@@ -13,7 +13,6 @@ public class Fad {
 
     //linkattributter
     private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
-    private ArrayList<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
 
     public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør) {
         this.fadNr = fadNr;
@@ -52,36 +51,6 @@ public class Fad {
     // Returnerer true hvis fadet har plads til den angivne mængde
     public boolean harPladsTil(double mængde) {
         return mængde > 0 && mængde <= getLedigKapacitet();
-    }
-
-    // Whiskysammensætning metoder
-    public ArrayList<WhiskySammensætning> getWhiskySammensætninger() {
-        return new ArrayList<>(whiskySammensætninger);
-    }
-
-    void addWhiskySammensætning(WhiskySammensætning whiskySammensætning) {
-        if (!whiskySammensætninger.contains(whiskySammensætning)) {
-            whiskySammensætninger.add(whiskySammensætning);
-        }
-    }
-
-    // Returnerer den samlede mængde fra fadet, der allerede er brugt i produkter
-    public double getBrugtTilProdukter() {
-        double sum = 0;
-        for (WhiskySammensætning whiskySammensætning : whiskySammensætninger) {
-            sum += whiskySammensætning.getMængdeFraFad();
-        }
-        return sum;
-    }
-
-    // Returnerer hvor mange liter der er tilbage på fadet
-    public double getTilgængeligMængdeTilProdukt() {
-        return getPåfyldtMængde() - getBrugtTilProdukter();
-    }
-
-    // Returnerer true hvis fadet har nok indhold tilbage til den angivne mængde
-    public boolean harNokTilProdukt(double mængde) {
-        return mængde > 0 && mængde <= getTilgængeligMængdeTilProdukt();
     }
 
     // Returnerer true hvis den seneste påfyldning har lagret i mindst 3 år fra den angivne dato
