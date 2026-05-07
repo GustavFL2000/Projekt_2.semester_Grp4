@@ -11,6 +11,7 @@ public class Fad {
     private double størrelse;
     private String tidligereIndhold;
     private String leverandør;
+    //TODO Smid det som Leverandør leverandør istedet
 
     //linkattributter
     private List<Påfyldning> påfyldninger = new ArrayList<>();
