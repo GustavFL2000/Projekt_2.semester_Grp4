@@ -24,7 +24,7 @@ class DestillatTest {
                 null
         );
 
-        fad = new Fad(1, "DK", "Eg", 100, "Sherry", "Lev");
+        fad = new Fad(1, "DK", 100, "Sherry", "Lev");
     }
 
     // ---------------------------
@@ -144,5 +144,16 @@ class DestillatTest {
         // Act + Assert
         assertThrows(IllegalArgumentException.class,
                 () -> destillat.createPåfyldning(50, LocalDate.now(), null));
+    }
+    @Test
+    void T12_createPåfyldning_fadFuld() {
+        // Arrange
+
+        // fylder fadet helt op
+        destillat.createPåfyldning(100, LocalDate.now(), fad);
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class,
+                () -> destillat.createPåfyldning(1, LocalDate.now(), fad));
     }
 }

@@ -15,7 +15,7 @@ class FadTest {
     @BeforeEach
     void setUp() {
         // Arrange
-        fad = new Fad(1, "DK", "Eg", 100, "Sherry", "Lev");
+        fad = new Fad(1, "DK", 100, "Sherry", "Lev");
 
         destillat = new Destillat(
                 "Test",
@@ -31,7 +31,7 @@ class FadTest {
     // ---------------------------
 
     @Test
-    void T1_klar_over3år() {
+    void T16_klar_over3år() {
         // Arrange
         LocalDate dagsDato = LocalDate.of(2026,1,1);
         destillat.createPåfyldning(50, dagsDato.minusYears(4), fad);
@@ -44,7 +44,7 @@ class FadTest {
     }
 
     @Test
-    void T14_klar_præcis3år() {
+    void T17_klar_præcis3år() {
         // Arrange
         LocalDate dagsDato = LocalDate.of(2026,1,1);
         destillat.createPåfyldning(50, dagsDato.minusYears(3), fad);
@@ -57,7 +57,7 @@ class FadTest {
     }
 
     @Test
-    void T3_ikkeKlar() {
+    void T18_ikkeKlar() {
         // Arrange
         LocalDate dagsDato = LocalDate.of(2026,1,1);
         destillat.createPåfyldning(50, dagsDato.minusYears(2), fad);
@@ -70,14 +70,14 @@ class FadTest {
     }
 
     @Test
-    void T4_exception_datoNull() {
+    void T19_exception_datoNull() {
         // Act + Assert
         assertThrows(RuntimeException.class,
                 () -> fad.erKlarTilAftapning(null));
     }
 
     @Test
-    void T5_exception_ingenPåfyldning() {
+    void T20_exception_ingenPåfyldning() {
         // Arrange
         LocalDate dagsDato = LocalDate.of(2026,1,1);
 

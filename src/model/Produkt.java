@@ -31,17 +31,18 @@ public class Produkt {
         }
     }
 
-    public WhiskySammensætning createWhiskySammensætning (double mængde, Fad fad){
-        if (fad == null) {
-            throw new IllegalArgumentException("Fad må ikke være null");
+
+    public WhiskySammensætning createWhiskySammensætning (double mængdeFraDestillat, Destillat destillat){
+        if (destillat == null) {
+            throw new IllegalArgumentException("Destillat må ikke være null");
         }
-        if (mængde <= 0 ) {
+        if (mængdeFraDestillat <= 0 ) {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
-        if (!fad.harNokTilProdukt(mængde)) {
+        if (!destillat.harNokTilProdukt(mængdeFraDestillat)) {
             throw new IllegalArgumentException("Der er ikke nok whisky i fadet");
         }
-        return new WhiskySammensætning(mængde, this, fad);
+        return new WhiskySammensætning(mængdeFraDestillat, this, destillat);
     }
 
     public int getProduktNr() {
