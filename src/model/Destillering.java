@@ -59,9 +59,28 @@ public class Destillering {
     }
 
     public DestilleringsMængde createDestilleringsMængde (double mængde, Destillat destillat) {
-        //todo tilføj exceptions
-
+        if (mængde <= 0 ){
+            throw new IllegalArgumentException("Mængde skal værre større end 0");
+        }
+        if (destillat == null){
+            throw new IllegalArgumentException("Destillat må ikke være null");
+        }
+        if (mængde > getRestMængde()){
+            throw new IllegalArgumentException("Der er ikke nok væske tilbage fra destilleringen");
+        }
         return new DestilleringsMængde(mængde, this, destillat);
+    }
+
+    public double getPådeltMængde (){
+        double sum = 0;
+        for (DestilleringsMængde destilleringsMængde : destilleringsMængder) {
+            sum+=destilleringsMængde.getMængde();
+        }
+        return sum;
+    }
+
+    public double getRestMængde() {
+        return væskeMængde-getPådeltMængde();
     }
 
     public int getDestilleringsID() {
