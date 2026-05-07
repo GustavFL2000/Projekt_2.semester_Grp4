@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Destillat {
     private String destilatNavn;
@@ -9,20 +10,15 @@ public class Destillat {
     private double mængde;
     private double alkoholProcent;
     // link attributter
-    private Destillering destillering;
-    private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
-    private ArrayList<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
+    private List<Påfyldning> påfyldninger = new ArrayList<>();
+    private List<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
+    private List<DestilleringsMængde> destilleringsMængder = new ArrayList<>();
 
-    public Destillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent, Destillering destillering) {
+    public Destillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent) {
         this.dato = dato;
         this.mængde = mængde;
         this.alkoholProcent = alkoholProcent;
-        this.destillering = destillering;
         this.destilatNavn = destilatNavn;
-    }
-
-    public Destillering getDestillering() {
-        return destillering;
     }
 
     // påfyldning metoder
@@ -95,6 +91,19 @@ public class Destillat {
     // Returnerer true hvis destillatet har nok tilbage til den angivne mængde
     public boolean harNokTilProdukt(double mængde) {
         return mængde > 0 && mængde <= getTilgængeligMængdeTilProdukt();
+    }
+
+    //Destilleringmængde metoder
+
+
+    public List<DestilleringsMængde> getDestilleringsMængder() {
+        return new ArrayList<>(destilleringsMængder);
+    }
+
+     void addDestilleringsMængde (DestilleringsMængde destilleringsMængde){
+        if (!destilleringsMængder.contains(destilleringsMængde)){
+            destilleringsMængder.add(destilleringsMængde);
+        }
     }
 
     @Override

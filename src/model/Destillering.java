@@ -14,8 +14,8 @@ public class Destillering {
     String kommentar;
     Maltbatch maltbatch;
 
-    //Komposition --> 0..* Påfyldning
-    private List<Destillat> påfyldninger = new ArrayList<>();
+    //Komposition --> 0..* DestillingsMængde
+    private List<DestilleringsMængde> destilleringsMængder = new ArrayList<>();
 
     public Destillering(int destilleringsID, LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
         this.destilleringsID = destilleringsID;
@@ -28,16 +28,21 @@ public class Destillering {
         this.maltbatch = maltbatch;
     }
 
-    public List<Destillat> getPåfyldninger() {
-        return new ArrayList<>(påfyldninger);
+    //DestilleringsMængde metoder
+    public List<DestilleringsMængde> getDestilleringsMængder() {
+        return new ArrayList<>(destilleringsMængder);
     }
 
-    public Destillat createDestillat(String destilatNavn, LocalDate dato, double mængde, double alkoholProcent){
-        if (dato == null) throw new IllegalArgumentException("Ugyldig dato");
-        if (mængde <= 0) throw new IllegalArgumentException("Mængde skal være over 0");
-        Destillat destillat = new Destillat(destilatNavn,dato,mængde,alkoholProcent,this);
-        påfyldninger.add(destillat);
-        return destillat;
+     void addDestilleringsMængde (DestilleringsMængde destilleringsMængde){
+        if (!destilleringsMængder.contains(destilleringsMængde)) {
+            destilleringsMængder.add(destilleringsMængde);
+        }
+    }
+
+    public DestilleringsMængde createDestilleringsMængde (double mængde, Destillat destillat) {
+        //todo tilføj exceptions
+
+        return new DestilleringsMængde(mængde, this, destillat);
     }
 
     public int getDestilleringsID() {

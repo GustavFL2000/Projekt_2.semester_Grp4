@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Produkt {
     private int produktNr;
@@ -10,7 +11,7 @@ public class Produkt {
     private String beskrivelse;
     private KvalitetsStempel kvalitetsStempel; //Har en enum, med de forkslelige stempler
     // link attributter
-    private ArrayList<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
+    private List<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
 
     public Produkt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         this.produktNr = produktNr;

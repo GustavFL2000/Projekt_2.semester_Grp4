@@ -30,4 +30,10 @@ public class Controller {
         return produkt;
     }
 
+    public Destillat createDestillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent){
+        Destillat destillat = new Destillat(destilatNavn, dato, mængde, alkoholProcent);
+
+        return destillat;
+    }
+
 }

@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Fad {
     private int fadNr;
@@ -12,7 +13,7 @@ public class Fad {
     private String leverandør;
 
     //linkattributter
-    private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
+    private List<Påfyldning> påfyldninger = new ArrayList<>();
 
     public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør) {
         this.fadNr = fadNr;

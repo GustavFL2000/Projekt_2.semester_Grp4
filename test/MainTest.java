@@ -18,7 +18,7 @@ public class MainTest {
 
         System.out.println(controller.getDestilleringer());
 
-        Destillat destillat1 = destillering1.createDestillat("Destilat 1" ,destillering1.getSlutDato(),1000,70);
+        Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),1000,70);
         Destillat destillat2 = destillering2.createDestillat("Destilat 2" ,destillering2.getSlutDato(),1000,70);
 
 
