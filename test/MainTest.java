@@ -22,7 +22,7 @@ public class MainTest {
         Destillat destillat2 = controller.createDestillat("Destilat 2" ,destillering2.getSlutDato(),1000,70);
 
 
-        Fad fad1 = new Fad(1,"Spanien",200,"Brandy","Hans");
+        Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy","Hans");
         System.out.println("fad 1 har en kapicitet på: " + fad1.getLedigKapacitet() + " liter");
         Påfyldning påfyldning1 = destillat1.createPåfyldning(100,destillering1.getSlutDato(),fad1);
         System.out.println("fad 1 er blevet påfyldt: " + fad1.getPåfyldtMængde() + "liter");
