@@ -18,6 +18,25 @@ public class Destillering {
     private List<Destillat> påfyldninger = new ArrayList<>();
 
     public Destillering(int destilleringsID, LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
+
+        if (destilleringsID <= 0)
+            throw new IllegalArgumentException("ID skal være over 0");
+
+        if (startDato == null)
+            throw new IllegalArgumentException("Startdato må ikke være null");
+
+        if (slutDato == null)
+            throw new IllegalArgumentException("Slutdato må ikke være null");
+
+        if (alkoholProcent <= 0)
+            throw new IllegalArgumentException("Alkoholprocent skal være over 0");
+
+        if (væskeMængde <= 0)
+            throw new IllegalArgumentException("Væskemængde skal være over 0");
+
+        if (maltbatch == null)
+            throw new IllegalArgumentException("Maltbatch må ikke være null");
+
         this.destilleringsID = destilleringsID;
         this.startDato = startDato;
         this.slutDato = slutDato;
