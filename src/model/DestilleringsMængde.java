@@ -29,4 +29,13 @@ public class DestilleringsMængde {
     public double getMængde() {
         return mængde;
     }
+
+    @Override
+    public String toString() {
+        return "DestilleringsMængde{" +
+                "mængde=" + mængde +
+                ", destillering=" + destillering +
+                ", destillat=" + destillat +
+                '}';
+    }
 }
