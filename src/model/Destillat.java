@@ -15,6 +15,18 @@ public class Destillat {
     private List<DestilleringsMængde> destilleringsMængder = new ArrayList<>();
 
     public Destillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent) {
+        if (destilatNavn == null || destilatNavn.isBlank()){
+            throw new IllegalArgumentException("Destillatnavn skal udfyldes");
+        }
+        if (dato == null){
+            throw new IllegalArgumentException("Dato skal udfyldes");
+        }
+        if (mængde <= 0){
+            throw new IllegalArgumentException("Mængde skal være større end 0");
+        }
+        if (alkoholProcent <= 0 || alkoholProcent > 100){
+            throw new IllegalArgumentException("Alkoholprocent skal være mellem 0 og 100");
+        }
         this.dato = dato;
         this.mængde = mængde;
         this.alkoholProcent = alkoholProcent;
@@ -36,17 +48,17 @@ public class Destillat {
         if (mængde <= 0) {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
+        if (dato == null){
+            throw new IllegalArgumentException("Dato skal udfyldes");
+        }
+        if (fad == null) {
+            throw new IllegalArgumentException("Fad skal vælges");
+        }
         if (mængde > getRestMængde()) {
             throw new IllegalArgumentException("Der er ikke nok destillat tilbage");
         }
-        if (fad == null) {
-            throw new IllegalArgumentException("Fad må ikke være null");
-        }
         if (!fad.harPladsTil(mængde)) {
             throw new IllegalArgumentException("Der er ikke nok plads i fadet");
-        }
-        if (dato == null){
-            throw new IllegalArgumentException("Dato må ikke være null");
         }
         return new Påfyldning(mængde, dato,this, fad);
     }

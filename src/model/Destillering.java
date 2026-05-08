@@ -18,24 +18,20 @@ public class Destillering {
     private List<DestilleringsMængde> destilleringsMængder = new ArrayList<>();
 
     public Destillering(int destilleringsID, LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
-
         if (destilleringsID <= 0)
             throw new IllegalArgumentException("ID skal være over 0");
-
         if (startDato == null)
-            throw new IllegalArgumentException("Startdato må ikke være null");
-
+            throw new IllegalArgumentException("Startdato skal udfyldes");
         if (slutDato == null)
-            throw new IllegalArgumentException("Slutdato må ikke være null");
-
-        if (alkoholProcent <= 0)
-            throw new IllegalArgumentException("Alkoholprocent skal være over 0");
-
+            throw new IllegalArgumentException("Slutdato skal udfyldes");
+        if (slutDato.isBefore(startDato))
+            throw new IllegalArgumentException("Slutdato må ikke være før startdato");
+        if (alkoholProcent <= 0 || alkoholProcent > 100)
+            throw new IllegalArgumentException("Alkoholprocent skal være mellem 0 og 100");
         if (væskeMængde <= 0)
-            throw new IllegalArgumentException("Væskemængde skal være over 0");
-
+            throw new IllegalArgumentException("Væskemængde skal være større end 0");
         if (maltbatch == null)
-            throw new IllegalArgumentException("Maltbatch må ikke være null");
+            throw new IllegalArgumentException("Maltbatch skal vælges");
 
         this.destilleringsID = destilleringsID;
         this.startDato = startDato;
@@ -63,7 +59,7 @@ public class Destillering {
             throw new IllegalArgumentException("Mængde skal værre større end 0");
         }
         if (destillat == null){
-            throw new IllegalArgumentException("Destillat må ikke være null");
+            throw new IllegalArgumentException("Destillat skal vælges");
         }
         if (mængde > getRestMængde()){
             throw new IllegalArgumentException("Der er ikke nok væske tilbage fra destilleringen");
