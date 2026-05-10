@@ -30,7 +30,7 @@ public class Controller {
         return produkt;
     }
 
-    public Fad createFad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør){
+    public Fad createFad(int fadNr, String land, double størrelse, String tidligereIndhold, Leverandør leverandør){
         Fad fad = new Fad(fadNr,land,størrelse,tidligereIndhold,leverandør);
         storage.addFad(fad);
         return fad;

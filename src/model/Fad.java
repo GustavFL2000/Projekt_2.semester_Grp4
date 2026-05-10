@@ -10,19 +10,18 @@ public class Fad {
     private String træSort;
     private double størrelse;
     private String tidligereIndhold;
-    private String leverandør;
-    //TODO Smid det som Leverandør leverandør istedet
 
     //linkattributter
     private List<Påfyldning> påfyldninger = new ArrayList<>();
+    private Leverandør leverandør;
 
-    public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, String leverandør) {
+    public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
         this.fadNr = fadNr;
         this.land = land;
         this.træSort = "Egetræ";
         this.størrelse = størrelse;
         this.tidligereIndhold = tidligereIndhold;
-        this.leverandør = leverandør;
+        setLeverandør(leverandør);
     }
 
     //Påfyldning metoder
@@ -69,6 +68,19 @@ public class Fad {
 
     }
 
+    //Leverandør metoder
+    public void setLeverandør (Leverandør leverandør){
+        if (this.leverandør != leverandør){
+            this.leverandør=leverandør;
+            if (leverandør!=null){
+                leverandør.addFad(this);
+            }
+        }
+    }
+
+    public Leverandør getLeverandør() {
+        return leverandør;
+    }
 
     @Override
     public String toString() {

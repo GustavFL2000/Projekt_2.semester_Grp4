@@ -25,6 +25,16 @@ public class Leverandør {
     public void addFad (Fad fad) {
         if (!fade.contains(fad)) {
             fade.add(fad);
+            fad.setLeverandør(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Leverandør{" +
+                "navn='" + navn + '\'' +
+                ", land='" + land + '\'' +
+                ", kontaktInfo='" + kontaktInfo + '\'' +
+                '}';
     }
 }

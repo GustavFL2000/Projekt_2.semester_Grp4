@@ -39,8 +39,11 @@ public class MainTest {
         System.out.println("Destillering 2 har fordelt: " + destillering2.getPådeltMængde() + " liter");
         System.out.println("Destillering 2 har tilbage: " + destillering2.getRestMængde() + " liter");
 
+        //Oprettet en leverandør til fade
+     Leverandør fad1Leverandør = new Leverandør("Bo´fade", "Italien", "20212021");
+
         // Opretter et fad
-        Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy","Hans");
+        Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy", fad1Leverandør);
 
 
         System.out.println();
@@ -102,5 +105,8 @@ public class MainTest {
         System.out.println();
         System.out.println("Destilleringsmængder for destillat 1:");
         System.out.println(destillat1.getDestilleringsMængder());
+
+        System.out.println();
+        System.out.println(fad1.getLeverandør());
     }
 }
