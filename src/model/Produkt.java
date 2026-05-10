@@ -12,7 +12,9 @@ public class Produkt {
     private KvalitetsStempel kvalitetsStempel; //Har en enum, med de forkslelige stempler
     // link attributter
     private List<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
+    private List<Flaske> flasker = new ArrayList<>();
 
+    //todo tilføj valigering
     public Produkt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         this.produktNr = produktNr;
         this.vandMængde = vandMængde;
@@ -22,6 +24,7 @@ public class Produkt {
         this.kvalitetsStempel = kvalitetsStempel;
     }
 
+    //Whiskysammensætning metoder
     public List<WhiskySammensætning> getWhiskySammensætninger() {
         return new ArrayList<>(whiskySammensætninger);
     }
@@ -44,6 +47,27 @@ public class Produkt {
             throw new IllegalArgumentException("Der er ikke nok whisky i fadet");
         }
         return new WhiskySammensætning(mængdeFraDestillat, this, destillat);
+    }
+
+    //Flaske metoder
+
+
+    public List<Flaske> getFlasker() {
+        return new ArrayList<>(flasker);
+    }
+
+    void addFlaske (Flaske flaske){
+        if (!flasker.contains(flaske)){
+            flasker.add(flaske);
+        }
+    }
+
+    public Flaske createFlaske ( int størrelse){
+        if (størrelse <= 0) {
+            throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
+        }
+        int flaskeNr = flasker.size() + 1;
+        return new Flaske(flaskeNr, størrelse, this);
     }
 
     public int getProduktNr() {

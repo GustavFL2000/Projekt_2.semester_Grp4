@@ -15,6 +15,7 @@ public class Fad {
     private List<Påfyldning> påfyldninger = new ArrayList<>();
     private Leverandør leverandør;
 
+    //TODO tilføj validering
     public Fad(int fadNr, String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
         this.fadNr = fadNr;
         this.land = land;

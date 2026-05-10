@@ -16,8 +16,11 @@ public class Reol {
     Lager lager;
 
     public Reol(int reolNr, Lager lager) {
-        if (reolNr < 0)
-            throw new IllegalArgumentException("Nummer skal være positivt");
+        if (reolNr <= 0)
+            throw new IllegalArgumentException("Nummer skal være større end 0");
+        if (lager == null) {
+            throw new IllegalArgumentException("Der skal være et lager valgt");
+        }
         this.reolNr = reolNr;
         this.lager = lager;
 
