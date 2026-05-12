@@ -126,5 +126,17 @@ public class MainTest {
 
         System.out.println(reol1.getFadPlacering(fad1));
         System.out.println(reol1.getAlleFade());
+
+        // produkt / flaske
+        Flaske flaske = prod1.createFlaske(75);
+        Flaske flaske2 = prod1.createFlaske(75);
+
+        prod1.createFlaske(75, 10);
+
+        System.out.println(prod1.getFlasker());
+
+        System.out.println(flaske.getFlaskeNr());
+        System.out.println(flaske2.getFlaskeNr());
+        System.out.println("Antal flasker for produkt 1: " + prod1.getFlasker().size());
     }
 }

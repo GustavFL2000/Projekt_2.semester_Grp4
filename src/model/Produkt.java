@@ -62,12 +62,25 @@ public class Produkt {
         }
     }
 
-    public Flaske createFlaske ( int størrelse){
+    public Flaske createFlaske(int størrelse){
         if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
         }
         int flaskeNr = flasker.size() + 1;
         return new Flaske(flaskeNr, størrelse, this);
+    }
+
+    public List<Flaske> createFlaske(int størrelse, int antalFlasker){
+        if (størrelse <= 0) {
+            throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
+        }
+        List<Flaske> oprettedeFlasker = new ArrayList<>();
+        for (int i = 0; i < antalFlasker; i++) {
+            int flaskeNr = flasker.size() + 1;
+            Flaske flaske =  new Flaske(flaskeNr, størrelse, this);
+            oprettedeFlasker.add(flaske);
+        }
+        return oprettedeFlasker;
     }
 
     public int getProduktNr() {
@@ -92,5 +105,17 @@ public class Produkt {
 
     public KvalitetsStempel getKvalitetsStempel() {
         return kvalitetsStempel;
+    }
+
+    @Override
+    public String toString() {
+        return "Produkt{" +
+                "produktNr=" + produktNr +
+                ", vandMængde=" + vandMængde +
+                ", vandOprindelse='" + vandOprindelse + '\'' +
+                ", alkoholProcent=" + alkoholProcent +
+                ", beskrivelse='" + beskrivelse + '\'' +
+                ", kvalitetsStempel=" + kvalitetsStempel +
+                '}';
     }
 }
