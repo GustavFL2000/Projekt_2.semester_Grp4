@@ -99,7 +99,7 @@ public class Produkt {
         return new Flaske(flaskeNr, størrelse, this);
     }
 
-    public List<Flaske> createFlaske(int størrelse, int antalFlasker){
+    public List<Flaske> createFlasker(int størrelse, int antalFlasker){
         if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
         }

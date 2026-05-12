@@ -133,7 +133,7 @@ public class MainTest {
         Flaske flaske = prod1.createFlaske(75);
         Flaske flaske2 = prod1.createFlaske(75);
 
-        prod1.createFlaske(75, 10);
+        prod1.createFlasker(75, 10);
 
         System.out.println(prod1.getFlasker());
 
@@ -145,6 +145,6 @@ public class MainTest {
 
         // controller søgEfterFade
         System.out.println("søg");
-        System.out.println(controller.søgEfterFade(null, null, "brandy", null));
+        System.out.println(controller.søgEfterFade(null, null, null, 5));
     }
 }
