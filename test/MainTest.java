@@ -114,5 +114,9 @@ public class MainTest {
         Lager lager1 = controller.createLager(1,"ceresPark", "Forenden af satdion alle");
         Reol reol1 = lager1.createReol(1);
         System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
+
+        reol1.placerFad(fad1,1,1);
+
+        System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
     }
 }

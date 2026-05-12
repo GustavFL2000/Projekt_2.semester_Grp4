@@ -9,7 +9,6 @@ public class Lager {
     private String lagerNavn;
     private String adresse;
     private LocalDate oprettelsesDato;
-    private int ledigePladser;
 
     //Komposition --> 0..* Reol
     private List<Reol> reoler = new ArrayList<>();
@@ -36,10 +35,14 @@ public class Lager {
         return reol;
     }
 
-    public int getLedigePladser(){
+    public int getLedigePladser() {
+
+        int ledigePladser = 0;
+
         for (Reol reol : reoler) {
-           ledigePladser += reol.getLedigePladser();
+            ledigePladser += reol.getLedigePladser();
         }
+
         return ledigePladser;
     }
 
