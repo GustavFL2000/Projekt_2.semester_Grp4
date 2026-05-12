@@ -44,6 +44,7 @@ public class MainTest {
 
         // Opretter et fad
         Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy", fad1Leverandør);
+        Fad fad2 = controller.createFad(2,"Spanien",200,"Brandy", fad1Leverandør);
 
 
         System.out.println();
@@ -109,13 +110,14 @@ public class MainTest {
         System.out.println();
         System.out.println(fad1.getLeverandør());
 
-
-
+        //Opretter lager
         Lager lager1 = controller.createLager(1,"ceresPark", "Forenden af satdion alle");
         Reol reol1 = lager1.createReol(1);
         System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
 
+        //Placerer fade
         reol1.placerFad(fad1,1,1);
+        reol1.placerFad(fad2,1,2);
 
         System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
 
@@ -138,5 +140,11 @@ public class MainTest {
         System.out.println(flaske.getFlaskeNr());
         System.out.println(flaske2.getFlaskeNr());
         System.out.println("Antal flasker for produkt 1: " + prod1.getFlasker().size());
+
+        Lager lager2 = controller.createLager(2, "a", "a");
+
+        // controller søgEfterFade
+        System.out.println("søg");
+        System.out.println(controller.søgEfterFade(null, null, "brandy", null));
     }
 }

@@ -99,6 +99,22 @@ public class Fad {
         return fadNr;
     }
 
+    public String getLand() {
+        return land;
+    }
+
+    public String getTræSort() {
+        return træSort;
+    }
+
+    public double getStørrelse() {
+        return størrelse;
+    }
+
+    public String getTidligereIndhold() {
+        return tidligereIndhold;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(this.fadNr);
