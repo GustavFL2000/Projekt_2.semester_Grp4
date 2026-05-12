@@ -95,6 +95,10 @@ public class Fad {
         return reol;
     }
 
+    public int getFadNr() {
+        return fadNr;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(this.fadNr);

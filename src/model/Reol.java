@@ -133,6 +133,23 @@ public class Reol {
         return hylder[hylde][plads];
     }
 
+    public String getFadPlacering (Fad fad){
+        for (int h = 0; h < hylder.length; h++) {
+
+            for (int p = 0; p < hylder[h].length; p++) {
+
+                if (hylder[h][p] == fad) {
+                    return  "FadNr: " + fad.getFadNr()
+                            + ", Lager: " + lager.getLagerNavn()
+                            + ", Reol: " + reolNr
+                            + ", Hylde: " + (h + 1)
+                            + ", Plads: " + (p + 1);
+                }
+            }
+        }
+        return "Fadet står ikke på denne reol";
+    }
+
     public int getReolNr() {
         return reolNr;
     }

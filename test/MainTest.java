@@ -123,5 +123,7 @@ public class MainTest {
         fad1.getReol().flytFad(fad1,reol1,2,2);
         System.out.println("Placering: "+fad1.getReol().getFad(1,1));
         System.out.println("Placering: "+fad1.getReol().getFad(2,2));
+
+        System.out.println(reol1.getFadPlacering(fad1));
     }
 }
