@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Reol {
 
     private int reolNr;
@@ -109,13 +112,6 @@ public class Reol {
             throw new IllegalArgumentException("Ny reol må ikke være null");
         }
 
-        // Fjern fra gammel placering
-        Reol gammelReol = fad.getReol();
-
-        if (gammelReol != null) {
-            gammelReol.fjernFad(fad);
-        }
-
         // Placer på ny placering
         nyReol.placerFad(fad, nyHylde, nyPlads);
     }
@@ -148,6 +144,23 @@ public class Reol {
             }
         }
         return "Fadet står ikke på denne reol";
+    }
+
+    public List<Fad> getAlleFade() {
+
+        List<Fad> fade = new ArrayList<>();
+
+        for (int h = 0; h < hylder.length; h++) {
+
+            for (int p = 0; p < hylder[h].length; p++) {
+
+                if (hylder[h][p] != null) {
+                    fade.add(hylder[h][p]);
+                }
+            }
+        }
+
+        return fade;
     }
 
     public int getReolNr() {

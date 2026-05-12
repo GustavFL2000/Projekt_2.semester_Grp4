@@ -125,5 +125,6 @@ public class MainTest {
         System.out.println("Placering: "+fad1.getReol().getFad(2,2));
 
         System.out.println(reol1.getFadPlacering(fad1));
+        System.out.println(reol1.getAlleFade());
     }
 }
