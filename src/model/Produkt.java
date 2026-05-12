@@ -14,7 +14,6 @@ public class Produkt {
     private List<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
     private List<Flaske> flasker = new ArrayList<>();
 
-    //todo tilføj valigering
     public Produkt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         if (produktNr <= 0) {
             throw new IllegalArgumentException(
@@ -31,9 +30,9 @@ public class Produkt {
                     "Vandoprindelse må ikke være null");
         }
 
-        if (alkoholProcent <= 0) {
+        if (alkoholProcent <= 0 || alkoholProcent > 100) {
             throw new IllegalArgumentException(
-                    "Alkoholprocent skal være større end 0");
+                    "Alkoholprocent skal være større end 0 og mindre end 100");
         }
 
         if (beskrivelse == null) {

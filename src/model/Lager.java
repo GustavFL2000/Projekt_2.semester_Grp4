@@ -14,6 +14,9 @@ public class Lager {
     private List<Reol> reoler = new ArrayList<>();
 
     public Lager(int lagerNr ,String lagerNavn, String adresse) {
+        if (lagerNr <= 0){
+            throw new IllegalArgumentException("Lager nr skal være større end 0");
+        }
         if (lagerNavn == null){
             throw new IllegalArgumentException("Lager navn skal udfyldes");
         }

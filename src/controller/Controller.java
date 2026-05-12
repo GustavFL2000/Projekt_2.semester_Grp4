@@ -61,8 +61,10 @@ public class Controller {
             if (fadNr != null && fad.getFadNr() != fadNr) {
                 matcher = false;
             }
-            if (lager != null && fad.getReol() != null && fad.getReol().getLager() != lager) {
-                matcher = false;
+            if (lager != null ) {
+                if (fad.getReol() != null && fad.getReol().getLager() != lager){
+                    matcher = false;
+                }
             }
             if (tidligereIndhold != null && !tidligereIndhold.isBlank()) {
                 if (!tidligereIndhold.equalsIgnoreCase(fad.getTidligereIndhold())) {
