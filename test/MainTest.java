@@ -118,5 +118,10 @@ public class MainTest {
         reol1.placerFad(fad1,1,1);
 
         System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
+
+        System.out.println("Placering: "+fad1.getReol().getFad(1,1));
+        fad1.getReol().flytFad(fad1,reol1,2,2);
+        System.out.println("Placering: "+fad1.getReol().getFad(1,1));
+        System.out.println("Placering: "+fad1.getReol().getFad(2,2));
     }
 }

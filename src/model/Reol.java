@@ -59,44 +59,65 @@ public class Reol {
             throw new IllegalArgumentException("Pladsen er optaget");
         }
 
-        // Fjern gammel relation
+        // Fjern fadet fra gammel reol hvis det allerede er placeret
         Reol oldReol = fad.getReol();
 
         if (oldReol != null) {
-
-            for (int h = 0; h < oldReol.hylder.length; h++) {
-
-                for (int p = 0; p < oldReol.hylder[h].length; p++) {
-
-                    if (oldReol.hylder[h][p] == fad) {
-                        oldReol.hylder[h][p] = null;
-                    }
-                }
-            }
+            oldReol.fjernFad(fad);
         }
 
+        // Placer fadet på ny plads
         hylder[hylde][plads] = fad;
 
+        // Opdater dobbeltrettet association
         fad.setReol(this);
     }
 
-    public void fjernFad(int hylde, int plads) {
 
-        if (hylde < 0 || hylde >= hylder.length) {
-            throw new IllegalArgumentException("Ugyldigt hyldenummer");
+    public void fjernFad(Fad fad) {
+
+        if (fad == null) {
+            throw new IllegalArgumentException("Fad må ikke være null");
         }
 
-        if (plads < 0 || plads >= hylder[hylde].length) {
-            throw new IllegalArgumentException("Ugyldigt pladsnummer");
+        for (int h = 0; h < hylder.length; h++) {
+
+            for (int p = 0; p < hylder[h].length; p++) {
+
+                if (hylder[h][p] == fad) {
+
+                    hylder[h][p] = null;
+                    fad.setReol(null);
+
+                    return;
+                }
+            }
+        }
+    }
+
+    public void flytFad(
+            Fad fad,
+            Reol nyReol,
+            int nyHylde,
+            int nyPlads) {
+
+        if (fad == null) {
+            throw new IllegalArgumentException("Fad må ikke være null");
         }
 
-        Fad fad = hylder[hylde][plads];
-
-        if (fad != null) {
-            fad.setReol(null);
+        if (nyReol == null) {
+            throw new IllegalArgumentException("Ny reol må ikke være null");
         }
 
-        hylder[hylde][plads] = null;
+        // Fjern fra gammel placering
+        Reol gammelReol = fad.getReol();
+
+        if (gammelReol != null) {
+            gammelReol.fjernFad(fad);
+        }
+
+        // Placer på ny placering
+        nyReol.placerFad(fad, nyHylde, nyPlads);
     }
 
     public Fad getFad(int hylde, int plads) {
