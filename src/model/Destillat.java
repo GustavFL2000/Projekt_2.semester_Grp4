@@ -97,14 +97,14 @@ public class Destillat {
 
     // Returnerer hvor mange liter der er tilbage af destillatet til produkter
     public double getTilgængeligMængdeTilProdukt() {
-        return getPåfyldtMængde() - getBrugtTilProdukter();
+        return mængde - getBrugtTilProdukter();
     }
 
     // Returnerer true hvis destillatet har nok tilbage til den angivne mængde
     public boolean harNokTilProdukt(double mængde) {
-        return mængde > 0 && mængde <= getTilgængeligMængdeTilProdukt();
+        return mængde > 0 &&
+                mængde <= getTilgængeligMængdeTilProdukt();
     }
-
     //Destilleringmængde metoder
 
 

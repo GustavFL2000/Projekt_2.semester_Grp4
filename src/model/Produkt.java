@@ -16,6 +16,35 @@ public class Produkt {
 
     //todo tilføj valigering
     public Produkt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
+        if (produktNr <= 0) {
+            throw new IllegalArgumentException(
+                    "Produktnummer skal være større end 0");
+        }
+
+        if (vandMængde < 0) {
+            throw new IllegalArgumentException(
+                    "Vandmængde må ikke være negativ");
+        }
+
+        if (vandOprindelse == null) {
+            throw new IllegalArgumentException(
+                    "Vandoprindelse må ikke være null");
+        }
+
+        if (alkoholProcent <= 0) {
+            throw new IllegalArgumentException(
+                    "Alkoholprocent skal være større end 0");
+        }
+
+        if (beskrivelse == null) {
+            throw new IllegalArgumentException(
+                    "Beskrivelse må ikke være null");
+        }
+
+        if (kvalitetsStempel == null) {
+            throw new IllegalArgumentException(
+                    "Kvalitetsstempel må ikke være null");
+        }
         this.produktNr = produktNr;
         this.vandMængde = vandMængde;
         this.vandOprindelse = vandOprindelse;
