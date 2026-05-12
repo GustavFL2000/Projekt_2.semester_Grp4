@@ -46,4 +46,10 @@ public class Controller {
         return destillat;
     }
 
+    public Lager createLager(int lagerNr ,String lagerNavn, String adresse){
+        Lager lager = new Lager(lagerNr,lagerNavn,adresse);
+        return lager;
+    }
+
+
 }

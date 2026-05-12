@@ -1,9 +1,6 @@
 package storage;
 
-import model.Destillering;
-import model.Fad;
-import model.Produkt;
-import model.Påfyldning;
+import model.*;
 
 import java.util.List;
 
@@ -16,4 +13,7 @@ public interface IStorage {
 
     void addFad(Fad fad);
     List<Fad> getFade();
+
+    void addLager(Lager lager);
+    List<Lager> getLagerListe();
 }

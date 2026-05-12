@@ -108,5 +108,11 @@ public class MainTest {
 
         System.out.println();
         System.out.println(fad1.getLeverandør());
+
+
+
+        Lager lager1 = controller.createLager(1,"ceresPark", "Forenden af satdion alle");
+        Reol reol1 = lager1.createReol(1);
+        System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
     }
 }

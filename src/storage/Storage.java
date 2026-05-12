@@ -1,9 +1,6 @@
 package storage;
 
-import model.Destillering;
-import model.Fad;
-import model.Produkt;
-import model.Påfyldning;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +9,7 @@ public class Storage implements IStorage{
     private List<Destillering> destilleringer = new ArrayList<>();
     private List<Produkt> produkter = new ArrayList<>();
     private List<Fad> fade = new ArrayList<>();
+    private List<Lager> lagerListe = new ArrayList<>();
 
     @Override
     public void addDestillering(Destillering destillering){
@@ -48,6 +46,18 @@ public class Storage implements IStorage{
     @Override
     public List<Fad> getFade() {
         return new ArrayList<>(fade);
+    }
+
+    @Override
+    public void addLager(Lager lager) {
+        if(!lagerListe.contains(lager)){
+            lagerListe.add(lager);
+        }
+    }
+
+    @Override
+    public List<Lager> getLagerListe() {
+        return new ArrayList<>(lagerListe);
     }
 
 

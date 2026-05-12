@@ -1,16 +1,20 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lager {
+    private int lagerNr;
     private String lagerNavn;
     private String adresse;
+    private LocalDate oprettelsesDato;
+    private int ledigePladser;
 
     //Komposition --> 0..* Reol
-    List<Reol> reoler = new ArrayList<>();
+    private List<Reol> reoler = new ArrayList<>();
 
-    public Lager(String lagerNavn, String adresse) {
+    public Lager(int lagerNr ,String lagerNavn, String adresse) {
         if (lagerNavn == null){
             throw new IllegalArgumentException("Lager navn skal udfyldes");
         }
@@ -19,6 +23,7 @@ public class Lager {
         }
         this.lagerNavn = lagerNavn;
         this.adresse = adresse;
+        this.lagerNr = lagerNr;
     }
 
     public List<Reol> getReoler() {
@@ -29,6 +34,13 @@ public class Lager {
         Reol reol = new Reol(reolNr, this);
         reoler.add(reol);
         return reol;
+    }
+
+    public int getLedigePladser(){
+        for (Reol reol : reoler) {
+           ledigePladser += reol.getLedigePladser();
+        }
+        return ledigePladser;
     }
 
     public String getLagerNavn() {

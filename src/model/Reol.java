@@ -13,7 +13,7 @@ public class Reol {
     private List<Fad> fade = new ArrayList<>();
 
     // composition: --> 1 lager
-    Lager lager;
+    private Lager lager;
 
     public Reol(int reolNr, Lager lager) {
         if (reolNr <= 0)
@@ -24,5 +24,25 @@ public class Reol {
         this.reolNr = reolNr;
         this.lager = lager;
 
+    }
+
+    public int getLedigePladser(){
+        int ledigePladser = 0;
+        for (int i = 0; i < hylde1.length; i++) {
+            if(hylde1[i] == null){
+                ledigePladser++;
+            }
+        }
+        for (int i = 0; i < hylde2.length; i++) {
+            if(hylde2[i] == null){
+                ledigePladser++;
+            }
+        }
+        for (int i = 0; i < hylde3.length; i++) {
+            if(hylde3[i] == null){
+                ledigePladser++;
+            }
+        }
+        return ledigePladser;
     }
 }
