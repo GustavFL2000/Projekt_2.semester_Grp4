@@ -13,6 +13,15 @@ public class Leverandør {
     private List<Fad> fade = new ArrayList<>();
 
     public Leverandør(String navn, String land, String kontaktInfo) {
+        if (navn == null){
+            throw new IllegalArgumentException("Du skal indtaste et navn");
+        }
+        if (land == null){
+            throw new IllegalArgumentException("Du skal indtaste et land");
+        }
+        if (kontaktInfo == null){
+            throw new IllegalArgumentException("Du skal indtaste kontakt oplysninger");
+        }
         this.navn = navn;
         this.land = land;
         this.kontaktInfo = kontaktInfo;
@@ -25,6 +34,16 @@ public class Leverandør {
     public void addFad (Fad fad) {
         if (!fade.contains(fad)) {
             fade.add(fad);
+            fad.setLeverandør(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Leverandør{" +
+                "navn='" + navn + '\'' +
+                ", land='" + land + '\'' +
+                ", kontaktInfo='" + kontaktInfo + '\'' +
+                '}';
     }
 }

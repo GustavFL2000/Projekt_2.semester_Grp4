@@ -12,13 +12,12 @@ public class MainTest {
         Controller controller = new Controller(storage);
 
         // Opretter maltbatch, som bruges til destilleringerne
-        Maltbatch maltbatch1 = new Maltbatch(1, Kornsort.EVERGREEN);
-        Maltbatch maltbatch2 = new Maltbatch(1, Kornsort.STAIRWAY);
+        Maltbatch maltbatch1 = controller.createMaltBatch( Kornsort.EVERGREEN);
 
         // Registrerer færdige destilleringer
-       Destillering destillering1 = controller.createDestillering(1,LocalDate.of(2020,11,4),
+       Destillering destillering1 = controller.createDestillering(LocalDate.of(2020,11,4),
                LocalDate.of(2022,11,5), 70, false,"Ny november batch", 200, maltbatch1);
-        Destillering destillering2 = controller.createDestillering(2,LocalDate.of(2020,1,1),
+        Destillering destillering2 = controller.createDestillering(LocalDate.of(2020,1,1),
                 LocalDate.of(2022,1,2), 70, false,"Nyårs bryg", 200, maltbatch1);
 
         System.out.println("Registrerede destilleringer:");
@@ -39,8 +38,12 @@ public class MainTest {
         System.out.println("Destillering 2 har fordelt: " + destillering2.getPådeltMængde() + " liter");
         System.out.println("Destillering 2 har tilbage: " + destillering2.getRestMængde() + " liter");
 
+        //Oprettet en leverandør til fade
+     Leverandør fad1Leverandør = new Leverandør("Bo´fade", "Italien", "20212021");
+
         // Opretter et fad
-        Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy","Hans");
+        Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy", fad1Leverandør);
+        Fad fad2 = controller.createFad(2,"Spanien",200,"Brandy", fad1Leverandør);
 
 
         System.out.println();
@@ -102,5 +105,48 @@ public class MainTest {
         System.out.println();
         System.out.println("Destilleringsmængder for destillat 1:");
         System.out.println(destillat1.getDestilleringsMængder());
+
+        System.out.println();
+        System.out.println(fad1.getLeverandør());
+
+        //Opretter lager
+        Lager lager1 = controller.createLager("ceresPark", "Forenden af satdion alle");
+        Reol reol1 = lager1.createReol(1);
+        System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
+
+        //Placerer fade
+        reol1.placerFad(fad1,1,1);
+        reol1.placerFad(fad2,1,2);
+
+        System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
+
+        System.out.println("Placering: "+fad1.getReol().getFad(1,1));
+        fad1.getReol().flytFad(fad1,reol1,2,2);
+        System.out.println("Placering: "+fad1.getReol().getFad(1,1));
+        System.out.println("Placering: "+fad1.getReol().getFad(2,2));
+
+        System.out.println(reol1.getFadPlacering(fad1));
+        System.out.println(reol1.getAlleFade());
+
+        // produkt / flaske
+        Flaske flaske = prod1.createFlaske(75);
+        Flaske flaske2 = prod1.createFlaske(75);
+
+        prod1.createFlasker(75, 10);
+
+        System.out.println(prod1.getFlasker());
+
+        System.out.println(flaske.getFlaskeNr());
+        System.out.println(flaske2.getFlaskeNr());
+        System.out.println("Antal flasker for produkt 1: " + prod1.getFlasker().size());
+
+        Lager lager2 = controller.createLager( "a", "a");
+
+        // controller søgEfterFade
+        System.out.println("søg");
+        System.out.println(controller.søgEfterFade(null, null, null, 4));
+
+        System.out.println(lager1.getLagerNr());
+        System.out.println(lager2.getLagerNr());
     }
 }

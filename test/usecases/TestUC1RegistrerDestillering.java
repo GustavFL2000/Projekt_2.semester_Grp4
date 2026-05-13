@@ -1,4 +1,4 @@
-package usecases;
+package test.usecases;
 
 import controller.Controller;
 import model.Destillering;
@@ -32,7 +32,6 @@ public class TestUC1RegistrerDestillering {
     void TC1_createDestillering1() {
 
         Destillering d = controller.createDestillering(
-                1,
                 LocalDate.of(2026,5,1),
                 LocalDate.of(2026,5,10),
                 45,

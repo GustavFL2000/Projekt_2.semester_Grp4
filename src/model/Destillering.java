@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Destillering {
-    int destilleringsID;
-    LocalDate startDato;
-    LocalDate slutDato;
-    double væskeMængde;
-    double alkoholProcent;
-    boolean rygematriale;
-    String kommentar;
-    Maltbatch maltbatch;
+    private int destilleringsID;
+    private LocalDate startDato;
+    private LocalDate slutDato;
+    private double væskeMængde;
+    private double alkoholProcent;
+    private boolean rygematriale;
+    private String kommentar;
+    private Maltbatch maltbatch;
 
     //Komposition --> 0..* DestillingsMængde
     private List<DestilleringsMængde> destilleringsMængder = new ArrayList<>();
@@ -48,35 +48,35 @@ public class Destillering {
         return new ArrayList<>(destilleringsMængder);
     }
 
-     void addDestilleringsMængde (DestilleringsMængde destilleringsMængde){
+    void addDestilleringsMængde(DestilleringsMængde destilleringsMængde) {
         if (!destilleringsMængder.contains(destilleringsMængde)) {
             destilleringsMængder.add(destilleringsMængde);
         }
     }
 
-    public DestilleringsMængde createDestilleringsMængde (double mængde, Destillat destillat) {
-        if (mængde <= 0 ){
+    public DestilleringsMængde createDestilleringsMængde(double mængde, Destillat destillat) {
+        if (mængde <= 0) {
             throw new IllegalArgumentException("Mængde skal værre større end 0");
         }
-        if (destillat == null){
+        if (destillat == null) {
             throw new IllegalArgumentException("Destillat skal vælges");
         }
-        if (mængde > getRestMængde()){
+        if (mængde > getRestMængde()) {
             throw new IllegalArgumentException("Der er ikke nok væske tilbage fra destilleringen");
         }
         return new DestilleringsMængde(mængde, this, destillat);
     }
 
-    public double getPådeltMængde (){
+    public double getPådeltMængde() {
         double sum = 0;
         for (DestilleringsMængde destilleringsMængde : destilleringsMængder) {
-            sum+=destilleringsMængde.getMængde();
+            sum += destilleringsMængde.getMængde();
         }
         return sum;
     }
 
     public double getRestMængde() {
-        return væskeMængde-getPådeltMængde();
+        return væskeMængde - getPådeltMængde();
     }
 
     public int getDestilleringsID() {
