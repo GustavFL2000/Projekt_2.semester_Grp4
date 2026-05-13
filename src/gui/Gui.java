@@ -2,24 +2,50 @@ package gui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 public class Gui extends Application {
 
-    private Scene scene;
-
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Gui Demo");
+        stage.setTitle("Whisky System");
 
-        scene = new Scene(new FrontPagePane(this), 400, 300);
+        TabPane tabPane = new TabPane();
+
+        // Forside
+        Tab tabFrontpage = new Tab("Forside");
+        tabFrontpage.setContent(new FrontPagePane());
+
+        // Registrer destillering
+        Tab tabDestillering = new Tab("Registrer Destillering");
+        tabDestillering.setContent(new RegistrerDestilleringPane());
+
+        // Fad
+        Tab tabFad = new Tab("Fad");
+        tabFad.setContent(new FadPane());
+
+        // Whisky produkt
+        Tab tabWhisky = new Tab("Opret Whisky Produkt");
+        tabWhisky.setContent(new OpretWhiskyProduktPane());
+
+        // Tabs må ikke lukkes
+        tabFrontpage.setClosable(false);
+        tabDestillering.setClosable(false);
+        tabFad.setClosable(false);
+        tabWhisky.setClosable(false);
+
+        tabPane.getTabs().addAll(
+                tabFrontpage,
+                tabDestillering,
+                tabFad,
+                tabWhisky
+        );
+
+        Scene scene = new Scene(tabPane, 800, 600);
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    // 🔥 Denne bruger vi til at skifte side
-    public void setPane(javafx.scene.layout.Pane pane) {
-        scene.setRoot(pane);
     }
 }

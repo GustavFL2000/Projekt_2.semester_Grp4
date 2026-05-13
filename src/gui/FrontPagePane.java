@@ -1,27 +1,18 @@
 package gui;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
-public class FrontPagePane extends GridPane {
+public class FrontPagePane extends VBox {
 
-    public FrontPagePane(Gui gui) {
+    public FrontPagePane() {
 
-        this.setPadding(new Insets(20));
-        this.setHgap(10);
-        this.setVgap(10);
+        this.setAlignment(Pos.CENTER);
+        this.setSpacing(20);
 
-        Button btnPage1 = new Button("Registrer Destillering");
-        Button btnPage2 = new Button("Fad");
-        Button btnPage3 = new Button("Opret Whisky Produkt");
+        Label lblWelcome = new Label("Velkommen til Whisky Systemet");
 
-        this.add(btnPage1, 0, 0);
-        this.add(btnPage2, 1, 0);
-        this.add(btnPage3, 2, 0);
-
-        btnPage1.setOnAction(e -> gui.setPane(new RegistrerDestilleringPane(gui)));
-        btnPage2.setOnAction(e -> gui.setPane(new FadPane(gui)));
-        btnPage3.setOnAction(e -> gui.setPane(new OpretWhiskyProduktPane(gui)));
+        this.getChildren().add(lblWelcome);
     }
 }
