@@ -98,11 +98,7 @@ public class Reol {
         }
     }
 
-    public void flytFad(
-            Fad fad,
-            Reol nyReol,
-            int nyHylde,
-            int nyPlads) {
+    public void flytFad(Fad fad, Reol nyReol, int nyHylde, int nyPlads) {
 
         if (fad == null) {
             throw new IllegalArgumentException("Fad må ikke være null");

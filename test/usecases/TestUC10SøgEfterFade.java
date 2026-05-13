@@ -1,4 +1,4 @@
-package usecases;
+package test.usecases;
 
 public class TestUC10SøgEfterFade {
 }

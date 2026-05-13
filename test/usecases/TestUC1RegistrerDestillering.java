@@ -1,4 +1,4 @@
-package usecases;
+package test.usecases;
 
 import controller.Controller;
 import model.Destillering;
