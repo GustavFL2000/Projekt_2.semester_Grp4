@@ -1,4 +1,4 @@
-package test.usecases;
+package usecases;
 
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,18 +22,15 @@ public class TestUC5FlytFade {
     @BeforeEach
     void setUp() {
 
-        lager1 = new Lager(1,"Lager aarhus", "Aarhus" );
-
-        lager2 = new Lager(1,"Lager Vejle", "Vejle");
+        lager1 = new Lager(1, "Lager aarhus", "Aarhus");
+        lager2 = new Lager(1, "Lager Vejle", "Vejle");
 
         reol1 = new Reol(1, lager1);
-
         reol2 = new Reol(2, lager2);
 
         leverandør = new Leverandør("test Supplier", "Skotland", "hej");
 
         fad1 = new Fad(1, "Skotland", 100, "Sherry", leverandør);
-
         fad2 = new Fad(2, "Irland", 100, "Portvin", leverandør);
 
         // Startplacering
@@ -48,57 +45,37 @@ public class TestUC5FlytFade {
     void TC53_flytFad1() {
 
         // Act
-        reol1.flytFad(
-                fad1,
-                reol2,
-                1,
-                1);
+        reol1.flytFad(fad1, reol2, 1, 1);
 
         // Assert
-        assertEquals(
-                fad1,
-                reol2.getFad(1,1));
+        assertEquals(fad1, reol2.getFad(1, 1));
 
-        assertNull(
-                reol1.getFad(0,0));
+        //gamle placering
+        assertNull(reol1.getFad(0, 0));
     }
 
     @Test
     void TC54_flytFad2() {
 
         // Act
-        reol1.flytFad(
-                fad1,
-                reol2,
-                2,
-                2);
+        reol1.flytFad(fad1, reol2, 2, 2);
 
         // Assert
-        assertEquals(
-                fad1,
-                reol2.getFad(2,2));
+        assertEquals(fad1, reol2.getFad(2, 2));
 
-        assertNull(
-                reol1.getFad(0,0));
+        assertNull(reol1.getFad(0, 0));
     }
 
     @Test
     void TC55_flytFad3() {
 
         // Act
-        reol1.flytFad(
-                fad1,
-                reol1,
-                0,
-                2);
+        reol1.flytFad(fad1, reol1, 0, 2);
 
         // Assert
-        assertEquals(
-                fad1,
-                reol1.getFad(0,2));
+        assertEquals(fad1, reol1.getFad(0, 2));
 
-        assertNull(
-                reol1.getFad(0,0));
+        assertNull(reol1.getFad(0, 0));
     }
 
     // -------------------------------------------------
@@ -108,90 +85,50 @@ public class TestUC5FlytFade {
     @Test
     void TC56_nullFad() {
 
-        assertThrows(
-                IllegalArgumentException.class,
-
-                () -> {
-                    reol1.flytFad(
-                            null,
-                            reol2,
-                            1,
-                            1);
+        assertThrows(IllegalArgumentException.class, () -> {
+                    reol1.flytFad(null, reol2, 1, 1);
                 });
     }
 
     @Test
     void TC57_nullReol() {
 
-        assertThrows(
-                IllegalArgumentException.class,
-
-                () -> {
-                    reol1.flytFad(
-                            fad1,
-                            null,
-                            1,
-                            1);
+        assertThrows(IllegalArgumentException.class, () -> {
+                    reol1.flytFad(fad1, null, 1, 1);
                 });
     }
 
     @Test
     void TC58_negativHylde() {
 
-        assertThrows(
-                IllegalArgumentException.class,
-
-                () -> {
-                    reol1.flytFad(
-                            fad1,
-                            reol2,
-                            -1,
-                            1);
+        assertThrows(IllegalArgumentException.class, () -> {
+                    reol1.flytFad(fad1, reol2, -1, 1);
                 });
     }
 
     @Test
     void TC59_hyldeUdenforArray() {
 
-        assertThrows(
-                IllegalArgumentException.class,
-
-                () -> {
-                    reol1.flytFad(
-                            fad1,
-                            reol2,
-                            5,
-                            1);
+        assertThrows(IllegalArgumentException.class, () -> {
+                    reol1.flytFad(fad1, reol2, 5, 1);
                 });
     }
 
     @Test
     void TC60_negativPlads() {
 
-        assertThrows(
-                IllegalArgumentException.class,
-
-                () -> {
-                    reol1.flytFad(
-                            fad1,
-                            reol2,
-                            1,
-                            -1);
+        assertThrows(IllegalArgumentException.class, () -> {
+                    reol1.flytFad(fad1, reol2, 1, -1);
                 });
     }
 
     @Test
     void TC61_pladsUdenforArray() {
 
-        assertThrows(
-                IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    reol1.flytFad(
-                            fad1,
-                            reol2,
-                            1,
-                            5);
+                    reol1.flytFad(fad1, reol2, 1, 5);
                 });
     }
 
@@ -199,21 +136,11 @@ public class TestUC5FlytFade {
     void TC62_pladsOptaget() {
 
         // Arrange
-        reol2.placerFad(
-                fad2,
-                0,
-                0);
+        reol2.placerFad(fad2, 0, 0);
 
         // Act + Assert
-        assertThrows(
-                IllegalArgumentException.class,
-
-                () -> {
-                    reol1.flytFad(
-                            fad1,
-                            reol2,
-                            0,
-                            0);
+        assertThrows(IllegalArgumentException.class, () -> {
+                    reol1.flytFad(fad1, reol2, 0, 0);
                 });
     }
 }

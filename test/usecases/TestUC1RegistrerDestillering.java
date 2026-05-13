@@ -1,4 +1,4 @@
-package test.usecases;
+package usecases;
 
 import controller.Controller;
 import model.Destillering;
@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestUC1RegistrerDestillering {
     private Controller controller;
     private Maltbatch maltbatch;
+
     @BeforeEach
     void setUp() {
         IStorage storage = new Storage();
@@ -31,15 +32,7 @@ public class TestUC1RegistrerDestillering {
     @Test
     void TC1_createDestillering1() {
 
-        Destillering d = controller.createDestillering(
-                LocalDate.of(2026,5,1),
-                LocalDate.of(2026,5,10),
-                45,
-                true,
-                "Test",
-                100,
-                maltbatch
-        );
+        Destillering d = controller.createDestillering(LocalDate.of(2026, 5, 1), LocalDate.of(2026, 5, 10), 45, true, "Test", 100, maltbatch);
 
         assertNotNull(d);
         assertEquals(1, d.getDestilleringsID());
@@ -48,16 +41,7 @@ public class TestUC1RegistrerDestillering {
     @Test
     void TC2_createDestillering2() {
 
-        Destillering d = controller.createDestillering(
-                10,
-                LocalDate.of(2026,6,1),
-                LocalDate.of(2026,6,10),
-                60,
-                false,
-                "Ny destillering",
-                200,
-                maltbatch
-        );
+        Destillering d = controller.createDestillering(LocalDate.of(2026, 6, 1), LocalDate.of(2026, 6, 10), 60, false, "Ny destillering", 200, maltbatch);
 
         assertNotNull(d);
         assertEquals(10, d.getDestilleringsID());
@@ -67,15 +51,8 @@ public class TestUC1RegistrerDestillering {
     void TC3_createDestillering_Graensevaerdi() {
 
         Destillering d = controller.createDestillering(
-                1,
-                LocalDate.now(),
-                LocalDate.now(),
-                0.1,
-                true,
-                "Grænseværdi",
-                1,
-                maltbatch
-        );
+
+                LocalDate.now(), LocalDate.now(), 0.1, true, "Grænseværdi", 1, maltbatch);
 
         assertNotNull(d);
     }
@@ -84,15 +61,8 @@ public class TestUC1RegistrerDestillering {
     void TC4_createDestillering_Graensevaerdi() {
 
         Destillering d = controller.createDestillering(
-                1,
-                LocalDate.now(),
-                LocalDate.now(),
-                100,
-                true,
-                "Grænseværdi",
-                500,
-                maltbatch
-        );
+
+                LocalDate.now(), LocalDate.now(), 100, true, "Grænseværdi", 500, maltbatch);
 
         assertNotNull(d);
     }
@@ -106,15 +76,8 @@ public class TestUC1RegistrerDestillering {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
-                    0,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    45,
-                    true,
-                    "Fejl",
-                    100,
-                    maltbatch
-            );
+
+                    LocalDate.now(), LocalDate.now(), 45, true, "Fejl", 100, maltbatch);
         });
     }
 
@@ -123,15 +86,8 @@ public class TestUC1RegistrerDestillering {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
-                    1,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    0,
-                    true,
-                    "Fejl",
-                    100,
-                    maltbatch
-            );
+
+                    LocalDate.now(), LocalDate.now(), 0, true, "Fejl", 100, maltbatch);
         });
     }
 
@@ -140,15 +96,8 @@ public class TestUC1RegistrerDestillering {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
-                    1,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    -1,
-                    true,
-                    "Fejl",
-                    100,
-                    maltbatch
-            );
+
+                    LocalDate.now(), LocalDate.now(), -1, true, "Fejl", 100, maltbatch);
         });
     }
 
@@ -157,15 +106,8 @@ public class TestUC1RegistrerDestillering {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
-                    1,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    45,
-                    true,
-                    "Fejl",
-                    0,
-                    maltbatch
-            );
+
+                    LocalDate.now(), LocalDate.now(), 45, true, "Fejl", 0, maltbatch);
         });
     }
 
@@ -174,15 +116,8 @@ public class TestUC1RegistrerDestillering {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
-                    1,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    45,
-                    true,
-                    "Fejl",
-                    -10,
-                    maltbatch
-            );
+
+                    LocalDate.now(), LocalDate.now(), 45, true, "Fejl", -10, maltbatch);
         });
     }
 
@@ -191,15 +126,8 @@ public class TestUC1RegistrerDestillering {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
-                    1,
-                    null,
-                    LocalDate.now(),
-                    45,
-                    true,
-                    "Fejl",
-                    100,
-                    maltbatch
-            );
+
+                    null, LocalDate.now(), 45, true, "Fejl", 100, maltbatch);
         });
     }
 
@@ -207,16 +135,7 @@ public class TestUC1RegistrerDestillering {
     void TC11_slutDatoNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            controller.createDestillering(
-                    1,
-                    LocalDate.now(),
-                    null,
-                    45,
-                    true,
-                    "Fejl",
-                    100,
-                    maltbatch
-            );
+            controller.createDestillering(LocalDate.now(), null, 45, true, "Fejl", 100, maltbatch);
         });
     }
 
@@ -224,16 +143,7 @@ public class TestUC1RegistrerDestillering {
     void TC12_maltbatchNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            controller.createDestillering(
-                    1,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    45,
-                    true,
-                    "Fejl",
-                    100,
-                    null
-            );
+            controller.createDestillering(LocalDate.now(), LocalDate.now(), 45, true, "Fejl", 100, null);
         });
     }
 }
