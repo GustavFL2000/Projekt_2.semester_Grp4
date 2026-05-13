@@ -15,8 +15,10 @@ public class Controller {
         this.storage = storage;
     }
 
-    public Destillering createDestillering(int destilleringsID, LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
+    private int destilleringsID = 1;
+    public Destillering createDestillering(LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
         Destillering destillering = new Destillering(destilleringsID, startDato, slutDato, alkoholProcent, rygematriale, kommentar, væskeMængde, maltbatch);
+        destilleringsID++;
         storage.addDestillering(destillering);
         return destillering;
     }
@@ -47,8 +49,7 @@ public class Controller {
         return destillat;
     }
 
-    int lagerIdCount = 1;
-
+    private int lagerIdCount = 1;
     public Lager createLager(String lagerNavn, String adresse) {
         Lager lager = new Lager(lagerIdCount, lagerNavn, adresse);
         lagerIdCount++;
@@ -58,6 +59,18 @@ public class Controller {
 
     public List<Lager> getLager(){
         return storage.getLagerListe();
+    }
+
+    private int batchNr = 1;
+    public Maltbatch createMaltBatch (Kornsort kornsort){
+        Maltbatch maltbatch = new Maltbatch(batchNr, kornsort);
+        batchNr++;
+        storage.addMaltbatch(maltbatch);
+        return maltbatch;
+    }
+
+    public List<Maltbatch> getMaltbatches(){
+        return storage.getMaltbatch();
     }
 
     public List<Fad> søgEfterFade(Integer fadNr, Lager lager, String tidligereIndhold, Integer alder) {

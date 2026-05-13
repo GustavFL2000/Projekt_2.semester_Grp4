@@ -16,4 +16,7 @@ public interface IStorage {
 
     void addLager(Lager lager);
     List<Lager> getLagerListe();
+
+    void addMaltbatch(Maltbatch maltbatch);
+    List<Maltbatch> getMaltbatch();
 }

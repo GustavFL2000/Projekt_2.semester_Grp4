@@ -10,6 +10,7 @@ public class Storage implements IStorage{
     private List<Produkt> produkter = new ArrayList<>();
     private List<Fad> fade = new ArrayList<>();
     private List<Lager> lagerListe = new ArrayList<>();
+    private List<Maltbatch> maltbatches = new ArrayList<>();
 
     @Override
     public void addDestillering(Destillering destillering){
@@ -58,6 +59,18 @@ public class Storage implements IStorage{
     @Override
     public List<Lager> getLagerListe() {
         return new ArrayList<>(lagerListe);
+    }
+
+    @Override
+    public void addMaltbatch(Maltbatch maltbatch) {
+        if (!maltbatches.contains(maltbatch)){
+            maltbatches.add(maltbatch);
+        }
+    }
+
+    @Override
+    public List<Maltbatch> getMaltbatch() {
+        return new ArrayList<>(maltbatches);
     }
 
 

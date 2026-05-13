@@ -23,5 +23,8 @@ public class Maltbatch {
         return kornsort;
     }
 
-
+    @Override
+    public String toString() {
+        return batchNr + " " + kornsort.toString();
+    }
 }

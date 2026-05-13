@@ -12,13 +12,12 @@ public class MainTest {
         Controller controller = new Controller(storage);
 
         // Opretter maltbatch, som bruges til destilleringerne
-        Maltbatch maltbatch1 = new Maltbatch(1, Kornsort.EVERGREEN);
-        Maltbatch maltbatch2 = new Maltbatch(1, Kornsort.STAIRWAY);
+        Maltbatch maltbatch1 = controller.createMaltBatch( Kornsort.EVERGREEN);
 
         // Registrerer færdige destilleringer
-       Destillering destillering1 = controller.createDestillering(1,LocalDate.of(2020,11,4),
+       Destillering destillering1 = controller.createDestillering(LocalDate.of(2020,11,4),
                LocalDate.of(2022,11,5), 70, false,"Ny november batch", 200, maltbatch1);
-        Destillering destillering2 = controller.createDestillering(2,LocalDate.of(2020,1,1),
+        Destillering destillering2 = controller.createDestillering(LocalDate.of(2020,1,1),
                 LocalDate.of(2022,1,2), 70, false,"Nyårs bryg", 200, maltbatch1);
 
         System.out.println("Registrerede destilleringer:");

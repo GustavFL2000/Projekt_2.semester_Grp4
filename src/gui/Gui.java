@@ -25,13 +25,13 @@ public class Gui extends Application {
         tabFrontpage.setContent(new FrontPagePane());
 
         Tab tabDestillering = new Tab("Registrer Destillering");
-        tabDestillering.setContent(new RegistrerDestilleringPane());
+        tabDestillering.setContent(new RegistrerDestilleringPane(controller));
 
         Tab tabFad = new Tab("Fad");
         tabFad.setContent(new FadPane());
 
         Tab tabWhisky = new Tab("Opret Whisky Produkt");
-        tabWhisky.setContent(new OpretWhiskyProduktPane());
+        tabWhisky.setContent(new OpretWhiskyProduktPane(controller));
 
         Tab tabLager = new Tab("Lager");
         tabLager.setContent(new LagerPane());
