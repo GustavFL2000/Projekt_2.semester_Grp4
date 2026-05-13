@@ -111,7 +111,7 @@ public class MainTest {
         System.out.println(fad1.getLeverandør());
 
         //Opretter lager
-        Lager lager1 = controller.createLager(1,"ceresPark", "Forenden af satdion alle");
+        Lager lager1 = controller.createLager("ceresPark", "Forenden af satdion alle");
         Reol reol1 = lager1.createReol(1);
         System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
 
@@ -141,10 +141,13 @@ public class MainTest {
         System.out.println(flaske2.getFlaskeNr());
         System.out.println("Antal flasker for produkt 1: " + prod1.getFlasker().size());
 
-        Lager lager2 = controller.createLager(2, "a", "a");
+        Lager lager2 = controller.createLager( "a", "a");
 
         // controller søgEfterFade
         System.out.println("søg");
         System.out.println(controller.søgEfterFade(null, null, null, 4));
+
+        System.out.println(lager1.getLagerNr());
+        System.out.println(lager2.getLagerNr());
     }
 }

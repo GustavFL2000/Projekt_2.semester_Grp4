@@ -68,7 +68,7 @@ public class Lager {
 
     @Override
     public String toString() {
-        return "Lager{" +
+        return "Lager{" + lagerNr +
                 "lagerNavn='" + lagerNavn + '\'' +
                 ", adresse='" + adresse + '\'' +
                 ", reoler=" + reoler +
