@@ -30,17 +30,23 @@ public class Gui extends Application {
         Tab tabWhisky = new Tab("Opret Whisky Produkt");
         tabWhisky.setContent(new OpretWhiskyProduktPane());
 
+        //Lager side
+        Tab tabLager = new Tab("Lager");
+        tabLager.setContent(new LagerPane());
+
         // Tabs må ikke lukkes
         tabFrontpage.setClosable(false);
         tabDestillering.setClosable(false);
         tabFad.setClosable(false);
         tabWhisky.setClosable(false);
+        tabLager.setClosable(false);
 
         tabPane.getTabs().addAll(
                 tabFrontpage,
                 tabDestillering,
                 tabFad,
-                tabWhisky
+                tabWhisky,
+                tabLager
         );
 
         Scene scene = new Scene(tabPane, 800, 600);
