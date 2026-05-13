@@ -47,8 +47,11 @@ public class Controller {
         return destillat;
     }
 
-    public Lager createLager(int lagerNr, String lagerNavn, String adresse) {
-        Lager lager = new Lager(lagerNr, lagerNavn, adresse);
+    int lagerIdCount = 1;
+
+    public Lager createLager(String lagerNavn, String adresse) {
+        Lager lager = new Lager(lagerIdCount, lagerNavn, adresse);
+        lagerIdCount++;
         storage.addLager(lager);
         return lager;
     }
