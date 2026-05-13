@@ -1,4 +1,4 @@
-package usecases;
+package test.usecases;
 
 import model.Destillat;
 import model.Fad;
