@@ -43,9 +43,9 @@ public class TestUC10SøgEfterFade {
         reol1 = new Reol(1, lager1);
         reol2 = new Reol(2, lager2);
 
-        fad1 = controller.createFad(1, "Skotland", 100, "Sherry", leverandør);
-        fad2 = controller.createFad(2, "Irland", 120, "Bourbon", leverandør);
-        fad3 = controller.createFad(3, "USA", 90, "Sherry", leverandør);
+        fad1 = controller.createFad( "Skotland", 100, "Sherry", leverandør);
+        fad2 = controller.createFad( "Irland", 120, "Bourbon", leverandør);
+        fad3 = controller.createFad( "USA", 90, "Sherry", leverandør);
 
         reol1.placerFad(fad1, 0, 0);
         reol1.placerFad(fad2, 0, 1);
