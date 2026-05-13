@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import model.Maltbatch;
 
+import java.time.LocalDate;
+
 public class RegistrerDestilleringPane extends GridPane {
     private Controller controller;
 
@@ -61,5 +63,48 @@ public class RegistrerDestilleringPane extends GridPane {
         this.add(lblKommentar, 0, 12);
         TextField txtKommentar = new TextField();
         this.add(txtKommentar, 0, 13);
+
+        //Opret knap
+        Button btnOpretKnap = new Button("Opret destillering");
+        this.add(btnOpretKnap,0, 14);
+        btnOpretKnap.setOnAction(event ->{
+            try {
+                LocalDate startDato = dpStartDato.getValue();
+                LocalDate sluttDato = dpSlutDato.getValue();
+                double alkoholProcent = Double.parseDouble(txtAlkoholProcent.getText());
+                boolean rygeMateriale = chbRygeMateriale.isSelected();
+                String kommentar = txtKommentar.getText();
+                double væskeMængde = Double.parseDouble(txtVæskeMængde.getText());
+                Maltbatch maltbatch = cobMaltBatch.getSelectionModel().getSelectedItem();
+                controller.createDestillering(startDato, sluttDato, alkoholProcent, rygeMateriale, kommentar, væskeMængde, maltbatch);
+
+                //Bekræftelse alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Succes");
+                alert.setHeaderText("Destillering oprettet");
+                alert.setContentText("Destilleringen blev oprettet korrekt.");
+
+                alert.showAndWait();
+
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt tal");
+                alert.setContentText("Indtast gyldige tal.");
+
+                alert.showAndWait();
+
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt dato");
+                alert.setContentText("Slut dato må ikke være før start dato");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
     }
 }

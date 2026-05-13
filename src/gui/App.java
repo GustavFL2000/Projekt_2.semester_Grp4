@@ -20,6 +20,10 @@ public class App {
     }
 
     public static void initStorage (Controller controller){
+        // Maltbatch
         controller.createMaltBatch( Kornsort.EVERGREEN);
+
+        //Leverandør
+        controller.createLeverandør("Bo´s fade", "Italien", "25342123");
     }
 }

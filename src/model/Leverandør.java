@@ -40,10 +40,6 @@ public class Leverandør {
 
     @Override
     public String toString() {
-        return "Leverandør{" +
-                "navn='" + navn + '\'' +
-                ", land='" + land + '\'' +
-                ", kontaktInfo='" + kontaktInfo + '\'' +
-                '}';
+        return navn + ", tlf: " + kontaktInfo;
     }
 }

@@ -33,8 +33,10 @@ public class Controller {
         return produkt;
     }
 
-    public Fad createFad(int fadNr, String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
+    private int fadNr = 1;
+    public Fad createFad(String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
         Fad fad = new Fad(fadNr, land, størrelse, tidligereIndhold, leverandør);
+        fadNr++;
         storage.addFad(fad);
         return fad;
     }
@@ -71,6 +73,16 @@ public class Controller {
 
     public List<Maltbatch> getMaltbatches(){
         return storage.getMaltbatch();
+    }
+
+    public Leverandør createLeverandør (String navn, String land, String kontaktInfo){
+        Leverandør leverandør = new Leverandør(navn, land, kontaktInfo);
+        storage.addLeverandør(leverandør);
+        return leverandør;
+    }
+
+    public List<Leverandør> getLeverandører(){
+        return storage.getLeverandør();
     }
 
     public List<Fad> søgEfterFade(Integer fadNr, Lager lager, String tidligereIndhold, Integer alder) {

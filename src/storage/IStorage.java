@@ -19,4 +19,8 @@ public interface IStorage {
 
     void addMaltbatch(Maltbatch maltbatch);
     List<Maltbatch> getMaltbatch();
+
+    void addLeverandør(Leverandør leverandør);
+
+    List<Leverandør> getLeverandør();
 }
