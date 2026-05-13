@@ -39,11 +39,11 @@ public class MainTest {
         System.out.println("Destillering 2 har tilbage: " + destillering2.getRestMængde() + " liter");
 
         //Oprettet en leverandør til fade
-     Leverandør fad1Leverandør = new Leverandør("Bo´fade", "Italien", "20212021");
+     Leverandør fad1Leverandør = controller.createLeverandør("Bo´fade", "Italien", "20212021");
 
         // Opretter et fad
-        Fad fad1 = controller.createFad(1,"Spanien",200,"Brandy", fad1Leverandør);
-        Fad fad2 = controller.createFad(2,"Spanien",200,"Brandy", fad1Leverandør);
+        Fad fad1 = controller.createFad("Spanien",200,"Brandy", fad1Leverandør);
+        Fad fad2 = controller.createFad("Spanien",200,"Brandy", fad1Leverandør);
 
 
         System.out.println();
