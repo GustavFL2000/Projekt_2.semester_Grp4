@@ -1,4 +1,4 @@
-package test.usecases;
+package usecases;
 
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
