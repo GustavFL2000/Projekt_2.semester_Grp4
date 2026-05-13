@@ -26,6 +26,7 @@ public class Lager {
         this.lagerNavn = lagerNavn;
         this.adresse = adresse;
         this.lagerNr = lagerNr;
+        this.oprettelsesDato = LocalDate.now();
     }
 
     public List<Reol> getReoler() {
@@ -55,6 +56,14 @@ public class Lager {
 
     public String getAdresse() {
         return adresse;
+    }
+
+    public LocalDate getOprettelsesDato() {
+        return oprettelsesDato;
+    }
+
+    public int getLagerNr() {
+        return lagerNr;
     }
 
     @Override

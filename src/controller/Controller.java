@@ -49,7 +49,12 @@ public class Controller {
 
     public Lager createLager(int lagerNr, String lagerNavn, String adresse) {
         Lager lager = new Lager(lagerNr, lagerNavn, adresse);
+        storage.addLager(lager);
         return lager;
+    }
+
+    public List<Lager> getLager(){
+        return storage.getLagerListe();
     }
 
     public List<Fad> søgEfterFade(Integer fadNr, Lager lager, String tidligereIndhold, Integer alder) {
@@ -62,7 +67,7 @@ public class Controller {
                 matcher = false;
             }
             if (lager != null ) {
-                if (fad.getReol() != null && fad.getReol().getLager() != lager){
+                if (fad.getReol() == null || fad.getReol().getLager() != lager){
                     matcher = false;
                 }
             }

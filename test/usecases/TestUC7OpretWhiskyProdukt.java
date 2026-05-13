@@ -1,4 +1,4 @@
-package test;
+package usecases;
 
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +12,8 @@ public class TestUC7OpretWhiskyProdukt {
 
     private Produkt produkt;
     private Destillat destillat;
+    private Fad fad;
+    private Leverandør leverandør;
 
     @BeforeEach
     void setUp() {
@@ -32,6 +34,15 @@ public class TestUC7OpretWhiskyProdukt {
 
         // Gør destillatet klar til produkter
         // så harNokTilProdukt() bliver true
+
+        leverandør = new Leverandør("BoFade", "Spanien", "12345678");
+
+        fad = new Fad(1, "Spanien", 100, "Sherry", leverandør);
+
+        destillat.createPåfyldning(
+                100,
+                LocalDate.now().minusYears(3),
+                fad);
     }
 
     @Test

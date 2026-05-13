@@ -145,6 +145,6 @@ public class MainTest {
 
         // controller søgEfterFade
         System.out.println("søg");
-        System.out.println(controller.søgEfterFade(null, null, null, 5));
+        System.out.println(controller.søgEfterFade(null, null, null, 4));
     }
 }

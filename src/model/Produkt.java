@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +75,9 @@ public class Produkt {
         if (!destillat.harNokTilProdukt(mængdeFraDestillat)) {
             throw new IllegalArgumentException("Der er ikke nok whisky i fadet");
         }
+        if (!destillat.erKlarTilProdukt(LocalDate.now())) {
+            throw new IllegalArgumentException("Destillatet har ikke lagret mindst 3 år");
+        }
         return new WhiskySammensætning(mængdeFraDestillat, this, destillat);
     }
 
@@ -101,6 +105,9 @@ public class Produkt {
     public List<Flaske> createFlasker(int størrelse, int antalFlasker){
         if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
+        }
+        if (antalFlasker < 0) {
+            throw new IllegalArgumentException("Antal flasker skal være større end 0");
         }
         List<Flaske> oprettedeFlasker = new ArrayList<>();
         for (int i = 0; i < antalFlasker; i++) {
