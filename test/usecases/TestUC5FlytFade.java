@@ -22,48 +22,22 @@ public class TestUC5FlytFade {
     @BeforeEach
     void setUp() {
 
-        lager1 = new Lager(
-                "Lager Nord",
-                "Aarhus");
+        lager1 = new Lager(1,"Lager aarhus", "Aarhus" );
 
-        lager2 = new Lager(
-                "Lager Syd",
-                "Vejle");
+        lager2 = new Lager(1,"Lager Vejle", "Vejle");
 
-        reol1 = new Reol(
-                1,
-                lager1);
+        reol1 = new Reol(1, lager1);
 
-        reol2 = new Reol(
-                2,
-                lager2);
+        reol2 = new Reol(2, lager2);
 
-        leverandør = new Leverandør(
-                "Macallan Supplier",
-                "Skotland",
-                "kontakt@macallan.com");
+        leverandør = new Leverandør("test Supplier", "Skotland", "hej");
 
-        fad1 = new Fad(
-                1,
-                "Skotland",
-                "Eg",
-                100,
-                "Sherry",
-                leverandør);
+        fad1 = new Fad(1, "Skotland", 100, "Sherry", leverandør);
 
-        fad2 = new Fad(
-                2,
-                "Irland",
-                "Eg",
-                100,
-                "Portvin",
-                leverandør);
+        fad2 = new Fad(2, "Irland", 100, "Portvin", leverandør);
 
         // Startplacering
-        reol1.placerFad(
-                fad1,
-                0,
-                0);
+        reol1.placerFad(fad1, 0, 0);
     }
 
     // -------------------------------------------------
