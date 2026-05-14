@@ -26,7 +26,7 @@ public class OpretWhiskyProduktPane extends GridPane {
 
     }
 
-    public void fordelDestillatPåFad(){
+  /*  public void fordelDestillatPåFad(){
         //Destillering
         Label lblDestillering = new Label("Vælg destillering");
         this.add(lblDestillering, 2, 1);
@@ -83,5 +83,5 @@ public class OpretWhiskyProduktPane extends GridPane {
                 alert.showAndWait();
             }
         });
-    }
+    }*/
 }

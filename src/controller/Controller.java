@@ -64,10 +64,6 @@ public class Controller {
         return destillering.createDestilleringsMængde(mængde, destillat);
     }
 
-    //PåfyldningsMængde
-    public Påfyldning createPåfyldning (){
-
-    }
 
     //lager
     private int lagerIdCount = 1;
