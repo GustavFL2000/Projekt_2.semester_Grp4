@@ -74,17 +74,13 @@ public class Fad {
     }
 
     public boolean erKlarTilAftapning(LocalDate dagsDato) {
-
         if (dagsDato == null) {
             throw new IllegalArgumentException("Dato må ikke være null");
         }
-
         if (påfyldninger.isEmpty()) {
-            throw new IllegalArgumentException("Ingen påfyldninger");
+            return false;
         }
-
         LocalDate sidsteDato = påfyldninger.getLast().getDato();
-
         return !sidsteDato.isAfter(dagsDato.minusYears(3));
     }
 
@@ -122,6 +118,8 @@ public class Fad {
 
     @Override
     public String toString() {
-        return "FadNr: " + fadNr + " ledig kapicitet: " + getLedigKapacitet();
+        return "FadNr: " + fadNr +
+                " | påfyldt: " + getPåfyldtMængde() +
+                " | ledig: " + getLedigKapacitet();
     }
 }

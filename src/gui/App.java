@@ -25,19 +25,25 @@ public class App {
         // Maltbatch
         Maltbatch maltbatch = controller.createMaltBatch(Kornsort.EVERGREEN);
 
-        //Leverandør og fad
-        Leverandør leverandør = controller.createLeverandør("Bo´s fade", "Italien", "25342123");
-        controller.createFad("Spanien", 50, "Cherry", leverandør);
-
         //Destillering
         Destillering destillering1 = controller.createDestillering(LocalDate.of(2020,11,4),
-                LocalDate.of(2022,11,5), 70, false,"Ny november batch", 200, maltbatch);
+                LocalDate.of(2022,11,5), 70, false,"Ny november batch", 100, maltbatch);
 
         //Destillat
         Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),70);
 
         //Destilleringsmængde
         controller.createDestilleringsMængde(100, destillering1, destillat1);
+
+
+        //Leverandør og fad
+        Leverandør leverandør = controller.createLeverandør("Bo´s fade", "Italien", "25342123");
+        Fad fad = controller.createFad("Spanien", 50, "Cherry", leverandør);
+        Fad fad2 = controller.createFad("Spanien", 100, "Cherry", leverandør);
+
+        //Påfyldning
+        controller.createPåfyldning(50, LocalDate.of(2023, 5, 14), destillat1, fad);
+        controller.createPåfyldning(50, LocalDate.of(2026, 5, 14), destillat1, fad2);
 
         // lager
         Lager lager = controller.createLagerMedReoler("Lager 1", "Solskinvej 1, 8000, Århus", 2);

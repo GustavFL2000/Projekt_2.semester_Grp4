@@ -21,8 +21,9 @@ public class TestUC6FindFadeKlarTilAftapning {
 
         fad = new Fad(1, "Skotland", 100, "Sherry", leverandør);
 
-        destillat = new Destillat("TestDestillat", LocalDate.now().minusYears(5), 100, 70);
+        destillat = new Destillat("TestDestillat", LocalDate.now().minusYears(5), 70);
     }
+
 
     // -------------------------------------------------
     // Gyldige testcases erKlarTilAftapning()
