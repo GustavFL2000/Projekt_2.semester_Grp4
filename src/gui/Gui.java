@@ -54,15 +54,8 @@ public class Gui extends Application {
         });
 
         //Whisky produkt
-        OpretWhiskyProduktPane opretWhiskyPane = new OpretWhiskyProduktPane(controller);
         Tab tabWhisky = new Tab("Opret Whisky Produkt");
-        tabWhisky.setContent(opretWhiskyPane);
-        //Opdaterer comboBoxne når du trykker på tabben for Whiskyprodukt (påfyldning) pane
-        tabWhisky.setOnSelectionChanged(event -> {
-            if (tabWhisky.isSelected()){
-                opretWhiskyPane.updateControls();
-            }
-        });
+        tabWhisky.setContent(new OpretWhiskyProduktPane(controller));
 
         //Lager
         Tab tabLager = new Tab("Lager");
