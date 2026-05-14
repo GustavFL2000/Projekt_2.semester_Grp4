@@ -34,7 +34,7 @@ public class App {
                 LocalDate.of(2022,11,5), 70, false,"Ny november batch", 200, maltbatch);
 
         //Destillat
-        Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),200,70);
+        Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),70);
 
 
         Lager lager = controller.createLagerMedReoler("Lager 1", "Solskinvej 1, 8000, Århus", 2);

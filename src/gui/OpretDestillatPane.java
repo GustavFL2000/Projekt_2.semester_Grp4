@@ -45,29 +45,22 @@ public class OpretDestillatPane extends GridPane {
         DatePicker dpDato = new DatePicker();
         this.add(dpDato, 0, 4);
 
-        //mængde
-        Label lblMængde = new Label("Indtast mængde");
-        this.add(lblMængde, 0, 5);
-        TextField txtMængde = new TextField();
-        this.add(txtMængde, 0, 6);
-
         //alkoholProcent
         Label lblAlkoholProcent = new Label("Indtast alkoholprocent");
-        this.add(lblAlkoholProcent, 0, 7);
+        this.add(lblAlkoholProcent, 0, 5);
         TextField txtAlkoholProcent = new TextField();
-        this.add(txtAlkoholProcent, 0, 8);
+        this.add(txtAlkoholProcent, 0, 6);
 
 
         //Opret knap
         Button btnOpretKnap = new Button("Opret destillat");
-        this.add(btnOpretKnap, 0, 9);
+        this.add(btnOpretKnap, 0, 7);
         btnOpretKnap.setOnAction(event -> {
             try {
                 String destillatNavn = txtDestillatNavn.getText();
                 LocalDate dato = dpDato.getValue();
-                double mængde = Double.parseDouble(txtMængde.getText());
                 double alkoholProcent = Double.parseDouble(txtAlkoholProcent.getText());
-                controller.createDestillat(destillatNavn, dato, mængde, alkoholProcent);
+                controller.createDestillat(destillatNavn, dato, alkoholProcent);
 
                 //Opdaterer comboBoxne efter destillat er oprettet
                 updateControls();
@@ -75,7 +68,6 @@ public class OpretDestillatPane extends GridPane {
                 //Fjerner alt tekst efter oprettelse
                 txtDestillatNavn.clear();
                 dpDato.setValue(null);
-                txtMængde.clear();
                 txtAlkoholProcent.clear();
 
                 //Bekræftelse alert
@@ -104,6 +96,9 @@ public class OpretDestillatPane extends GridPane {
     }
 
     public void fordelDestillat() {
+        Label lbl = new Label("Tilføj destillering på destillat");
+        this.add(lbl, 2, 0);
+
         //Destillering
         Label lblDestillering = new Label("Vælg destillering");
         this.add(lblDestillering, 2, 1);
@@ -117,7 +112,6 @@ public class OpretDestillatPane extends GridPane {
         cobDestillat = new ComboBox<>();
         cobDestillat.setItems(FXCollections.observableArrayList(controller.getDestillater()));
         this.add(cobDestillat, 2, 4);
-        updateControls();
 
         //Mængde
         Label lblMængde = new Label("Indtast mængde");
@@ -136,7 +130,6 @@ public class OpretDestillatPane extends GridPane {
 
                 controller.createDestilleringsMængde(mængde, destillering, destillat);
 
-                destillering.createDestilleringsMængde(mængde, destillat);
 
                 //Opdaterer comboBoksne efter at man har trykket på knappen
                 updateControls();

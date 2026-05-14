@@ -76,8 +76,9 @@ public class FadPane extends GridPane {
                 Leverandør leverandør = cobLeverandør.getSelectionModel().getSelectedItem();
                 controller.createFad(land, størrelse, tidligereIndhold, leverandør);
 
-                //Opdaterer listviewen efter man har opdateret fad
-                lsvFade.setItems(FXCollections.observableArrayList(controller.getFade()));
+                //Opdaterer listView efter at man har trykket på knappen
+                updateControls();
+
                 // fjerner alt tekst efter oprettelse
                 txtLand.clear();
                 txtStørrelse.clear();
@@ -151,5 +152,12 @@ public class FadPane extends GridPane {
                 alert.showAndWait();
             }
         });
+    }
+    //Opdaterer comboBoxne så der kommer destilleringer og destillater ind
+    public void updateControls() {
+        lsvFade.setItems(
+                FXCollections.observableArrayList(controller.getFade())
+        );
+
     }
 }
