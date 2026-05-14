@@ -24,8 +24,8 @@ public class MainTest {
         System.out.println(controller.getDestilleringer());
 
         // Opretter destillater
-        Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),200,70);
-        Destillat destillat2 = controller.createDestillat("Destilat 2" ,destillering2.getSlutDato(),200,70);
+        Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),70);
+        Destillat destillat2 = controller.createDestillat("Destilat 2" ,destillering2.getSlutDato(),70);
 
         // Fordeler mængde fra destillering til destillat
         destillering1.createDestilleringsMængde(200, destillat1);
