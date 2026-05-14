@@ -72,12 +72,10 @@ public class Produkt {
         if (mængdeFraDestillat <= 0 ) {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
-        if (!destillat.harNokTilProdukt(mængdeFraDestillat)) {
+        if (!destillat.harNokTilProdukt(mængdeFraDestillat,LocalDate.now())) {
             throw new IllegalArgumentException("Der er ikke nok whisky i fadet");
         }
-        if (!destillat.erKlarTilProdukt(LocalDate.now())) {
-            throw new IllegalArgumentException("Destillatet har ikke lagret mindst 3 år");
-        }
+
         return new WhiskySammensætning(mængdeFraDestillat, this, destillat);
     }
 
