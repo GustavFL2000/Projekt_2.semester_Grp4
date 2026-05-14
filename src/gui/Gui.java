@@ -47,7 +47,7 @@ public class Gui extends Application {
         tabFad.setContent(fadPane);
 
         //Opdaterer listview når du trykker på tabben for destillat pane
-        tabDestillat.setOnSelectionChanged(event -> {
+        tabFad.setOnSelectionChanged(event -> {
             if (tabFad.isSelected()){
                 fadPane.updateControls();
             }
