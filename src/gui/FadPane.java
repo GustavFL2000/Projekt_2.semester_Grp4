@@ -8,10 +8,8 @@ import javafx.scene.layout.GridPane;
 import model.Destillat;
 import model.Fad;
 import model.Leverandør;
-import model.Maltbatch;
-
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class FadPane extends GridPane {
     private Controller controller;
@@ -34,6 +32,8 @@ public class FadPane extends GridPane {
         this.add(lsvFade, 2, 1, 1, 10);
 
         opretFad();
+        fordelDestillatPåFad();
+
     }
 
     public void opretFad (){
@@ -118,44 +118,6 @@ public class FadPane extends GridPane {
     }
 
 
-
-    public void påfyldFad (){
-
-        //Opret knap
-        Button btnOpretKnap = new Button("Opret fad");
-        this.add(btnOpretKnap,0, 9);
-        btnOpretKnap.setOnAction(event ->{
-            try {
-
-
-                //Bekræftelse alert
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-                alert.setTitle("Succes");
-                alert.setHeaderText("Fad oprettet");
-                alert.setContentText("Fad blev oprettet korrekt.");
-
-                alert.showAndWait();
-
-            } catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-
-                alert.setTitle("Fejl");
-                alert.setHeaderText("Ugyldigt tal");
-                alert.setContentText("Du kan kun indtaste tal i størrelse");
-
-                alert.showAndWait();
-
-            }catch (IllegalArgumentException e) {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Fejl");
-                alert.setHeaderText("Ugyldige data");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-            }
-        });
-    }
     //Opdaterer comboBoxne så der kommer destilleringer og destillater ind
     public void updateControls() {
         lsvFade.setItems(
@@ -174,37 +136,37 @@ public class FadPane extends GridPane {
 
     public void fordelDestillatPåFad(){
         Label lbl = new Label("Fordel destillat på fad");
-        this.add(lbl, 0, 0);
+        this.add(lbl, 3, 0);
 
         //Destillat
         Label lblDestillering = new Label("Vælg destillat");
-        this.add(lblDestillering, 0, 1);
+        this.add(lblDestillering, 3, 1);
         cobDestillat = new ComboBox<>();
         cobDestillat.setItems(FXCollections.observableArrayList(controller.getDestillater()));
-        this.add(cobDestillat, 0, 2);
+        this.add(cobDestillat, 3, 2);
 
         //Fad
         Label lblFad = new Label("Vælg fad");
-        this.add(lblFad, 0, 3);
+        this.add(lblFad, 3, 3);
         cobFad = new ComboBox<>();
         cobFad.setItems(FXCollections.observableArrayList(controller.getFade()));
-        this.add(cobFad, 0, 4);
+        this.add(cobFad, 3, 4);
 
         //Mængde
         Label lblMængde = new Label("Indtast mængde");
-        this.add(lblMængde, 0, 5);
+        this.add(lblMængde, 3, 5);
         TextField txtMængde = new TextField();
-        this.add(txtMængde, 0, 6);
+        this.add(txtMængde, 3, 6);
 
         // StartDato
         Label lblDato = new Label("Vælg dato");
-        this.add(lblDato,0, 7);
+        this.add(lblDato,3, 7);
         DatePicker dpDato = new DatePicker();
-        this.add(dpDato, 0,8);
+        this.add(dpDato, 3,8);
 
         //Knap til whiskysammensætning
         Button btnFordel = new Button("Tilføj mængde til fad");
-        this.add(btnFordel, 0, 9);
+        this.add(btnFordel, 3, 9);
         btnFordel.setOnAction(event -> {
             try {
                 Destillat destillat = cobDestillat.getSelectionModel().getSelectedItem();
