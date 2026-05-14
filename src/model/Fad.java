@@ -122,6 +122,6 @@ public class Fad {
 
     @Override
     public String toString() {
-        return String.valueOf(this.fadNr);
+        return "FadNr: " + fadNr + " ledig kapicitet: " + getLedigKapacitet();
     }
 }

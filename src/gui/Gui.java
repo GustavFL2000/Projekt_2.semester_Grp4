@@ -21,29 +21,50 @@ public class Gui extends Application {
 
         TabPane tabPane = new TabPane();
 
+        //Forside
         Tab tabFrontpage = new Tab("Forside");
         tabFrontpage.setContent(new FrontPagePane());
 
+        //Destillering
         Tab tabDestillering = new Tab("Registrer Destillering");
         tabDestillering.setContent(new RegistrerDestilleringPane(controller));
 
+        //Destillat
         OpretDestillatPane opretDestillatPane = new OpretDestillatPane(controller);
         Tab tabDestillat = new Tab("Registrer Destillat");
         tabDestillat.setContent(opretDestillatPane);
 
-        //Opdaterer comboBoxne når du trykker på tabben
+        //Opdaterer comboBoxne når du trykker på tabben for destillat pane
         tabDestillat.setOnSelectionChanged(event -> {
             if (tabDestillat.isSelected()){
              opretDestillatPane.updateControls();
             }
         });
 
+        //Fad
+        FadPane fadPane = new FadPane(controller);
         Tab tabFad = new Tab("Fad");
-        tabFad.setContent(new FadPane(controller));
+        tabFad.setContent(fadPane);
 
+        //Opdaterer listview når du trykker på tabben for destillat pane
+        tabDestillat.setOnSelectionChanged(event -> {
+            if (tabFad.isSelected()){
+                fadPane.updateControls();
+            }
+        });
+
+        //Whisky produkt
+        OpretWhiskyProduktPane opretWhiskyPane = new OpretWhiskyProduktPane(controller);
         Tab tabWhisky = new Tab("Opret Whisky Produkt");
-        tabWhisky.setContent(new OpretWhiskyProduktPane(controller));
+        tabWhisky.setContent(opretWhiskyPane);
+        //Opdaterer comboBoxne når du trykker på tabben for Whiskyprodukt (påfyldning) pane
+        tabWhisky.setOnSelectionChanged(event -> {
+            if (tabWhisky.isSelected()){
+                opretWhiskyPane.updateControls();
+            }
+        });
 
+        //Lager
         Tab tabLager = new Tab("Lager");
         tabLager.setContent(new LagerPane(controller));
 

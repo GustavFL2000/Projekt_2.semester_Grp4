@@ -49,8 +49,8 @@ public class Controller {
     }
 
     //Destillat
-    public Destillat createDestillat(String destilatNavn, LocalDate dato, double mængde, double alkoholProcent) {
-        Destillat destillat = new Destillat(destilatNavn, dato, mængde, alkoholProcent);
+    public Destillat createDestillat(String destilatNavn, LocalDate dato, double alkoholProcent) {
+        Destillat destillat = new Destillat(destilatNavn, dato, alkoholProcent);
         storage.addDestillat(destillat);
         return destillat;
     }
@@ -65,8 +65,8 @@ public class Controller {
     }
 
     //PåfyldningsMængde
-    public Påfyldning createPåfyldning (){
-
+    public Påfyldning createPåfyldning (double mængdeFraDestillat, LocalDate dato, Destillat destillat, Fad fad){
+        return destillat.createPåfyldning(mængdeFraDestillat, dato, fad);
     }
 
     //lager

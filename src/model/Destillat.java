@@ -7,28 +7,23 @@ import java.util.List;
 public class Destillat {
     private String destilatNavn;
     private LocalDate dato;
-    private double mængde;
     private double alkoholProcent;
     // link attributter
     private List<Påfyldning> påfyldninger = new ArrayList<>();
     private List<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
     private List<DestilleringsMængde> destilleringsMængder = new ArrayList<>();
 
-    public Destillat(String destilatNavn,LocalDate dato, double mængde, double alkoholProcent) {
+    public Destillat(String destilatNavn,LocalDate dato, double alkoholProcent) {
         if (destilatNavn == null || destilatNavn.isBlank()){
             throw new IllegalArgumentException("Destillatnavn skal udfyldes");
         }
         if (dato == null){
             throw new IllegalArgumentException("Dato skal udfyldes");
         }
-        if (mængde <= 0){
-            throw new IllegalArgumentException("Mængde skal være større end 0");
-        }
         if (alkoholProcent <= 0 || alkoholProcent > 100){
             throw new IllegalArgumentException("Alkoholprocent skal være mellem 0 og 100");
         }
         this.dato = dato;
-        this.mængde = mængde;
         this.alkoholProcent = alkoholProcent;
         this.destilatNavn = destilatNavn;
     }
@@ -72,7 +67,7 @@ public class Destillat {
     }
 
     public double getRestMængde () {
-        return mængde - getPåfyldtMængde();
+        return getDestilleringsmængder() - getPåfyldtMængde();
     }
 
     // Whiskysammensætning metoder
@@ -115,9 +110,8 @@ public class Destillat {
         }
         return !påfyldninger.isEmpty();
     }
+
     //Destilleringmængde metoder
-
-
     public List<DestilleringsMængde> getDestilleringsMængder() {
         return new ArrayList<>(destilleringsMængder);
     }
@@ -128,8 +122,16 @@ public class Destillat {
         }
     }
 
+    public double getDestilleringsmængder (){
+        double sum = 0;
+        for (DestilleringsMængde destilleringsMængde : destilleringsMængder) {
+            sum+=destilleringsMængde.getMængde();
+        }
+        return sum;
+    }
+
     @Override
     public String toString() {
-        return destilatNavn;
+        return destilatNavn + " " + getRestMængde();
     }
 }
