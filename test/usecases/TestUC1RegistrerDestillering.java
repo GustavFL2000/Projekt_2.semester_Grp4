@@ -35,16 +35,36 @@ public class TestUC1RegistrerDestillering {
         Destillering d = controller.createDestillering(LocalDate.of(2026, 5, 1), LocalDate.of(2026, 5, 10), 45, true, "Test", 100, maltbatch);
 
         assertNotNull(d);
-        assertEquals(1, d.getDestilleringsID());
+        assertTrue(d.getDestilleringsID() > 0);
     }
 
     @Test
-    void TC2_createDestillering2() {
+    void TC2_createDestillering_AutoGenereretID() {
 
-        Destillering d = controller.createDestillering(LocalDate.of(2026, 6, 1), LocalDate.of(2026, 6, 10), 60, false, "Ny destillering", 200, maltbatch);
+        // Arrange
 
-        assertNotNull(d);
-        assertEquals(10, d.getDestilleringsID());
+        // Act
+        Destillering d1 = controller.createDestillering(
+                LocalDate.now(),
+                LocalDate.now(),
+                45,
+                true,
+                "Test1",
+                100,
+                maltbatch);
+
+        Destillering d2 = controller.createDestillering(
+                LocalDate.now(),
+                LocalDate.now(),
+                45,
+                true,
+                "Test2",
+                100,
+                maltbatch);
+
+        // Assert
+        assertEquals(d1.getDestilleringsID() + 1,
+                d2.getDestilleringsID());
     }
 
     @Test
@@ -71,18 +91,9 @@ public class TestUC1RegistrerDestillering {
     // Ugyldige testcases
     // -------------------------------------------------
 
-    @Test
-    void TC5_destilleringsID0() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            controller.createDestillering(
-
-                    LocalDate.now(), LocalDate.now(), 45, true, "Fejl", 100, maltbatch);
-        });
-    }
 
     @Test
-    void TC6_alkoholProcent0() {
+    void TC5_alkoholProcent0() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
@@ -92,7 +103,7 @@ public class TestUC1RegistrerDestillering {
     }
 
     @Test
-    void TC7_alkoholProcentMinus1() {
+    void TC6_alkoholProcentMinus1() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
@@ -102,7 +113,7 @@ public class TestUC1RegistrerDestillering {
     }
 
     @Test
-    void TC8_vaeskeMaengde0() {
+    void TC7_vaeskeMaengde0() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
@@ -112,7 +123,7 @@ public class TestUC1RegistrerDestillering {
     }
 
     @Test
-    void TC9_vaeskeMaengdeMinus10() {
+    void TC8_vaeskeMaengdeMinus10() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
@@ -122,7 +133,7 @@ public class TestUC1RegistrerDestillering {
     }
 
     @Test
-    void TC10_startDatoNull() {
+    void TC9_startDatoNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(
@@ -132,7 +143,7 @@ public class TestUC1RegistrerDestillering {
     }
 
     @Test
-    void TC11_slutDatoNull() {
+    void TC10_slutDatoNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(LocalDate.now(), null, 45, true, "Fejl", 100, maltbatch);
@@ -140,7 +151,7 @@ public class TestUC1RegistrerDestillering {
     }
 
     @Test
-    void TC12_maltbatchNull() {
+    void TC11_maltbatchNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             controller.createDestillering(LocalDate.now(), LocalDate.now(), 45, true, "Fejl", 100, null);

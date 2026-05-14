@@ -1,8 +1,11 @@
 package usecases;
 
+import controller.Controller;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.IStorage;
+import storage.Storage;
 
 import java.time.LocalDate;
 
@@ -14,16 +17,28 @@ public class TestUC7OpretWhiskyProdukt {
     private Destillat destillat;
     private Fad fad;
     private Leverandør leverandør;
+    private Controller controller;
+    private Destillering destillering;
+    private Maltbatch maltbatch;
+
 
     @BeforeEach
     void setUp() {
+        IStorage storage = new Storage();
+        controller = new Controller(storage);
+
+        maltbatch = new Maltbatch(1, Kornsort.EVERGREEN);
 
         produkt = new Produkt(1, 10, "Kildevand", 40, "Single Malt", KvalitetsStempel.SINGLE_MALT);
 
-        destillat = new Destillat("TestDestillat", LocalDate.now(), 100, 70);
+        destillat = new Destillat("TestDestillat", LocalDate.now(), 70);
 
         // Gør destillatet klar til produkter
         // så harNokTilProdukt() bliver true
+
+        destillering = controller.createDestillering(LocalDate.now().minusYears(5), LocalDate.now().minusYears(5).plusDays(1), 70, false, "Test", 100, maltbatch);
+
+        destillering.createDestilleringsMængde(100, destillat);
 
         leverandør = new Leverandør("BoFade", "Spanien", "12345678");
 
@@ -113,7 +128,7 @@ public class TestUC7OpretWhiskyProdukt {
     @Test
     void TC31_destillatUdenNokWhisky() {
 
-        Destillat lilleDestillat = new Destillat("Lille", LocalDate.now(), 10, 70);
+        Destillat lilleDestillat = new Destillat("Lille", LocalDate.now(), 70);
 
         assertThrows(IllegalArgumentException.class,
 

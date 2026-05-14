@@ -4,6 +4,7 @@ import controller.Controller;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.IStorage;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -28,37 +29,104 @@ public class TestUC10SøgEfterFade {
     private Destillat destillat;
 
     private Leverandør leverandør;
+    private Destillering destillering;
+    private Maltbatch maltbatch;
 
     @BeforeEach
     void setUp() {
 
-        // Arrange
-        controller = new Controller(new Storage());
+        IStorage storage = new Storage();
+        controller = new Controller(storage);
 
-        leverandør = new Leverandør("test Supplier", "Skotland", "hej");
+        maltbatch = new Maltbatch(1, Kornsort.EVERGREEN);
 
-        lager1 = controller.createLager("Lager 1", "Adresse 1");
-        lager2 = controller.createLager("Lager 2", "Adresse 2");
+        leverandør = new Leverandør(
+                "test Supplier",
+                "Skotland",
+                "hej"
+        );
+
+        lager1 = controller.createLager(
+                "Lager 1",
+                "Adresse 1"
+        );
+
+        lager2 = controller.createLager(
+                "Lager 2",
+                "Adresse 2"
+        );
 
         reol1 = lager1.createReol();
         reol2 = lager2.createReol();
 
-        fad1 = controller.createFad( "Skotland", 100, "Sherry", leverandør);
-        fad2 = controller.createFad( "Irland", 120, "Bourbon", leverandør);
-        fad3 = controller.createFad( "USA", 90, "Sherry", leverandør);
+        fad1 = controller.createFad(
+                "Skotland",
+                100,
+                "Sherry",
+                leverandør
+        );
+
+        fad2 = controller.createFad(
+                "Irland",
+                120,
+                "Bourbon",
+                leverandør
+        );
+
+        fad3 = controller.createFad(
+                "USA",
+                90,
+                "Sherry",
+                leverandør
+        );
 
         reol1.placerFad(fad1, 0, 0);
         reol1.placerFad(fad2, 0, 1);
         reol2.placerFad(fad3, 0, 0);
 
-        destillat = new Destillat("TestDestillat", LocalDate.now(), 500, 70);
+        // Opret destillat først
+        destillat = new Destillat(
+                "TestDestillat",
+                LocalDate.now(),
+                70
+        );
 
-        // Påfyldninger til alderstest
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(4), fad1);
+        // Opret destillering
+        destillering =
+                controller.createDestillering(
+                        LocalDate.now().minusYears(5),
+                        LocalDate.now().minusYears(5).plusDays(1),
+                        70,
+                        false,
+                        "Test",
+                        150,
+                        maltbatch
+                );
 
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(1), fad2);
+        // Kobl dem sammen
+        destillering.createDestilleringsMængde(
+                150,
+                destillat
+        );
 
-        destillat.createPåfyldning(50, LocalDate.now().minusYears(5), fad3);
+        // Nu virker påfyldninger
+        destillat.createPåfyldning(
+                50,
+                LocalDate.now().minusYears(4),
+                fad1
+        );
+
+        destillat.createPåfyldning(
+                50,
+                LocalDate.now().minusYears(1),
+                fad2
+        );
+
+        destillat.createPåfyldning(
+                50,
+                LocalDate.now().minusYears(5),
+                fad3
+        );
     }
 
     // -------------------------------------------------
@@ -164,10 +232,9 @@ public class TestUC10SøgEfterFade {
     @Test
     void TC78_negativAlder() {
 
-        // Act
-        List<Fad> result = controller.søgEfterFade(null, null, null, -1);
-
-        // Assert
-        assertEquals(0, result.size());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> controller.søgEfterFade(null, null, null, -1)
+        );
     }
 }

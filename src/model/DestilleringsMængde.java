@@ -7,7 +7,7 @@ public class DestilleringsMængde {
     private Destillering destillering;
     private Destillat destillat;
 
-     DestilleringsMængde(double mængde, Destillering destillering, Destillat destillat) {
+     public DestilleringsMængde(double mængde, Destillering destillering, Destillat destillat) {
          if (destillering == null) {
              throw new IllegalArgumentException("Destillering må ikke være null");
          }

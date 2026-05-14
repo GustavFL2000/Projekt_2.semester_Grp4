@@ -1,8 +1,11 @@
 package usecases;
 
+import controller.Controller;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.IStorage;
+import storage.Storage;
 
 import java.time.LocalDate;
 
@@ -13,15 +16,29 @@ public class TestUC6FindFadeKlarTilAftapning {
     private Fad fad;
     private Destillat destillat;
     private Leverandør leverandør;
+    private Controller controller;
+    private Maltbatch maltbatch;
+    private Destillering destillering;
 
     @BeforeEach
     void setUp() {
+
         // Arrange
+        IStorage storage = new Storage();
+        controller = new Controller(storage);
+
+        maltbatch = new Maltbatch(1, Kornsort.EVERGREEN);
+
         leverandør = new Leverandør("test Supplier", "Skotland", "hej");
 
         fad = new Fad(1, "Skotland", 100, "Sherry", leverandør);
 
         destillat = new Destillat("TestDestillat", LocalDate.now().minusYears(5), 70);
+
+        destillering = controller.createDestillering(LocalDate.now().minusYears(5), LocalDate.now().minusYears(5).plusDays(1), 70, false, "Test", 100, maltbatch);
+
+        // Giver destillatet 100 liter
+        destillering.createDestilleringsMængde(100, destillat);
     }
 
 
@@ -102,11 +119,10 @@ public class TestUC6FindFadeKlarTilAftapning {
     @Test
     void TC68_ingenPåfyldninger() {
 
-        // Act + Assert
-        assertThrows(IllegalArgumentException.class,
+        // Act
+        boolean resultat = fad.erKlarTilAftapning(LocalDate.now());
 
-                () -> {
-                    fad.erKlarTilAftapning(LocalDate.now());
-                });
+        // Assert
+        assertFalse(resultat);
     }
 }

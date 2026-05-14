@@ -128,6 +128,9 @@ public class Controller {
         List<Fad> alleFade = getFade();
         List<Fad> fundneFade = new ArrayList<>();
 
+        if (alder != null && alder < 0) {
+            throw new IllegalArgumentException("Alder må ikke være negativ");
+        }
         for (Fad fad : alleFade) {
             boolean matcher = true;
             if (fadNr != null && fad.getFadNr() != fadNr) {
