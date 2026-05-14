@@ -55,8 +55,15 @@ public class Gui extends Application {
         });
 
         //Whisky produkt
+        OpretWhiskyProduktPane whiskyProduktPane = new OpretWhiskyProduktPane(controller);
         Tab tabWhisky = new Tab("Opret Whisky Produkt");
-        tabWhisky.setContent(new OpretWhiskyProduktPane(controller));
+        tabWhisky.setContent(whiskyProduktPane);
+
+        tabWhisky.setOnSelectionChanged(event -> {
+            if (tabWhisky.isSelected()) {
+                whiskyProduktPane.updateControls();
+            }
+        });
 
         //Lager
         LagerPane lagerPane = new LagerPane(controller);

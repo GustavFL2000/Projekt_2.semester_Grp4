@@ -3,17 +3,15 @@ package gui;
 import controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
-import model.Destillat;
 import model.Fad;
-import model.WhiskySammensætning;
-
-import java.time.LocalDate;
 
 public class OpretWhiskyProduktPane extends GridPane {
 
     private Controller controller;
+    private ListView<Fad> lsvTilgængeligeFade;
 
     public OpretWhiskyProduktPane(Controller controller) {
         this.controller = controller;
@@ -25,16 +23,31 @@ public class OpretWhiskyProduktPane extends GridPane {
         whiskySammensætning();
     }
 
-    public void whiskySammensætning (){
-        Label lblTilgængeligeFade = new Label("Tilgængelige fade klar til whisky produkt");
-        this.add(lblTilgængeligeFade,0,0);
+    public void whiskySammensætning() {
 
-        //Tilgængelige fade der har lageret i 3 år
-        ListView<Fad> lsvTilgængeligeFade = new ListView<>();
+        Label lblTilgængeligeFade =
+                new Label("Tilgængelige fade klar til whisky produkt");
+
+        this.add(lblTilgængeligeFade, 0, 0);
+
+        // Tilgængelige fade der har lagret i 3 år
+        lsvTilgængeligeFade = new ListView<>();
+
         lsvTilgængeligeFade.setItems(
-                FXCollections.observableArrayList(controller.getFadeKlarTilAftapning())
+                FXCollections.observableArrayList(
+                        controller.getFadeKlarTilAftapning()
+                )
         );
+
         this.add(lsvTilgængeligeFade, 0, 1);
     }
 
+    public void updateControls() {
+
+        lsvTilgængeligeFade.setItems(
+                FXCollections.observableArrayList(
+                        controller.getFadeKlarTilAftapning()
+                )
+        );
+    }
 }
