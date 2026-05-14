@@ -13,7 +13,7 @@ public class Flaske {
         this.flaskeNr = flaskeNr;
         this.størrelse = størrelse;
         this.produkt = produkt;
-
+    //todo Registreringsdato, antal flasker måske?
         produkt.addFlaske(this);
     }
 
