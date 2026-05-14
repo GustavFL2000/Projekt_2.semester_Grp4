@@ -40,8 +40,9 @@ public class Fad {
         this.træSort = "Egetræ";
         this.størrelse = størrelse;
         this.tidligereIndhold = tidligereIndhold;
+        this.leverandør = leverandør;
 
-        setLeverandør(leverandør);
+        leverandør.addFad(this);
     }
 
     public List<Påfyldning> getPåfyldninger() {
@@ -87,22 +88,11 @@ public class Fad {
         return !sidsteDato.isAfter(dagsDato.minusYears(3));
     }
 
-    public void setLeverandør(Leverandør leverandør) {
-
-        if (this.leverandør != leverandør) {
-            this.leverandør = leverandør;
-
-            if (leverandør != null) {
-                leverandør.addFad(this);
-            }
-        }
-    }
-
     public Leverandør getLeverandør() {
         return leverandør;
     }
 
-    public void setReol(Reol reol) {
+     void setReol(Reol reol) {
         this.reol = reol;
     }
 

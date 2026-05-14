@@ -111,7 +111,7 @@ public class MainTest {
 
         //Opretter lager
         Lager lager1 = controller.createLager("ceresPark", "Forenden af satdion alle");
-        Reol reol1 = lager1.createReol(1);
+        Reol reol1 = lager1.createReol();
         System.out.println("Antal ledige pladser: " + lager1.getLedigePladser());
 
         //Placerer fade
@@ -133,6 +133,7 @@ public class MainTest {
         Flaske flaske2 = prod1.createFlaske(75);
 
         prod1.createFlasker(75, 10);
+        Flaske flaske3 = prod1.createFlaske(75);
 
         System.out.println(prod1.getFlasker());
 

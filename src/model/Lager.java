@@ -29,14 +29,33 @@ public class Lager {
         this.oprettelsesDato = LocalDate.now();
     }
 
+     void addReol(Reol reol){
+        if (!reoler.contains(reol)){
+            reoler.add(reol);
+        }
+    }
+
     public List<Reol> getReoler() {
         return new ArrayList<>(reoler);
     }
 
-    public Reol createReol (int reolNr){
+    public Reol createReol (){
+        int reolNr = reoler.size() + 1;
         Reol reol = new Reol(reolNr, this);
-        reoler.add(reol);
         return reol;
+    }
+
+    public List<Reol> createReoler (int antalReoler){
+        if (antalReoler <= 0){
+            throw new IllegalArgumentException("Antal reoler skal være større end 0");
+        }
+        List<Reol> oprettedeReoler = new ArrayList<>();
+        for (int i = 0; i < antalReoler; i++) {
+            int reolNr = reoler.size() + 1;
+            Reol reol = new Reol(reolNr, this);
+            oprettedeReoler.add(reol);
+        }
+        return oprettedeReoler;
     }
 
     public int getLedigePladser() {
@@ -68,10 +87,6 @@ public class Lager {
 
     @Override
     public String toString() {
-        return "Lager{" + lagerNr +
-                "lagerNavn='" + lagerNavn + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", reoler=" + reoler +
-                '}';
+        return "LagerNr " + lagerNr + " - " + lagerNavn + " (" + reoler.size() + " reoler)";
     }
 }

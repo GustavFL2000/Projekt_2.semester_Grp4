@@ -15,6 +15,7 @@ public class Controller {
         this.storage = storage;
     }
 
+    //Destillering
     private int destilleringsID = 1;
     public Destillering createDestillering(LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
         Destillering destillering = new Destillering(destilleringsID, startDato, slutDato, alkoholProcent, rygematriale, kommentar, væskeMængde, maltbatch);
@@ -27,12 +28,14 @@ public class Controller {
         return storage.getDestilleringer();
     }
 
+    //Produkt
     public Produkt createProdukt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         Produkt produkt = new Produkt(produktNr, vandMængde, vandOprindelse, alkoholProcent, beskrivelse, kvalitetsStempel);
         storage.addProdukt(produkt);
         return produkt;
     }
 
+    //Fade
     private int fadNr = 1;
     public Fad createFad(String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
         Fad fad = new Fad(fadNr, land, størrelse, tidligereIndhold, leverandør);
@@ -45,12 +48,28 @@ public class Controller {
         return storage.getFade();
     }
 
+    //Destillat
     public Destillat createDestillat(String destilatNavn, LocalDate dato, double mængde, double alkoholProcent) {
         Destillat destillat = new Destillat(destilatNavn, dato, mængde, alkoholProcent);
-
+        storage.addDestillat(destillat);
         return destillat;
     }
 
+    public List<Destillat> getDestillater(){
+        return storage.getDestillater();
+    }
+
+    //DestilleringsMængde
+    public DestilleringsMængde createDestilleringsMængde (double mængde, Destillering destillering, Destillat destillat){
+        return destillering.createDestilleringsMængde(mængde, destillat);
+    }
+
+    //PåfyldningsMængde
+    public Påfyldning createPåfyldning (){
+
+    }
+
+    //lager
     private int lagerIdCount = 1;
     public Lager createLager(String lagerNavn, String adresse) {
         Lager lager = new Lager(lagerIdCount, lagerNavn, adresse);
@@ -59,10 +78,17 @@ public class Controller {
         return lager;
     }
 
+    public Lager createLagerMedReoler(String lagerNavn, String adresse, int antalReoler) {
+        Lager lager = createLager(lagerNavn, adresse);
+        lager.createReoler(antalReoler);
+        return lager;
+    }
+
     public List<Lager> getLager(){
         return storage.getLagerListe();
     }
 
+    //MaltBatch
     private int batchNr = 1;
     public Maltbatch createMaltBatch (Kornsort kornsort){
         Maltbatch maltbatch = new Maltbatch(batchNr, kornsort);
@@ -75,6 +101,7 @@ public class Controller {
         return storage.getMaltbatch();
     }
 
+    //Leverandør
     public Leverandør createLeverandør (String navn, String land, String kontaktInfo){
         Leverandør leverandør = new Leverandør(navn, land, kontaktInfo);
         storage.addLeverandør(leverandør);

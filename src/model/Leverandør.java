@@ -31,10 +31,9 @@ public class Leverandør {
         return new ArrayList<>(fade);
     }
 
-    public void addFad (Fad fad) {
+     void addFad (Fad fad) {
         if (!fade.contains(fad)) {
             fade.add(fad);
-            fad.setLeverandør(this);
         }
     }
 

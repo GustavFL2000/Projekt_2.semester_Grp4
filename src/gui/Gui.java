@@ -27,6 +27,17 @@ public class Gui extends Application {
         Tab tabDestillering = new Tab("Registrer Destillering");
         tabDestillering.setContent(new RegistrerDestilleringPane(controller));
 
+        OpretDestillatPane opretDestillatPane = new OpretDestillatPane(controller);
+        Tab tabDestillat = new Tab("Registrer Destillat");
+        tabDestillat.setContent(opretDestillatPane);
+
+        //Opdaterer comboBoxne når du trykker på tabben
+        tabDestillat.setOnSelectionChanged(event -> {
+            if (tabDestillat.isSelected()){
+             opretDestillatPane.updateControls();
+            }
+        });
+
         Tab tabFad = new Tab("Fad");
         tabFad.setContent(new FadPane(controller));
 
@@ -34,10 +45,11 @@ public class Gui extends Application {
         tabWhisky.setContent(new OpretWhiskyProduktPane(controller));
 
         Tab tabLager = new Tab("Lager");
-        tabLager.setContent(new LagerPane());
+        tabLager.setContent(new LagerPane(controller));
 
         tabFrontpage.setClosable(false);
         tabDestillering.setClosable(false);
+        tabDestillat.setClosable(false);
         tabFad.setClosable(false);
         tabWhisky.setClosable(false);
         tabLager.setClosable(false);
@@ -45,6 +57,7 @@ public class Gui extends Application {
         tabPane.getTabs().addAll(
                 tabFrontpage,
                 tabDestillering,
+                tabDestillat,
                 tabFad,
                 tabWhisky,
                 tabLager

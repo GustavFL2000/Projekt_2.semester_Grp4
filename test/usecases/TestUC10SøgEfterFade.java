@@ -40,8 +40,8 @@ public class TestUC10SøgEfterFade {
         lager1 = controller.createLager("Lager 1", "Adresse 1");
         lager2 = controller.createLager("Lager 2", "Adresse 2");
 
-        reol1 = new Reol(1, lager1);
-        reol2 = new Reol(2, lager2);
+        reol1 = lager1.createReol();
+        reol2 = lager2.createReol();
 
         fad1 = controller.createFad( "Skotland", 100, "Sherry", leverandør);
         fad2 = controller.createFad( "Irland", 120, "Bourbon", leverandør);

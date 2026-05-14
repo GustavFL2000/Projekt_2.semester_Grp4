@@ -5,13 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import model.Fad;
 import model.Leverandør;
 import model.Maltbatch;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class FadPane extends GridPane {
     private Controller controller;
+    private ListView<Fad> lsvFade;
 
     public FadPane(Controller controller) {
         this.controller=controller;
@@ -20,6 +23,17 @@ public class FadPane extends GridPane {
         this.setHgap(10);
         this.setVgap(10);
 
+        //Fade
+        Label lblTilgængeligeFade = new Label("Tilgængelige fade");
+        this.add(lblTilgængeligeFade,2,0);
+        lsvFade = new ListView<>();
+        lsvFade.setItems(FXCollections.observableArrayList(controller.getFade()));
+        this.add(lsvFade, 2, 1, 1, 10);
+
+        opretFad();
+    }
+
+    public void opretFad (){
         Label lbl = new Label("Opret fad");
         this.add(lbl, 0, 0);
 
@@ -62,6 +76,14 @@ public class FadPane extends GridPane {
                 Leverandør leverandør = cobLeverandør.getSelectionModel().getSelectedItem();
                 controller.createFad(land, størrelse, tidligereIndhold, leverandør);
 
+                //Opdaterer listviewen efter man har opdateret fad
+                lsvFade.setItems(FXCollections.observableArrayList(controller.getFade()));
+                // fjerner alt tekst efter oprettelse
+                txtLand.clear();
+                txtStørrelse.clear();
+                txtTidligereIndhold.clear();
+                cobLeverandør.getSelectionModel().clearSelection();
+
                 //Bekræftelse alert
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -89,6 +111,45 @@ public class FadPane extends GridPane {
                 alert.showAndWait();
             }
         });
+    }
 
+
+
+    public void påfyldFad (){
+
+        //Opret knap
+        Button btnOpretKnap = new Button("Opret fad");
+        this.add(btnOpretKnap,0, 9);
+        btnOpretKnap.setOnAction(event ->{
+            try {
+
+
+                //Bekræftelse alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Succes");
+                alert.setHeaderText("Fad oprettet");
+                alert.setContentText("Fad blev oprettet korrekt.");
+
+                alert.showAndWait();
+
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt tal");
+                alert.setContentText("Du kan kun indtaste tal i størrelse");
+
+                alert.showAndWait();
+
+            }catch (IllegalArgumentException e) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldige data");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
     }
 }

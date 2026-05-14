@@ -106,7 +106,7 @@ public class Produkt {
         if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
         }
-        if (antalFlasker < 0) {
+        if (antalFlasker <= 0) {
             throw new IllegalArgumentException("Antal flasker skal være større end 0");
         }
         List<Flaske> oprettedeFlasker = new ArrayList<>();

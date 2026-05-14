@@ -23,4 +23,8 @@ public interface IStorage {
     void addLeverandør(Leverandør leverandør);
 
     List<Leverandør> getLeverandør();
+
+    void addDestillat(Destillat destillat);
+
+    List<Destillat> getDestillater();
 }

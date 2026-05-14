@@ -25,8 +25,8 @@ public class TestUC5FlytFade {
         lager1 = new Lager(1, "Lager aarhus", "Aarhus");
         lager2 = new Lager(1, "Lager Vejle", "Vejle");
 
-        reol1 = new Reol(1, lager1);
-        reol2 = new Reol(2, lager2);
+        reol1 = lager1.createReol();
+        reol2 = lager2.createReol();
 
         leverandør = new Leverandør("test Supplier", "Skotland", "hej");
 

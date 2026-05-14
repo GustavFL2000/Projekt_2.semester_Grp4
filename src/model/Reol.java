@@ -13,7 +13,7 @@ public class Reol {
     // Composition --> 1 Lager
     private Lager lager;
 
-    public Reol(int reolNr, Lager lager) {
+     Reol(int reolNr, Lager lager) {
 
         if (reolNr <= 0) {
             throw new IllegalArgumentException("Nummer skal være større end 0");
@@ -25,6 +25,8 @@ public class Reol {
 
         this.reolNr = reolNr;
         this.lager = lager;
+
+        lager.addReol(this);
     }
 
     public int getLedigePladser() {
@@ -165,5 +167,10 @@ public class Reol {
 
     public Lager getLager() {
         return lager;
+    }
+
+    @Override
+    public String toString() {
+        return "Reol: " + reolNr;
     }
 }

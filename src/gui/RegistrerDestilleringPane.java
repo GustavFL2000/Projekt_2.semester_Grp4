@@ -78,6 +78,15 @@ public class RegistrerDestilleringPane extends GridPane {
                 Maltbatch maltbatch = cobMaltBatch.getSelectionModel().getSelectedItem();
                 controller.createDestillering(startDato, sluttDato, alkoholProcent, rygeMateriale, kommentar, væskeMængde, maltbatch);
 
+                //clearer boxen
+                dpStartDato.setValue(null);
+                dpSlutDato.setValue(null);
+                txtAlkoholProcent.clear();
+                chbRygeMateriale.setSelected(false);
+                txtKommentar.clear();
+                txtVæskeMængde.clear();
+                cobMaltBatch.getSelectionModel().clearSelection();
+
                 //Bekræftelse alert
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -87,21 +96,10 @@ public class RegistrerDestilleringPane extends GridPane {
 
                 alert.showAndWait();
 
-            } catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-
-                alert.setTitle("Fejl");
-                alert.setHeaderText("Ugyldigt tal");
-                alert.setContentText("Indtast gyldige tal.");
-
-                alert.showAndWait();
-
             } catch (IllegalArgumentException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-
                 alert.setTitle("Fejl");
-                alert.setHeaderText("Ugyldigt dato");
-                alert.setContentText("Slut dato må ikke være før start dato");
+                alert.setHeaderText("Ugyldige data");
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
