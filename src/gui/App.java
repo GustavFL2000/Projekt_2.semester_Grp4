@@ -36,7 +36,10 @@ public class App {
         //Destillat
         Destillat destillat1 = controller.createDestillat("Destilat 1" ,destillering1.getSlutDato(),70);
 
+        //Destilleringsmængde
+        controller.createDestilleringsMængde(100, destillering1, destillat1);
 
+        // lager
         Lager lager = controller.createLagerMedReoler("Lager 1", "Solskinvej 1, 8000, Århus", 2);
         Lager lager2 = controller.createLagerMedReoler("Lager 2", "Solskinvej 2, 8000, Århus", 3);
     }

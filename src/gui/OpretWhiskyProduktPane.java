@@ -27,6 +27,9 @@ public class OpretWhiskyProduktPane extends GridPane {
     }
 
     public void fordelDestillatPåFad(){
+        Label lbl = new Label("Fordel destillat på fad");
+        this.add(lbl, 0, 0);
+
         //Destillat
         Label lblDestillering = new Label("Vælg destillat");
         this.add(lblDestillering, 0, 1);
