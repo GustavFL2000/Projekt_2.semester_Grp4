@@ -139,8 +139,8 @@ public class FadPane extends GridPane {
         this.add(lbl, 3, 0);
 
         //Destillat
-        Label lblDestillering = new Label("Vælg destillat");
-        this.add(lblDestillering, 3, 1);
+        Label lblDestillat = new Label("Vælg destillat");
+        this.add(lblDestillat, 3, 1);
         cobDestillat = new ComboBox<>();
         cobDestillat.setItems(FXCollections.observableArrayList(controller.getDestillater()));
         this.add(cobDestillat, 3, 2);

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import model.Lager;
 
 public class Gui extends Application {
 
@@ -47,7 +48,7 @@ public class Gui extends Application {
         tabFad.setContent(fadPane);
 
         //Opdaterer listview når du trykker på tabben for destillat pane
-        tabDestillat.setOnSelectionChanged(event -> {
+        tabFad.setOnSelectionChanged(event -> {
             if (tabFad.isSelected()){
                 fadPane.updateControls();
             }
@@ -58,8 +59,16 @@ public class Gui extends Application {
         tabWhisky.setContent(new OpretWhiskyProduktPane(controller));
 
         //Lager
+        LagerPane lagerPane = new LagerPane(controller);
         Tab tabLager = new Tab("Lager");
-        tabLager.setContent(new LagerPane(controller));
+        tabLager.setContent(lagerPane);
+
+        tabLager.setOnSelectionChanged(event -> {
+            if (tabLager.isSelected()){
+                lagerPane.updateControls();
+            }
+        });
+
 
         tabFrontpage.setClosable(false);
         tabDestillering.setClosable(false);

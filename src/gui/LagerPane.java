@@ -5,10 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import model.Fad;
+import model.Leverandør;
 
 public class LagerPane extends GridPane {
     private Controller controller;
     private ListView lagerlist;
+    private ComboBox<Fad> cobFad;
 
     public LagerPane(Controller controller) {
         this.controller = controller;
@@ -18,11 +21,21 @@ public class LagerPane extends GridPane {
         this.setVgap(10);
 
         opretLager();
+        placerFadpåLager();
 
         lagerlist = new ListView<>();
         lagerlist.setItems(FXCollections.observableArrayList(controller.getLager()));
         this.add(lagerlist, 2, 1, 1, 10);
     }
+
+    public void placerFadpåLager(){
+        Label lblFad = new Label("Vælg fad");
+        this.add(lblFad, 3, 0);
+        cobFad = new ComboBox<>();
+        cobFad.setItems(FXCollections.observableArrayList(controller.getFade()));
+        this.add(cobFad, 3, 1);
+    }
+
 
     public void opretLager (){
         //String lagerNavn, String adresse
@@ -86,6 +99,10 @@ public class LagerPane extends GridPane {
     public void updateControls() {
         lagerlist.setItems(
                 FXCollections.observableArrayList(controller.getLager())
+        );
+
+        cobFad.setItems(
+                FXCollections.observableArrayList(controller.getFade())
         );
     }
 }
