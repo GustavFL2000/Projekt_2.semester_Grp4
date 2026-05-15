@@ -71,7 +71,6 @@ public class MainTest {
 
         // Opretter et whiskyprodukt
         Produkt prod1 = controller.createProdukt(
-                1,
                 5,
                 "Brønd",
                 50,
@@ -87,7 +86,6 @@ public class MainTest {
 
         // Opretter endnu et whiskyprodukt
         Produkt prod2 = controller.createProdukt(
-                2,
                 5,
                 "Brønd",
                 50,
