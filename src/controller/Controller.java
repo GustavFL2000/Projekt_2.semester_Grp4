@@ -29,8 +29,10 @@ public class Controller {
     }
 
     //Produkt
-    public Produkt createProdukt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
+    private int produktNr = 1;
+    public Produkt createProdukt( double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         Produkt produkt = new Produkt(produktNr, vandMængde, vandOprindelse, alkoholProcent, beskrivelse, kvalitetsStempel);
+        produktNr++;
         storage.addProdukt(produkt);
         return produkt;
     }
