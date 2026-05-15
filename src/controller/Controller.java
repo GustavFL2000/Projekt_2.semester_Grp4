@@ -37,6 +37,10 @@ public class Controller {
         return produkt;
     }
 
+    public List<Produkt> getProdukter(){
+        return  storage.getProdukter();
+    }
+
     //Fade
     private int fadNr = 1;
     public Fad createFad(String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
@@ -165,5 +169,20 @@ public class Controller {
             }
         }
         return fundneFade;
+    }
+
+    //UC7 Opret whiskyprodkut
+    public List<Destillat> getDestillaterKlarTilProdukt() {
+
+        List<Destillat> klareDestillater = new ArrayList<>();
+
+        for (Destillat destillat : storage.getDestillater()) {
+
+            if (destillat.getTilgængeligKlarMængde(LocalDate.now()) > 0) {
+                klareDestillater.add(destillat);
+            }
+        }
+
+        return klareDestillater;
     }
 }
