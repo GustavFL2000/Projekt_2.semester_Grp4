@@ -171,6 +171,10 @@ public class Destillat {
 
     @Override
     public String toString() {
-        return destilatNavn + " " + getRestMængde();
+        return destilatNavn +
+                " | Rest: " + getRestMængde() +
+                " L | Klar: " +
+                getTilgængeligKlarMængde(LocalDate.now()) +
+                " L";
     }
 }
