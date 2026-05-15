@@ -72,7 +72,6 @@ public class MainTest {
         // Opretter et whiskyprodukt
         Produkt prod1 = controller.createProdukt(
                 5,
-                "Brønd",
                 50,
                 "Single malt lavet på november batch",
                 KvalitetsStempel.SINGLE_MALT
@@ -87,7 +86,6 @@ public class MainTest {
         // Opretter endnu et whiskyprodukt
         Produkt prod2 = controller.createProdukt(
                 5,
-                "Brønd",
                 50,
                 "Single malt lavet på nyårs bryg",
                 KvalitetsStempel.SINGLE_MALT

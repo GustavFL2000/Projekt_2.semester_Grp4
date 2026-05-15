@@ -29,7 +29,7 @@ public class TestUC7OpretWhiskyProdukt {
 
         maltbatch = new Maltbatch(1, Kornsort.EVERGREEN);
 
-        produkt = new Produkt(1, 10, "Kildevand", 40, "Single Malt", KvalitetsStempel.SINGLE_MALT);
+        produkt = new Produkt(1, 10, 40, "Single Malt", KvalitetsStempel.SINGLE_MALT);
 
         destillat = new Destillat("TestDestillat", LocalDate.now(), 70);
 
@@ -144,7 +144,7 @@ public class TestUC7OpretWhiskyProdukt {
     @Test
     void TC32_createProdukt1() {
 
-        Produkt produkt = new Produkt(1, 10, "Kildevand", 40, "Single Malt", KvalitetsStempel.SINGLE_MALT);
+        Produkt produkt = new Produkt(1, 10, 40, "Single Malt", KvalitetsStempel.SINGLE_MALT);
 
         assertNotNull(produkt);
     }
@@ -152,7 +152,7 @@ public class TestUC7OpretWhiskyProdukt {
     @Test
     void TC33_createProdukt2() {
 
-        Produkt produkt = new Produkt(2, 0, "Kilde", 45, "Premium", KvalitetsStempel.BLENDED);
+        Produkt produkt = new Produkt(2, 0, 45, "Premium", KvalitetsStempel.BLENDED);
 
         assertNotNull(produkt);
     }
@@ -160,7 +160,7 @@ public class TestUC7OpretWhiskyProdukt {
     @Test
     void TC34_createProdukt3() {
 
-        Produkt produkt = new Produkt(3, 0, "Kilde", 0.1, "Test", KvalitetsStempel.SINGLE_CASK);
+        Produkt produkt = new Produkt(3, 0, 0.1, "Test", KvalitetsStempel.SINGLE_CASK);
 
         assertNotNull(produkt);
     }
@@ -175,7 +175,7 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(0, 10, "Kilde", 40, "Test", KvalitetsStempel.SINGLE_MALT);
+                    new Produkt(0, 10, 40, "Test", KvalitetsStempel.SINGLE_MALT);
                 });
     }
 
@@ -185,7 +185,7 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(-1, 10, "Kilde", 40, "Test", KvalitetsStempel.SINGLE_MALT);
+                    new Produkt(-1, 10, 40, "Test", KvalitetsStempel.SINGLE_MALT);
                 });
     }
 
@@ -195,7 +195,7 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(1, -1, "Kilde", 40, "Test", KvalitetsStempel.SINGLE_MALT);
+                    new Produkt(1, -1, 40, "Test", KvalitetsStempel.SINGLE_MALT);
                 });
     }
 
@@ -205,7 +205,7 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(1, 10, "Kilde", 0, "Test", KvalitetsStempel.SINGLE_MALT);
+                    new Produkt(1, 10, 0, "Test", KvalitetsStempel.SINGLE_MALT);
                 });
     }
 
@@ -215,19 +215,19 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(1, 10, "Kilde", -1, "Test", KvalitetsStempel.SINGLE_MALT);
+                    new Produkt(1, 10, -1, "Test", KvalitetsStempel.SINGLE_MALT);
                 });
     }
 
-    @Test
-    void TC41_vandOprindelseNull() {
-
-        assertThrows(IllegalArgumentException.class,
-
-                () -> {
-                    new Produkt(1, 10, null, 40, "Test", KvalitetsStempel.SINGLE_MALT);
-                });
-    }
+//    @Test
+//    void TC41_vandOprindelseNull() {
+//
+//        assertThrows(IllegalArgumentException.class,
+//
+//                () -> {
+//                    new Produkt(1, 10, 40, "Test", KvalitetsStempel.SINGLE_MALT);
+//                });
+//    }
 
     @Test
     void TC42_beskrivelseNull() {
@@ -235,7 +235,7 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(1, 10, "Kilde", 40, null, KvalitetsStempel.SINGLE_MALT);
+                    new Produkt(1, 10, 40, null, KvalitetsStempel.SINGLE_MALT);
                 });
     }
 
@@ -245,7 +245,7 @@ public class TestUC7OpretWhiskyProdukt {
         assertThrows(IllegalArgumentException.class,
 
                 () -> {
-                    new Produkt(1, 10, "Kilde", 40, "Test", null);
+                    new Produkt(1, 10, 40, "Test", null);
                 });
     }
 }

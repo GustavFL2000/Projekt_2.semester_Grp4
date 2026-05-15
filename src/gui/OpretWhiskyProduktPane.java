@@ -200,7 +200,6 @@ public class OpretWhiskyProduktPane extends GridPane {
 
             controller.createProdukt(
                     vandMængde,
-                    vandOprindelse,
                     alkoholProcent,
                     beskrivelse,
                     kvalitetsStempel

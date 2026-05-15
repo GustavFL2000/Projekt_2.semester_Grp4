@@ -15,7 +15,7 @@ public class Produkt {
     private List<WhiskySammensætning> whiskySammensætninger = new ArrayList<>();
     private List<Flaske> flasker = new ArrayList<>();
 
-    public Produkt(int produktNr, double vandMængde, String vandOprindelse, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
+    public Produkt(int produktNr, double vandMængde, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         if (produktNr <= 0) {
             throw new IllegalArgumentException(
                     "Produktnummer skal være større end 0");
@@ -24,11 +24,6 @@ public class Produkt {
         if (vandMængde < 0) {
             throw new IllegalArgumentException(
                     "Vandmængde må ikke være negativ");
-        }
-
-        if (vandOprindelse == null) {
-            throw new IllegalArgumentException(
-                    "Vandoprindelse må ikke være null");
         }
 
         if (alkoholProcent <= 0 || alkoholProcent > 100) {
@@ -47,7 +42,7 @@ public class Produkt {
         }
         this.produktNr = produktNr;
         this.vandMængde = vandMængde;
-        this.vandOprindelse = vandOprindelse;
+        this.vandOprindelse = "Begravet dal under destilleriet";
         this.alkoholProcent = alkoholProcent;
         this.beskrivelse = beskrivelse;
         this.kvalitetsStempel = kvalitetsStempel;
