@@ -133,7 +133,6 @@ public class Controller {
     public List<Fad> søgEfterFade(Integer fadNr, Lager lager, String tidligereIndhold, Integer alder) {
         List<Fad> alleFade = getFade();
         List<Fad> fundneFade = new ArrayList<>();
-
         if (alder != null && alder < 0) {
             throw new IllegalArgumentException("Alder må ikke være negativ");
         }
@@ -163,7 +162,6 @@ public class Controller {
                     }
                 }
             }
-
             if (matcher) {
                 fundneFade.add(fad);
             }
