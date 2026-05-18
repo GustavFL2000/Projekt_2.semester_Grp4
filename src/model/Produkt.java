@@ -17,28 +17,23 @@ public class Produkt {
 
     public Produkt(int produktNr, double vandMængde, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         if (produktNr <= 0) {
-            throw new IllegalArgumentException(
-                    "Produktnummer skal være større end 0");
+            throw new IllegalArgumentException("Produktnummer skal være større end 0");
         }
 
         if (vandMængde < 0) {
-            throw new IllegalArgumentException(
-                    "Vandmængde må ikke være negativ");
+            throw new IllegalArgumentException("Vandmængde må ikke være negativ");
         }
 
         if (alkoholProcent <= 0 || alkoholProcent > 100) {
-            throw new IllegalArgumentException(
-                    "Alkoholprocent skal være større end 0 og mindre end 100");
+            throw new IllegalArgumentException("Alkoholprocent skal være større end 0 og mindre end 100");
         }
 
         if (beskrivelse == null) {
-            throw new IllegalArgumentException(
-                    "Beskrivelse må ikke være null");
+            throw new IllegalArgumentException("Beskrivelse må ikke være null");
         }
 
         if (kvalitetsStempel == null) {
-            throw new IllegalArgumentException(
-                    "Kvalitetsstempel må ikke være null");
+            throw new IllegalArgumentException("Kvalitetsstempel må ikke være null");
         }
         this.produktNr = produktNr;
         this.vandMængde = vandMængde;
@@ -53,25 +48,50 @@ public class Produkt {
         return new ArrayList<>(whiskySammensætninger);
     }
 
-    void addWhiskySammensætning (WhiskySammensætning whiskySammensætning){
-        if (!whiskySammensætninger.contains(whiskySammensætning)){
+    void addWhiskySammensætning(WhiskySammensætning whiskySammensætning) {
+        if (!whiskySammensætninger.contains(whiskySammensætning)) {
             whiskySammensætninger.add(whiskySammensætning);
         }
     }
 
 
-    public WhiskySammensætning createWhiskySammensætning (double mængdeFraDestillat, Destillat destillat){
+    public WhiskySammensætning createWhiskySammensætning(double mængdeFraDestillat, Destillat destillat) {
         if (destillat == null) {
             throw new IllegalArgumentException("Destillat må ikke være null");
         }
-        if (mængdeFraDestillat <= 0 ) {
+        if (mængdeFraDestillat <= 0) {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
-        if (!destillat.harNokTilProdukt(mængdeFraDestillat,LocalDate.now())) {
+        if (!destillat.harNokTilProdukt(mængdeFraDestillat, LocalDate.now())) {
             throw new IllegalArgumentException("Der er ikke nok whisky i fadet");
         }
 
         return new WhiskySammensætning(mængdeFraDestillat, this, destillat);
+    }
+
+    // Beregner samlet mængde whisky fra alle destillater (liter)
+    public double getWhiskySammensætniger() {
+        double sum = 0;
+
+        for (WhiskySammensætning whiskySammensætning : whiskySammensætninger) {
+            sum += whiskySammensætning.getMængdeFraDestillat();
+        }
+        return sum;
+    }
+
+    // Beregner hvor meget der er brugt til flasker (ml til liter)
+    public double getBrugtTilFlasker() {
+        double sum = 0;
+
+        for (Flaske flaske : flasker) {
+            sum += flaske.getStørrelseMl() / 1000.0;
+        }
+        return sum;
+    }
+
+    // Beregner hvor meget whisky der er tilbage i produktet (destillat + vand - flasker)
+    public double getRestMængde() {
+        return getWhiskySammensætniger() - getBrugtTilFlasker() + vandMængde;
     }
 
     //Flaske metoder
@@ -81,31 +101,38 @@ public class Produkt {
         return new ArrayList<>(flasker);
     }
 
-    void addFlaske (Flaske flaske){
-        if (!flasker.contains(flaske)){
+    void addFlaske(Flaske flaske) {
+        if (!flasker.contains(flaske)) {
             flasker.add(flaske);
         }
     }
 
-    public Flaske createFlaske(int størrelse){
+    public Flaske createFlaske(int størrelse) {
         if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
+        }
+        if ((størrelse / 1000.0) > getRestMængde()) {
+            throw new IllegalArgumentException("Der er ikke nok whisky");
         }
         int flaskeNr = flasker.size() + 1;
         return new Flaske(flaskeNr, størrelse, this);
     }
 
-    public List<Flaske> createFlasker(int størrelse, int antalFlasker){
+    public List<Flaske> createFlasker(int størrelse, int antalFlasker) {
         if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
         }
         if (antalFlasker <= 0) {
             throw new IllegalArgumentException("Antal flasker skal være større end 0");
         }
+        double samletMængde = (størrelse / 1000.0) * antalFlasker;
+        if (samletMængde > getRestMængde()) {
+            throw new IllegalArgumentException("Der er ikke nok whisky");
+        }
         List<Flaske> oprettedeFlasker = new ArrayList<>();
         for (int i = 0; i < antalFlasker; i++) {
             int flaskeNr = flasker.size() + 1;
-            Flaske flaske =  new Flaske(flaskeNr, størrelse, this);
+            Flaske flaske = new Flaske(flaskeNr, størrelse, this);
             oprettedeFlasker.add(flaske);
         }
         return oprettedeFlasker;
@@ -137,13 +164,6 @@ public class Produkt {
 
     @Override
     public String toString() {
-        return "Produkt{" +
-                "produktNr=" + produktNr +
-                ", vandMængde=" + vandMængde +
-                ", vandOprindelse='" + vandOprindelse + '\'' +
-                ", alkoholProcent=" + alkoholProcent +
-                ", beskrivelse='" + beskrivelse + '\'' +
-                ", kvalitetsStempel=" + kvalitetsStempel +
-                '}';
+        return "Produkt " + produktNr + " | rest: " + getRestMængde() + " L";
     }
 }

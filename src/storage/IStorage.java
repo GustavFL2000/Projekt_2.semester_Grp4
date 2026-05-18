@@ -27,4 +27,8 @@ public interface IStorage {
     void addDestillat(Destillat destillat);
 
     List<Destillat> getDestillater();
+
+    void addFlaske(Flaske flaske);
+
+    List<Flaske> getFlasker();
 }

@@ -3,6 +3,7 @@ package controller;
 import model.*;
 import storage.IStorage;
 
+import javax.swing.text.html.ListView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +129,17 @@ public class Controller {
 
     public List<Leverandør> getLeverandører(){
         return storage.getLeverandør();
+    }
+
+    private int flaskeNr = 0;
+    public Flaske createFlasker (int størrelse, Produkt produkt, int antalFlasker){
+        Flaske flaske = (Flaske) produkt.createFlasker(størrelse, antalFlasker);
+        storage.addFlaske(flaske);
+        return flaske;
+    }
+
+    public List<Flaske> getFlasker(){
+        return storage.getFlasker();
     }
 
     public List<Fad> søgEfterFade(Integer fadNr, Lager lager, String tidligereIndhold, Integer alder) {

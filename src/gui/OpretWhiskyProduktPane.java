@@ -13,20 +13,11 @@ public class OpretWhiskyProduktPane extends GridPane {
 
     private Controller controller;
 
-    // Produkt
-    private TextField txtVandMængde;
-    private TextField txtVandOprindelse;
-    private TextField txtAlkoholProcent;
-    private TextField txtBeskrivelse;
-    private ComboBox<KvalitetsStempel> cobKvalitetsStempel;
-
-    // Whisky sammensætning
-    private ComboBox<Produkt> cobProdukter;
+    private ComboBox<Produkt> cobProduktTilSammensætning;
+    private ComboBox<Produkt> cobProduktTilFlasker;
     private ComboBox<Destillat> cobDestillater;
-    private TextField txtMængdeFraDestillat;
 
     public OpretWhiskyProduktPane(Controller controller) {
-
         this.controller = controller;
 
         this.setPadding(new Insets(20));
@@ -35,309 +26,220 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         opretProduktPane();
         whiskySammensætningPane();
+        opretFlaskerPane();
 
         updateControls();
     }
 
-    // -------------------------------------------------------------------------
-    // Opret produkt
-    // -------------------------------------------------------------------------
-
-    private void opretProduktPane() {
-
-        Label lblTitel =
-                new Label("Opret whiskyprodukt");
-
+    public void opretProduktPane() {
+        Label lblTitel = new Label("Opret whiskyprodukt");
         this.add(lblTitel, 0, 0);
 
-        // Vandmængde
-        Label lblVandMængde =
-                new Label("Indtast vandmængde");
-
+        Label lblVandMængde = new Label("Indtast vandmængde");
         this.add(lblVandMængde, 0, 1);
-
-        txtVandMængde = new TextField();
-
+        TextField txtVandMængde = new TextField();
         this.add(txtVandMængde, 0, 2);
 
-        // Vandoprindelse
-        Label lblVandOprindelse =
-                new Label("Indtast vandoprindelse");
+        Label lblAlkoholProcent = new Label("Indtast alkoholprocent");
+        this.add(lblAlkoholProcent, 0, 3);
+        TextField txtAlkoholProcent = new TextField();
+        this.add(txtAlkoholProcent, 0, 4);
 
-        this.add(lblVandOprindelse, 0, 3);
+        Label lblBeskrivelse = new Label("Indtast beskrivelse");
+        this.add(lblBeskrivelse, 0, 5);
+        TextField txtBeskrivelse = new TextField();
+        this.add(txtBeskrivelse, 0, 6);
 
-        txtVandOprindelse = new TextField();
+        Label lblKvalitetsStempel = new Label("Vælg kvalitetsstempel");
+        this.add(lblKvalitetsStempel, 0, 7);
+        ComboBox<KvalitetsStempel> cobKvalitetsStempel = new ComboBox<>();
+        cobKvalitetsStempel.setItems(FXCollections.observableArrayList(KvalitetsStempel.values()));
+        this.add(cobKvalitetsStempel, 0, 8);
 
-        this.add(txtVandOprindelse, 0, 4);
+        Button btnOpretProdukt = new Button("Opret produkt");
+        this.add(btnOpretProdukt, 0, 9);
 
-        // Alkoholprocent
-        Label lblAlkoholProcent =
-                new Label("Indtast alkoholprocent");
+        btnOpretProdukt.setOnAction(event -> {
+            try {
+                double vandMængde = Double.parseDouble(txtVandMængde.getText());
+                double alkoholProcent = Double.parseDouble(txtAlkoholProcent.getText());
+                String beskrivelse = txtBeskrivelse.getText();
+                KvalitetsStempel kvalitetsStempel =
+                        cobKvalitetsStempel.getSelectionModel().getSelectedItem();
 
-        this.add(lblAlkoholProcent, 0, 5);
+                controller.createProdukt(vandMængde, alkoholProcent, beskrivelse, kvalitetsStempel);
 
-        txtAlkoholProcent = new TextField();
+                updateControls();
 
-        this.add(txtAlkoholProcent, 0, 6);
+                txtVandMængde.clear();
+                txtAlkoholProcent.clear();
+                txtBeskrivelse.clear();
+                cobKvalitetsStempel.getSelectionModel().clearSelection();
 
-        // Beskrivelse
-        Label lblBeskrivelse =
-                new Label("Indtast beskrivelse");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succes");
+                alert.setHeaderText("Produkt oprettet");
+                alert.setContentText("Whiskyproduktet blev oprettet.");
+                alert.showAndWait();
 
-        this.add(lblBeskrivelse, 0, 7);
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt tal");
+                alert.setContentText("Vandmængde og alkoholprocent skal være tal.");
+                alert.showAndWait();
 
-        txtBeskrivelse = new TextField();
-
-        this.add(txtBeskrivelse, 0, 8);
-
-        // Kvalitetsstempel
-        Label lblKvalitetsStempel =
-                new Label("Vælg kvalitetsstempel");
-
-        this.add(lblKvalitetsStempel, 0, 9);
-
-        cobKvalitetsStempel = new ComboBox<>();
-
-        cobKvalitetsStempel.setItems(
-                FXCollections.observableArrayList(
-                        KvalitetsStempel.values()
-                )
-        );
-
-        this.add(cobKvalitetsStempel, 0, 10);
-
-        // Knap
-        Button btnOpretProdukt =
-                new Button("Opret produkt");
-
-        this.add(btnOpretProdukt, 0, 11);
-
-        btnOpretProdukt.setOnAction(
-                event -> opretProduktAction()
-        );
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldige data");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
     }
 
-    // -------------------------------------------------------------------------
-    // Whisky sammensætning
-    // -------------------------------------------------------------------------
-
-    private void whiskySammensætningPane() {
-
-        Label lblTitel =
-                new Label("Whisky sammensætning");
-
+    public void whiskySammensætningPane() {
+        Label lblTitel = new Label("Whisky sammensætning");
         this.add(lblTitel, 3, 0);
 
-        // Produkt
-        Label lblProdukt =
-                new Label("Vælg produkt");
-
+        Label lblProdukt = new Label("Vælg produkt");
         this.add(lblProdukt, 3, 1);
+        cobProduktTilSammensætning = new ComboBox<>();
+        cobProduktTilSammensætning.setMaxWidth(300);
+        this.add(cobProduktTilSammensætning, 3, 2);
 
-        cobProdukter = new ComboBox<>();
-
-        this.add(cobProdukter, 3, 2);
-
-        // Destillat
-        Label lblDestillat =
-                new Label("Vælg destillat");
-
+        Label lblDestillat = new Label("Vælg destillat");
         this.add(lblDestillat, 3, 3);
-
         cobDestillater = new ComboBox<>();
-
+        cobDestillater.setMaxWidth(300);
         this.add(cobDestillater, 3, 4);
 
-        // Mængde
-        Label lblMængde =
-                new Label("Mængde fra destillat");
-
+        Label lblMængde = new Label("Mængde fra destillat");
         this.add(lblMængde, 3, 5);
-
-        txtMængdeFraDestillat = new TextField();
-
+        TextField txtMængdeFraDestillat = new TextField();
         this.add(txtMængdeFraDestillat, 3, 6);
 
-        // Knap
-        Button btnTilføjDestillat =
-                new Button("Tilføj destillat");
-
+        Button btnTilføjDestillat = new Button("Tilføj destillat");
         this.add(btnTilføjDestillat, 3, 7);
 
-        btnTilføjDestillat.setOnAction(
-                event -> tilføjDestillatAction()
-        );
-    }
+        btnTilføjDestillat.setOnAction(event -> {
+            try {
+                Produkt produkt = cobProduktTilSammensætning.getSelectionModel().getSelectedItem();
+                Destillat destillat = cobDestillater.getSelectionModel().getSelectedItem();
+                double mængde = Double.parseDouble(txtMængdeFraDestillat.getText());
 
-    // -------------------------------------------------------------------------
-    // Actions
-    // -------------------------------------------------------------------------
+                if (produkt == null) {
+                    throw new IllegalArgumentException("Vælg et produkt");
+                }
+                if (destillat == null) {
+                    throw new IllegalArgumentException("Vælg et destillat");
+                }
 
-    private void opretProduktAction() {
+                produkt.createWhiskySammensætning(mængde, destillat);
 
-        try {
+                updateControls();
 
-            double vandMængde =
-                    Double.parseDouble(
-                            txtVandMængde.getText()
-                    );
+                txtMængdeFraDestillat.clear();
 
-            String vandOprindelse =
-                    txtVandOprindelse.getText();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succes");
+                alert.setHeaderText("Destillat tilføjet");
+                alert.setContentText("Destillatet blev tilføjet til produktet.");
+                alert.showAndWait();
 
-            double alkoholProcent =
-                    Double.parseDouble(
-                            txtAlkoholProcent.getText()
-                    );
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt tal");
+                alert.setContentText("Mængde skal være et tal.");
+                alert.showAndWait();
 
-            String beskrivelse =
-                    txtBeskrivelse.getText();
-
-            KvalitetsStempel kvalitetsStempel =
-                    cobKvalitetsStempel
-                            .getSelectionModel()
-                            .getSelectedItem();
-
-            controller.createProdukt(
-                    vandMængde,
-                    alkoholProcent,
-                    beskrivelse,
-                    kvalitetsStempel
-            );
-
-            clearProduktFields();
-
-            updateControls();
-
-            Alert alert =
-                    new Alert(Alert.AlertType.INFORMATION);
-
-            alert.setHeaderText("Produkt oprettet");
-
-            alert.setContentText(
-                    "Whiskyproduktet blev oprettet."
-            );
-
-            alert.showAndWait();
-
-        } catch (NumberFormatException e) {
-
-            showError(
-                    "Vandmængde og alkoholprocent skal være tal."
-            );
-
-        } catch (IllegalArgumentException e) {
-
-            showError(e.getMessage());
-        }
-    }
-
-    private void tilføjDestillatAction() {
-
-        try {
-
-            Produkt produkt =
-                    cobProdukter
-                            .getSelectionModel()
-                            .getSelectedItem();
-
-            if (produkt == null) {
-                throw new IllegalArgumentException(
-                        "Vælg et produkt"
-                );
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldige data");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
             }
-
-            Destillat destillat =
-                    cobDestillater
-                            .getSelectionModel()
-                            .getSelectedItem();
-
-            if (destillat == null) {
-                throw new IllegalArgumentException(
-                        "Vælg et destillat"
-                );
-            }
-
-            double mængde =
-                    Double.parseDouble(
-                            txtMængdeFraDestillat.getText()
-                    );
-
-            produkt.createWhiskySammensætning(
-                    mængde,
-                    destillat
-            );
-
-            txtMængdeFraDestillat.clear();
-
-            updateControls();
-
-            Alert alert =
-                    new Alert(Alert.AlertType.INFORMATION);
-
-            alert.setHeaderText(
-                    "Destillat tilføjet"
-            );
-
-            alert.setContentText(
-                    "Destillatet blev tilføjet til produktet."
-            );
-
-            alert.showAndWait();
-
-        } catch (NumberFormatException e) {
-
-            showError("Mængde skal være et tal.");
-
-        } catch (IllegalArgumentException e) {
-
-            showError(e.getMessage());
-        }
+        });
     }
 
-    // -------------------------------------------------------------------------
-    // Hjælpemetoder
-    // -------------------------------------------------------------------------
+    public void opretFlaskerPane() {
+        Label lblTitel = new Label("Opret flasker");
+        this.add(lblTitel, 5, 0);
+
+        Label lblProdukt = new Label("Vælg produkt");
+        this.add(lblProdukt, 5, 1);
+        cobProduktTilFlasker = new ComboBox<>();
+        cobProduktTilFlasker.setMaxWidth(300);
+        this.add(cobProduktTilFlasker, 5, 2);
+
+        Label lblStørrelse = new Label("Indtast størrelse i ml på flasken");
+        this.add(lblStørrelse, 5, 3);
+        TextField txtFlaskeStørrelse = new TextField();
+        this.add(txtFlaskeStørrelse, 5, 4);
+
+        Label lblAntalFlasker = new Label("Indtast antal flasker");
+        this.add(lblAntalFlasker, 5, 5);
+        TextField txtAntalFlasker = new TextField();
+        this.add(txtAntalFlasker, 5, 6);
+
+        Button btnOpretFlasker = new Button("Opret flasker");
+        this.add(btnOpretFlasker, 5, 7);
+
+        btnOpretFlasker.setOnAction(event -> {
+            try {
+                Produkt produkt = cobProduktTilFlasker.getSelectionModel().getSelectedItem();
+
+                if (produkt == null) {
+                    throw new IllegalArgumentException("Vælg et produkt");
+                }
+
+                int størrelse = Integer.parseInt(txtFlaskeStørrelse.getText());
+                int antalFlasker = Integer.parseInt(txtAntalFlasker.getText());
+
+                produkt.createFlasker(størrelse, antalFlasker);
+
+                updateControls();
+
+                txtFlaskeStørrelse.clear();
+                txtAntalFlasker.clear();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succes");
+                alert.setHeaderText("Flasker oprettet");
+                alert.setContentText(antalFlasker + " flasker blev oprettet.");
+                alert.showAndWait();
+
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt tal");
+                alert.setContentText("Størrelse og antal flasker skal være hele tal.");
+                alert.showAndWait();
+
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldige data");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
+    }
 
     public void updateControls() {
+        cobProduktTilSammensætning.setItems(
+                FXCollections.observableArrayList(controller.getProdukter())
+        );
 
-        cobProdukter.setItems(
-                FXCollections.observableArrayList(
-                        controller.getProdukter()
-                )
+        cobProduktTilFlasker.setItems(
+                FXCollections.observableArrayList(controller.getProdukter())
         );
 
         cobDestillater.setItems(
-                FXCollections.observableArrayList(
-                        controller.getDestillaterKlarTilProdukt()
-                )
+                FXCollections.observableArrayList(controller.getDestillaterKlarTilProdukt())
         );
-    }
-
-    private void clearProduktFields() {
-
-        txtVandMængde.clear();
-
-        txtVandOprindelse.clear();
-
-        txtAlkoholProcent.clear();
-
-        txtBeskrivelse.clear();
-
-        cobKvalitetsStempel
-                .getSelectionModel()
-                .clearSelection();
-    }
-
-    private void showError(String message) {
-
-        Alert alert =
-                new Alert(Alert.AlertType.ERROR);
-
-        alert.setHeaderText("Fejl");
-
-        alert.setContentText(message);
-
-        alert.showAndWait();
     }
 }

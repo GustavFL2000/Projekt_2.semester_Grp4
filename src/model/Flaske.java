@@ -2,7 +2,7 @@ package model;
 
 public class Flaske {
     private int flaskeNr;
-    private int størrelse;
+    private int størrelseMl;
 
     // link attribut
     private Produkt produkt; //Lavet af et produkt
@@ -11,7 +11,7 @@ public class Flaske {
         if (produkt == null) throw new IllegalArgumentException("Produkt skal vælges");
         if (størrelse <= 0) throw new IllegalArgumentException("Størrelse skal være større end 0");
         this.flaskeNr = flaskeNr;
-        this.størrelse = størrelse;
+        this.størrelseMl = størrelse;
         this.produkt = produkt;
     //todo Registreringsdato, antal flasker måske?
         produkt.addFlaske(this);
@@ -21,8 +21,8 @@ public class Flaske {
         return flaskeNr;
     }
 
-    public int getStørrelse() {
-        return størrelse;
+    public int getStørrelseMl() {
+        return størrelseMl;
     }
 
     public Produkt getProdukt() {
@@ -33,7 +33,7 @@ public class Flaske {
     public String toString() {
         return "Flaske{" +
                 "flaskeNr=" + flaskeNr +
-                ", størrelse=" + størrelse +
+                ", størrelse=" + størrelseMl +
                 ", produkt=" + produkt +
                 '}';
     }
