@@ -96,26 +96,6 @@ public class Destillat {
         return getPåfyldtMængde() - getBrugtTilProdukter();
     }
 
-
-    //TODO slet
-
-    // Returnerer true hvis destillatet har nok tilbage til den angivne mængde
-//    public boolean harNokTilProdukt(double mængde) {
-//        return mængde > 0 &&
-//                mængde <= getTilgængeligMængdeTilProdukt();
-//    }
-
-
-//    public boolean erKlarTilProdukt(LocalDate dagsDato) {
-//        for (Påfyldning påfyldning : påfyldninger) {
-//            if (!påfyldning.getFad().erKlarTilAftapning(dagsDato)) {
-//                return false;
-//            }
-//        }
-//        return !påfyldninger.isEmpty();
-//    }
-
-
     //Destilleringmængde metoder
     public List<DestilleringsMængde> getDestilleringsMængder() {
         return new ArrayList<>(destilleringsMængder);
