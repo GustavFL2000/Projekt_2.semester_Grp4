@@ -255,7 +255,10 @@ public class Controller {
             Destillat destillat = ws.getDestillat();
 
             sb.append("Destillat: ")
-                    .append(destillat)
+                    .append(destillat.getDestilatNavn())
+                    .append(" | ")
+                    .append("Produceret den: ")
+                    .append(destillat.getDato())
                     .append("\n");
 
             sb.append("Mængde: ")

@@ -149,6 +149,14 @@ public class Destillat {
         return mængde <= getTilgængeligKlarMængde(dagsDato);
     }
 
+    public String getDestilatNavn() {
+        return destilatNavn;
+    }
+
+    public LocalDate getDato() {
+        return dato;
+    }
+
     @Override
     public String toString() {
         return destilatNavn +

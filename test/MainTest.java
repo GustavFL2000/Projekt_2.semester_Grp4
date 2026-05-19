@@ -93,7 +93,7 @@ public class MainTest {
         );
 
         // Sammensætter produktet med et andet destillat
-        prod2.createWhiskySammensætning(1, destillat2);
+        prod1.createWhiskySammensætning(1, destillat2);
 
         System.out.println("Destillat 2 har brugt: " + destillat2.getBrugtTilProdukter() + " liter på produkter");
         System.out.println("Destillat 2 har: " + destillat2.getTilgængeligMængdeTilProdukt() + " liter tilgængeligt til produkter");
@@ -141,12 +141,12 @@ public class MainTest {
             System.out.println(f.getFlaskeNr());
         }
 
-        List<Flaske> flasker1 = controller.createFlasker(100,prod2,10);
+        List<Flaske> flasker1 = controller.createFlasker(100,prod1,10);
 
         for (Flaske f : flasker1) {
             System.out.println(f.getFlaskeNr());
         }
 
-        System.out.println(controller.visHistorik(11));
+        System.out.println(controller.visHistorik(10));
     }
 }
