@@ -27,6 +27,7 @@ public class OpretWhiskyProduktPane extends GridPane {
         opretProduktPane();
         whiskySammensætningPane();
         opretFlaskerPane();
+        visFlaskeHistorik();
 
         updateControls();
     }
@@ -208,8 +209,13 @@ public class OpretWhiskyProduktPane extends GridPane {
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succes");
-                alert.setHeaderText("Flasker oprettet");
-                alert.setContentText(antalFlasker + " flasker blev oprettet.");
+                if(antalFlasker == 1){
+                    alert.setHeaderText("Flaske oprettet");
+                    alert.setContentText(antalFlasker + " flaske blev oprettet.");
+                }else {
+                    alert.setHeaderText("Flasker oprettet");
+                    alert.setContentText(antalFlasker + " flasker blev oprettet.");
+                }
                 alert.showAndWait();
 
             } catch (NumberFormatException e) {
@@ -227,6 +233,47 @@ public class OpretWhiskyProduktPane extends GridPane {
                 alert.showAndWait();
             }
         });
+    }
+
+    public void visFlaskeHistorik(){
+        Label lblTitel = new Label("Flaske Historik");
+        this.add(lblTitel, 6, 0);
+
+        TextField txtFlaskeNr = new TextField();
+        this.add(txtFlaskeNr, 6, 1);
+
+        Button btnFlaskeHistorik = new Button("vis historik");
+        this.add(btnFlaskeHistorik, 6, 2);
+
+        TextArea txaHistorik = new TextArea();
+        txaHistorik.setEditable(false);
+        txaHistorik.setPrefHeight(300);
+        this.add(txaHistorik, 6, 3,1,10);
+
+        btnFlaskeHistorik.setOnAction(event -> {
+            try {
+                int flaskeNr = Integer.parseInt(txtFlaskeNr.getText());
+                String historik = controller.visHistorik(flaskeNr);
+                txaHistorik.setText(historik);
+
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldigt tal");
+                alert.setContentText("Flaske nummeret skal være et hel tal.");
+                alert.showAndWait();
+
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Ugyldige data");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
+
+
+
     }
 
     public void updateControls() {

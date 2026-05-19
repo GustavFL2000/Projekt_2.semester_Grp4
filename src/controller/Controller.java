@@ -131,6 +131,7 @@ public class Controller {
         return storage.getLeverandør();
     }
 
+
     private int flaskeNr = 1;
     public List<Flaske> createFlasker(int størrelse, Produkt produkt, int antalFlasker){
 
@@ -227,11 +228,20 @@ public class Controller {
 
         StringBuilder sb = new StringBuilder();
 
+        Produkt produkt = fundetFlaske.getProdukt();
+
         sb.append("=== Historik for flaske ")
                 .append(flaskeNr)
                 .append(" ===\n\n");
 
-        Produkt produkt = fundetFlaske.getProdukt();
+        sb.append("Flaske: ")
+                .append("Nr: ")
+                .append(flaskeNr)
+                .append("/")
+                .append(produkt.getFlasker().size())
+                .append("\n\n");
+
+
 
         sb.append("Produkt: ")
                 .append("Nr: ")

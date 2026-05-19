@@ -141,7 +141,7 @@ public class MainTest {
             System.out.println(f.getFlaskeNr());
         }
 
-        List<Flaske> flasker1 = controller.createFlasker(100,prod1,10);
+        List<Flaske> flasker1 = controller.createFlasker(100,prod2,10);
 
         for (Flaske f : flasker1) {
             System.out.println(f.getFlaskeNr());
