@@ -30,6 +30,10 @@ public class DestilleringsMængde {
         return mængde;
     }
 
+    public Destillering getDestillering() {
+        return destillering;
+    }
+
     @Override
     public String toString() {
         return "DestilleringsMængde{" +

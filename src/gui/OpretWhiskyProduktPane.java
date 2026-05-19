@@ -15,6 +15,7 @@ public class OpretWhiskyProduktPane extends GridPane {
 
     private ComboBox<Produkt> cobProduktTilSammensætning;
     private ComboBox<Produkt> cobProduktTilFlasker;
+    private ComboBox<Produkt> cobProduktTilHistorik;
     private ComboBox<Destillat> cobDestillater;
 
     public OpretWhiskyProduktPane(Controller controller) {
@@ -70,12 +71,13 @@ public class OpretWhiskyProduktPane extends GridPane {
 
                 controller.createProdukt(vandMængde, alkoholProcent, beskrivelse, kvalitetsStempel);
 
-                updateControls();
 
                 txtVandMængde.clear();
                 txtAlkoholProcent.clear();
                 txtBeskrivelse.clear();
                 cobKvalitetsStempel.getSelectionModel().clearSelection();
+
+                updateControls();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succes");
@@ -102,27 +104,27 @@ public class OpretWhiskyProduktPane extends GridPane {
 
     public void whiskySammensætningPane() {
         Label lblTitel = new Label("Whisky sammensætning");
-        this.add(lblTitel, 3, 0);
+        this.add(lblTitel, 2, 0);
 
         Label lblProdukt = new Label("Vælg produkt");
-        this.add(lblProdukt, 3, 1);
+        this.add(lblProdukt, 2, 1);
         cobProduktTilSammensætning = new ComboBox<>();
         cobProduktTilSammensætning.setMaxWidth(300);
-        this.add(cobProduktTilSammensætning, 3, 2);
+        this.add(cobProduktTilSammensætning, 2, 2);
 
         Label lblDestillat = new Label("Vælg destillat");
-        this.add(lblDestillat, 3, 3);
+        this.add(lblDestillat, 2, 3);
         cobDestillater = new ComboBox<>();
         cobDestillater.setMaxWidth(300);
-        this.add(cobDestillater, 3, 4);
+        this.add(cobDestillater, 2, 4);
 
         Label lblMængde = new Label("Mængde fra destillat");
-        this.add(lblMængde, 3, 5);
+        this.add(lblMængde, 2, 5);
         TextField txtMængdeFraDestillat = new TextField();
-        this.add(txtMængdeFraDestillat, 3, 6);
+        this.add(txtMængdeFraDestillat, 2, 6);
 
         Button btnTilføjDestillat = new Button("Tilføj destillat");
-        this.add(btnTilføjDestillat, 3, 7);
+        this.add(btnTilføjDestillat, 2, 7);
 
         btnTilføjDestillat.setOnAction(event -> {
             try {
@@ -139,9 +141,12 @@ public class OpretWhiskyProduktPane extends GridPane {
 
                 produkt.createWhiskySammensætning(mængde, destillat);
 
-                updateControls();
 
+                cobProduktTilSammensætning.setItems(null);
+                cobDestillater.setItems(null);
                 txtMængdeFraDestillat.clear();
+
+                updateControls();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succes");
@@ -168,26 +173,26 @@ public class OpretWhiskyProduktPane extends GridPane {
 
     public void opretFlaskerPane() {
         Label lblTitel = new Label("Opret flasker");
-        this.add(lblTitel, 5, 0);
+        this.add(lblTitel, 4, 0);
 
         Label lblProdukt = new Label("Vælg produkt");
-        this.add(lblProdukt, 5, 1);
+        this.add(lblProdukt, 4, 1);
         cobProduktTilFlasker = new ComboBox<>();
         cobProduktTilFlasker.setMaxWidth(300);
-        this.add(cobProduktTilFlasker, 5, 2);
+        this.add(cobProduktTilFlasker, 4, 2);
 
         Label lblStørrelse = new Label("Indtast størrelse i ml på flasken");
-        this.add(lblStørrelse, 5, 3);
+        this.add(lblStørrelse, 4, 3);
         TextField txtFlaskeStørrelse = new TextField();
-        this.add(txtFlaskeStørrelse, 5, 4);
+        this.add(txtFlaskeStørrelse, 4, 4);
 
         Label lblAntalFlasker = new Label("Indtast antal flasker");
-        this.add(lblAntalFlasker, 5, 5);
+        this.add(lblAntalFlasker, 4, 5);
         TextField txtAntalFlasker = new TextField();
-        this.add(txtAntalFlasker, 5, 6);
+        this.add(txtAntalFlasker, 4, 6);
 
         Button btnOpretFlasker = new Button("Opret flasker");
-        this.add(btnOpretFlasker, 5, 7);
+        this.add(btnOpretFlasker, 4, 7);
 
         btnOpretFlasker.setOnAction(event -> {
             try {
@@ -202,10 +207,11 @@ public class OpretWhiskyProduktPane extends GridPane {
 
                 controller.createFlasker(størrelse,produkt, antalFlasker);
 
-                updateControls();
 
+                cobProduktTilFlasker.setItems(null);
                 txtFlaskeStørrelse.clear();
                 txtAntalFlasker.clear();
+                updateControls();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succes");
@@ -239,21 +245,37 @@ public class OpretWhiskyProduktPane extends GridPane {
         Label lblTitel = new Label("Flaske Historik");
         this.add(lblTitel, 6, 0);
 
+        Label lblProdukt = new Label("Vælg produkt");
+        this.add(lblProdukt, 6, 1);
+
+        cobProduktTilHistorik = new ComboBox<>();
+        cobProduktTilHistorik.setMaxWidth(300);
+        this.add(cobProduktTilHistorik, 6,2);
+
+        Label lblFlaskeNr = new Label("Indtast flaskenr");
+        this.add(lblFlaskeNr, 6, 3);
         TextField txtFlaskeNr = new TextField();
-        this.add(txtFlaskeNr, 6, 1);
+        this.add(txtFlaskeNr, 6, 4);
 
         Button btnFlaskeHistorik = new Button("vis historik");
-        this.add(btnFlaskeHistorik, 6, 2);
+        this.add(btnFlaskeHistorik, 6, 5);
 
         TextArea txaHistorik = new TextArea();
         txaHistorik.setEditable(false);
         txaHistorik.setPrefHeight(300);
-        this.add(txaHistorik, 6, 3,1,10);
+        this.add(txaHistorik, 6, 6,1,10);
 
         btnFlaskeHistorik.setOnAction(event -> {
             try {
                 int flaskeNr = Integer.parseInt(txtFlaskeNr.getText());
-                String historik = controller.visHistorik(flaskeNr);
+                Produkt produkt = cobProduktTilHistorik.getSelectionModel().getSelectedItem();
+
+                if (produkt == null) {
+                    throw new IllegalArgumentException("Vælg et produkt");
+                }
+                int produktNr = produkt.getProduktNr();
+
+                String historik = controller.visHistorik(flaskeNr, produktNr);
                 txaHistorik.setText(historik);
 
             } catch (NumberFormatException e) {
@@ -283,6 +305,10 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         cobProduktTilFlasker.setItems(
                 FXCollections.observableArrayList(controller.getProdukter())
+        );
+
+        cobProduktTilHistorik.setItems
+                (FXCollections.observableArrayList(controller.getProdukter())
         );
 
         cobDestillater.setItems(

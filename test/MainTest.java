@@ -147,6 +147,6 @@ public class MainTest {
             System.out.println(f.getFlaskeNr());
         }
 
-        System.out.println(controller.visHistorik(10));
+        System.out.println(controller.visHistorik(10, 1));
     }
 }

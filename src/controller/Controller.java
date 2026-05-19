@@ -132,20 +132,17 @@ public class Controller {
     }
 
 
-    private int flaskeNr = 1;
     public List<Flaske> createFlasker(int størrelse, Produkt produkt, int antalFlasker){
 
         List<Flaske> flasker = new ArrayList<>();
 
         for (int i = 0; i < antalFlasker; i++) {
 
-            Flaske flaske = produkt.createFlaskeMedNr(flaskeNr, størrelse);
+            Flaske flaske = produkt.createFlaske(størrelse);
 
             storage.addFlaske(flaske);
 
             flasker.add(flaske);
-
-            flaskeNr++;
         }
 
         return flasker;
@@ -210,15 +207,13 @@ public class Controller {
     }
 
 
-    public String visHistorik(int flaskeNr) {
+    public String visHistorik(int flaskeNr, int produktNr) {
 
         Flaske fundetFlaske = null;
 
-        // Find flaske
         for (Flaske flaske : storage.getFlasker()) {
-            if (flaske.getFlaskeNr() == flaskeNr) {
+            if (flaske.getFlaskeNr() == flaskeNr && flaske.getProdukt().getProduktNr() == produktNr) {
                 fundetFlaske = flaske;
-                break;
             }
         }
 
@@ -234,66 +229,65 @@ public class Controller {
                 .append(flaskeNr)
                 .append(" ===\n\n");
 
-        sb.append("Flaske: ")
-                .append("Nr: ")
+        sb.append("Flaske: Nr: ")
                 .append(flaskeNr)
                 .append("/")
                 .append(produkt.getFlasker().size())
                 .append("\n\n");
 
-
-
-        sb.append("Produkt: ")
-                .append("Nr: ")
-                .append(produkt.getProduktNr())
-                .append(" | ")
-                .append("VandMængde: ")
-                .append(produkt.getVandMængde())
-                .append(" | ")
-                .append("Vand oprindelse: ")
-                .append(produkt.getVandOprindelse())
-                .append(" | ")
-                .append("Alkohol procent: ")
-                .append(produkt.getAlkoholProcent())
-                .append(" | ")
-                .append("Beskrivelse: ")
-                .append(produkt.getBeskrivelse())
+        sb.append("Produkt:\n")
+                .append("  Nr: ").append(produkt.getProduktNr()).append("\n")
+                .append("  Alkohol: ").append(produkt.getAlkoholProcent()).append("%\n")
+                .append("  Vand: ").append(produkt.getVandMængde())
+                .append(" L fra ").append(produkt.getVandOprindelse()).append("\n")
+                .append("  Beskrivelse: ").append(produkt.getBeskrivelse())
                 .append("\n\n");
 
         for (WhiskySammensætning ws : produkt.getWhiskySammensætninger()) {
 
             Destillat destillat = ws.getDestillat();
 
-            sb.append("Destillat: ")
-                    .append(destillat.getDestilatNavn())
-                    .append(" | ")
-                    .append("Produceret den: ")
-                    .append(destillat.getDato())
-                    .append("\n");
+            sb.append("Destillat:\n")
+                    .append("  Navn: ").append(destillat.getDestilatNavn()).append("\n")
+                    .append("  Produceret: ").append(destillat.getDato()).append("\n")
+                    .append("  Mængde brugt i produktet: ")
+                    .append(ws.getMængdeFraDestillat()).append(" L\n");
 
-            sb.append("Mængde: ")
-                    .append(ws.getMængdeFraDestillat())
-                    .append(" L\n");
+            sb.append("  Fra destillering:\n");
+
+            for (DestilleringsMængde dm : destillat.getDestilleringsMængder()) {
+                Destillering destillering = dm.getDestillering();
+
+                sb.append("    - Destillering nr: ")
+                        .append(destillering.getDestilleringsID())
+                        .append(" (slutdato: ")
+                        .append(destillering.getSlutDato())
+                        .append(")\n");
+            }
+
+            sb.append("  Lagring på fad:\n");
 
             for (Påfyldning påfyldning : destillat.getPåfyldninger()) {
 
                 Fad fad = påfyldning.getFad();
 
-                sb.append("  Fad nr: ")
-                        .append(fad.getFadNr())
-                        .append("\n");
+                sb.append("    - Fad nr: ").append(fad.getFadNr()).append("\n")
+                        .append("      Mængde påfyldt: ")
+                        .append(påfyldning.getMængde()).append(" L\n")
+                        .append("      Tidligere indhold: ")
+                        .append(fad.getTidligereIndhold()).append("\n")
+                        .append("      Oprindelsesland: ")
+                        .append(fad.getLand()).append("\n")
+                        .append("      Påfyldningsdato: ")
+                        .append(påfyldning.getDato()).append("\n");
 
-                sb.append("  Tidligere indhold: ")
-                        .append(fad.getTidligereIndhold())
-                        .append("\n");
+                if (fad.getReol() != null) {
+                    sb.append("      Placering: ")
+                            .append(fad.getReol().getFadPlacering(fad))
+                            .append("\n");
+                }
 
-                sb.append("  Land: ")
-                        .append(fad.getLand())
-                        .append("\n");
-
-                sb.append("  Påfyldningsdato: ")
-                        .append(påfyldning.getDato())
-                        .append("\n\n");
+                sb.append("\n");
             }
         }
 

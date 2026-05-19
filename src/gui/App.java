@@ -65,5 +65,8 @@ public class App {
 
         // Whisky sammensætning
         produkt.createWhiskySammensætning(10, destillat1);
+
+        //flasker
+        controller.createFlasker(750, produkt, 10);
     }
 }
