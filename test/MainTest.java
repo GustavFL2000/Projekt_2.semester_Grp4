@@ -5,6 +5,7 @@ import storage.IStorage;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class MainTest {
 
         // Opretter et fad
         Fad fad1 = controller.createFad("Spanien",200,"Brandy", fad1Leverandør);
-        Fad fad2 = controller.createFad("Spanien",200,"Brandy", fad1Leverandør);
+        Fad fad2 = controller.createFad("Spanien",200,"Rom", fad1Leverandør);
 
 
         System.out.println();
@@ -53,8 +54,8 @@ public class MainTest {
         destillat1.createPåfyldning(100, destillering1.getSlutDato(), fad1);
         System.out.println("Fad 1 er blevet påfyldt: " + fad1.getPåfyldtMængde() + " liter");
 
-        destillat2.createPåfyldning(100, destillering2.getSlutDato(), fad1);
-        System.out.println("Fad 1 er blevet påfyldt: " + fad1.getPåfyldtMængde() + " liter");
+        destillat2.createPåfyldning(100, destillering2.getSlutDato(), fad2);
+        System.out.println("Fad 1 er blevet påfyldt: " + fad2.getPåfyldtMængde() + " liter");
 
         // Viser fadets påfyldningshistorik
         System.out.println();
@@ -125,18 +126,6 @@ public class MainTest {
         System.out.println(reol1.getAlleFade());
 
         // produkt / flaske
-        Flaske flaske = prod1.createFlaske(75);
-        Flaske flaske2 = prod1.createFlaske(75);
-
-        prod1.createFlasker(75, 10);
-        Flaske flaske3 = prod1.createFlaske(75);
-
-        System.out.println(prod1.getFlasker());
-
-        System.out.println(flaske.getFlaskeNr());
-        System.out.println(flaske2.getFlaskeNr());
-        System.out.println("Antal flasker for produkt 1: " + prod1.getFlasker().size());
-
         Lager lager2 = controller.createLager( "a", "a");
 
         // controller søgEfterFade
@@ -145,5 +134,19 @@ public class MainTest {
 
         System.out.println(lager1.getLagerNr());
         System.out.println(lager2.getLagerNr());
+
+        List<Flaske> flasker = controller.createFlasker(100,prod1,10);
+
+        for (Flaske f : flasker) {
+            System.out.println(f.getFlaskeNr());
+        }
+
+        List<Flaske> flasker1 = controller.createFlasker(100,prod2,10);
+
+        for (Flaske f : flasker1) {
+            System.out.println(f.getFlaskeNr());
+        }
+
+        System.out.println(controller.visHistorik(11));
     }
 }

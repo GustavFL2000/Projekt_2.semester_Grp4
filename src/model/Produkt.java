@@ -116,24 +116,17 @@ public class Produkt {
         return new Flaske(flaskeNr, størrelse, this);
     }
 
-    public List<Flaske> createFlasker(int størrelse, int antalFlasker) {
+    public Flaske createFlaskeMedNr(int flaskeNr, int størrelse) {
+
         if (størrelse <= 0) {
-            throw new IllegalArgumentException("Størrelsen på flasken skal værre større end 0");
+            throw new IllegalArgumentException("Størrelsen skal være større end 0");
         }
-        if (antalFlasker <= 0) {
-            throw new IllegalArgumentException("Antal flasker skal være større end 0");
-        }
-        double samletMængde = (størrelse / 1000.0) * antalFlasker;
-        if (samletMængde > getRestMængde()) {
+
+        if ((størrelse / 1000.0) > getRestMængde()) {
             throw new IllegalArgumentException("Der er ikke nok whisky");
         }
-        List<Flaske> oprettedeFlasker = new ArrayList<>();
-        for (int i = 0; i < antalFlasker; i++) {
-            int flaskeNr = flasker.size() + 1;
-            Flaske flaske = new Flaske(flaskeNr, størrelse, this);
-            oprettedeFlasker.add(flaske);
-        }
-        return oprettedeFlasker;
+
+        return new Flaske(flaskeNr, størrelse, this);
     }
 
     public int getProduktNr() {
@@ -158,12 +151,6 @@ public class Produkt {
 
     public KvalitetsStempel getKvalitetsStempel() {
         return kvalitetsStempel;
-    }
-
-    public String hentHistorie () {
-        String historie = "d";
-
-        return historie;
     }
 
     @Override

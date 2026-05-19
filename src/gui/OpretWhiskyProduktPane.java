@@ -199,7 +199,7 @@ public class OpretWhiskyProduktPane extends GridPane {
                 int størrelse = Integer.parseInt(txtFlaskeStørrelse.getText());
                 int antalFlasker = Integer.parseInt(txtAntalFlasker.getText());
 
-                produkt.createFlasker(størrelse, antalFlasker);
+                controller.createFlasker(størrelse,produkt, antalFlasker);
 
                 updateControls();
 

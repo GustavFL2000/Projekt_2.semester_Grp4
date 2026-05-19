@@ -131,11 +131,23 @@ public class Controller {
         return storage.getLeverandør();
     }
 
-    private int flaskeNr = 0;
-    public Flaske createFlasker (int størrelse, Produkt produkt, int antalFlasker){
-        Flaske flaske = (Flaske) produkt.createFlasker(størrelse, antalFlasker);
-        storage.addFlaske(flaske);
-        return flaske;
+    private int flaskeNr = 1;
+    public List<Flaske> createFlasker(int størrelse, Produkt produkt, int antalFlasker){
+
+        List<Flaske> flasker = new ArrayList<>();
+
+        for (int i = 0; i < antalFlasker; i++) {
+
+            Flaske flaske = produkt.createFlaskeMedNr(flaskeNr, størrelse);
+
+            storage.addFlaske(flaske);
+
+            flasker.add(flaske);
+
+            flaskeNr++;
+        }
+
+        return flasker;
     }
 
     public List<Flaske> getFlasker(){
@@ -195,4 +207,84 @@ public class Controller {
 
         return klareDestillater;
     }
+
+
+    public String visHistorik(int flaskeNr) {
+
+        Flaske fundetFlaske = null;
+
+        // Find flaske
+        for (Flaske flaske : storage.getFlasker()) {
+            if (flaske.getFlaskeNr() == flaskeNr) {
+                fundetFlaske = flaske;
+                break;
+            }
+        }
+
+        if (fundetFlaske == null) {
+            throw new IllegalArgumentException("Flaske findes ikke");
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("=== Historik for flaske ")
+                .append(flaskeNr)
+                .append(" ===\n\n");
+
+        Produkt produkt = fundetFlaske.getProdukt();
+
+        sb.append("Produkt: ")
+                .append("Nr: ")
+                .append(produkt.getProduktNr())
+                .append(" | ")
+                .append("VandMængde: ")
+                .append(produkt.getVandMængde())
+                .append(" | ")
+                .append("Vand oprindelse: ")
+                .append(produkt.getVandOprindelse())
+                .append(" | ")
+                .append("Alkohol procent: ")
+                .append(produkt.getAlkoholProcent())
+                .append(" | ")
+                .append("Beskrivelse: ")
+                .append(produkt.getBeskrivelse())
+                .append("\n\n");
+
+        for (WhiskySammensætning ws : produkt.getWhiskySammensætninger()) {
+
+            Destillat destillat = ws.getDestillat();
+
+            sb.append("Destillat: ")
+                    .append(destillat)
+                    .append("\n");
+
+            sb.append("Mængde: ")
+                    .append(ws.getMængdeFraDestillat())
+                    .append(" L\n");
+
+            for (Påfyldning påfyldning : destillat.getPåfyldninger()) {
+
+                Fad fad = påfyldning.getFad();
+
+                sb.append("  Fad nr: ")
+                        .append(fad.getFadNr())
+                        .append("\n");
+
+                sb.append("  Tidligere indhold: ")
+                        .append(fad.getTidligereIndhold())
+                        .append("\n");
+
+                sb.append("  Land: ")
+                        .append(fad.getLand())
+                        .append("\n");
+
+                sb.append("  Påfyldningsdato: ")
+                        .append(påfyldning.getDato())
+                        .append("\n\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
 }
