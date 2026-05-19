@@ -89,14 +89,12 @@ public class Produkt {
         return sum;
     }
 
-    // Beregner hvor meget whisky der er tilbage i produktet (destillat + vand - flasker)
+    // Beregner hvor meget whisky der er tilbage af produktet
     public double getRestMængde() {
         return getWhiskySammensætniger() - getBrugtTilFlasker() + vandMængde;
     }
 
     //Flaske metoder
-
-
     public List<Flaske> getFlasker() {
         return new ArrayList<>(flasker);
     }
@@ -160,6 +158,12 @@ public class Produkt {
 
     public KvalitetsStempel getKvalitetsStempel() {
         return kvalitetsStempel;
+    }
+
+    public String hentHistorie () {
+        String historie = "d";
+
+        return historie;
     }
 
     @Override
