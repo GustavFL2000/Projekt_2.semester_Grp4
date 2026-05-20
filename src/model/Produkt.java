@@ -116,18 +116,6 @@ public class Produkt {
         return new Flaske(flaskeNr, størrelse, this);
     }
 
-    public Flaske createFlaskeMedNr(int flaskeNr, int størrelse) {
-
-        if (størrelse <= 0) {
-            throw new IllegalArgumentException("Størrelsen skal være større end 0");
-        }
-
-        if ((størrelse / 1000.0) > getRestMængde()) {
-            throw new IllegalArgumentException("Der er ikke nok whisky");
-        }
-
-        return new Flaske(flaskeNr, størrelse, this);
-    }
 
     public int getProduktNr() {
         return produktNr;
@@ -147,10 +135,6 @@ public class Produkt {
 
     public String getBeskrivelse() {
         return beskrivelse;
-    }
-
-    public KvalitetsStempel getKvalitetsStempel() {
-        return kvalitetsStempel;
     }
 
     @Override

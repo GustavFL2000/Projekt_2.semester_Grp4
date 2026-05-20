@@ -18,11 +18,9 @@ public class Reol {
         if (reolNr <= 0) {
             throw new IllegalArgumentException("Nummer skal være større end 0");
         }
-
         if (lager == null) {
             throw new IllegalArgumentException("Der skal være et lager valgt");
         }
-
         this.reolNr = reolNr;
         this.lager = lager;
 
@@ -30,19 +28,14 @@ public class Reol {
     }
 
     public int getLedigePladser() {
-
         int count = 0;
-
         for (int h = 0; h < hylder.length; h++) {
-
             for (int p = 0; p < hylder[h].length; p++) {
-
                 if (hylder[h][p] == null) {
                     count++;
                 }
             }
         }
-
         return count;
     }
 
@@ -86,14 +79,10 @@ public class Reol {
         }
 
         for (int h = 0; h < hylder.length; h++) {
-
             for (int p = 0; p < hylder[h].length; p++) {
-
                 if (hylder[h][p] == fad) {
-
                     hylder[h][p] = null;
                     fad.setReol(null);
-
                     return;
                 }
             }

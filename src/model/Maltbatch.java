@@ -15,14 +15,6 @@ public class Maltbatch {
         this.kornsort = kornsort;
     }
 
-    public int getBatchNr() {
-        return batchNr;
-    }
-
-    public Kornsort getKornsort() {
-        return kornsort;
-    }
-
     @Override
     public String toString() {
         return batchNr + " " + kornsort.toString();

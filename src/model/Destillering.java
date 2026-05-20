@@ -44,10 +44,6 @@ public class Destillering {
     }
 
     //DestilleringsMængde metoder
-    public List<DestilleringsMængde> getDestilleringsMængder() {
-        return new ArrayList<>(destilleringsMængder);
-    }
-
     void addDestilleringsMængde(DestilleringsMængde destilleringsMængde) {
         if (!destilleringsMængder.contains(destilleringsMængde)) {
             destilleringsMængder.add(destilleringsMængde);
