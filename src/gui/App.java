@@ -29,7 +29,7 @@ public class App {
         // Destillering
         Destillering destillering1 = controller.createDestillering(LocalDate.of(2022, 11, 4), LocalDate.of(2022, 11, 5), 70, false, "Ny november batch", 50, maltbatch);
 
-        Destillering destillering2 = controller.createDestillering(LocalDate.of(2026, 5, 13), LocalDate.of(2026, 5, 14), 70, false, "Ny maj batch", 50, maltbatch2);
+        Destillering destillering2 = controller.createDestillering(LocalDate.of(2026, 5, 13), LocalDate.of(2026, 5, 14), 70, false, "Ny maj batch", 100, maltbatch2);
 
         // Destillater
         Destillat destillat1 = controller.createDestillat("Destillat 1", destillering1.getSlutDato(), 70);
@@ -37,13 +37,13 @@ public class App {
 
         // Destilleringsmængder
         controller.createDestilleringsMængde(50, destillering1, destillat1);
-        controller.createDestilleringsMængde(50, destillering2, destillat2);
+        controller.createDestilleringsMængde(100, destillering2, destillat2);
 
         // Leverandør og fade
         Leverandør leverandør = controller.createLeverandør("Bo´s fade", "Italien", "25342123");
 
-        Fad fad1 = controller.createFad("Spanien", 50, "Cherry", leverandør);
-        Fad fad2 = controller.createFad("Spanien", 100, "Cherry", leverandør);
+        Fad fad1 = controller.createFad("Spanien", 50, "Sherry", leverandør);
+        Fad fad2 = controller.createFad("Spanien", 100, "Sherry", leverandør);
 
         // Påfyldninger
         // Klar til produkt
@@ -60,13 +60,13 @@ public class App {
         reol1.placerFad(fad1, 0, 0);
         reol1.placerFad(fad2, 0, 1);
 
-        // Produkt
-        Produkt produkt = controller.createProdukt(10, 45, "God whisky", KvalitetsStempel.SINGLE_MALT);
-
-        // Whisky sammensætning
-        controller.createWhiskySammensætning(10, produkt,destillat1);
-
-        //flasker
-        controller.createFlasker(750, produkt, 10);
+//        // Produkt
+//        Produkt produkt = controller.createProdukt(10, 45, "God whisky", KvalitetsStempel.SINGLE_MALT);
+//
+//        // Whisky sammensætning
+//        controller.createWhiskySammensætning(10, produkt,destillat1);
+//
+//        //flasker
+//        controller.createFlasker(750, produkt, 10);
     }
 }
