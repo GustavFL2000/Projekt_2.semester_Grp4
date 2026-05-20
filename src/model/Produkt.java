@@ -48,7 +48,7 @@ public class Produkt {
         return new ArrayList<>(whiskySammensætninger);
     }
 
-    void addWhiskySammensætning(WhiskySammensætning whiskySammensætning) {
+    public void addWhiskySammensætning(WhiskySammensætning whiskySammensætning) {
         if (!whiskySammensætninger.contains(whiskySammensætning)) {
             whiskySammensætninger.add(whiskySammensætning);
         }
@@ -99,7 +99,7 @@ public class Produkt {
         return new ArrayList<>(flasker);
     }
 
-    void addFlaske(Flaske flaske) {
+    public void addFlaske(Flaske flaske) {
         if (!flasker.contains(flaske)) {
             flasker.add(flaske);
         }
