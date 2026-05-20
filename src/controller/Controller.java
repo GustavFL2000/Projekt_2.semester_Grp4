@@ -3,7 +3,6 @@ package controller;
 import model.*;
 import storage.IStorage;
 
-import javax.swing.text.html.ListView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +135,20 @@ public class Controller {
 
         List<Flaske> flasker = new ArrayList<>();
 
+        if (produkt == null) {
+            throw new IllegalArgumentException("Produkt skal vælges");
+        }
+        if (størrelse <= 0) {
+            throw new IllegalArgumentException("Størrelse skal være større end 0");
+        }
+        if (antalFlasker <= 0) {
+            throw new IllegalArgumentException("Antal flasker skal være større end 0");
+        }
+        double samletMængde = (størrelse / 1000.0) * antalFlasker;
+        if (samletMængde > produkt.getRestMængde()) {
+            throw new IllegalArgumentException("Der er ikke nok whisky");
+        }
+
         for (int i = 0; i < antalFlasker; i++) {
 
             Flaske flaske = produkt.createFlaske(størrelse);
@@ -150,6 +163,10 @@ public class Controller {
 
     public List<Flaske> getFlasker(){
         return storage.getFlasker();
+    }
+
+    public WhiskySammensætning createWhiskySammensætning (double mængdeFraDestillat, Produkt produkt, Destillat destillat){
+        return produkt.createWhiskySammensætning(mængdeFraDestillat, destillat);
     }
 
     public List<Fad> søgEfterFade(Integer fadNr, Lager lager, String tidligereIndhold, Integer alder) {

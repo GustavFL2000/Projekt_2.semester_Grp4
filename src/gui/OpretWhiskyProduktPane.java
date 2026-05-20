@@ -139,11 +139,8 @@ public class OpretWhiskyProduktPane extends GridPane {
                     throw new IllegalArgumentException("Vælg et destillat");
                 }
 
-                produkt.createWhiskySammensætning(mængde, destillat);
+                controller.createWhiskySammensætning(mængde, produkt, destillat);
 
-
-                cobProduktTilSammensætning.setItems(null);
-                cobDestillater.setItems(null);
                 txtMængdeFraDestillat.clear();
 
                 updateControls();
@@ -205,10 +202,8 @@ public class OpretWhiskyProduktPane extends GridPane {
                 int størrelse = Integer.parseInt(txtFlaskeStørrelse.getText());
                 int antalFlasker = Integer.parseInt(txtAntalFlasker.getText());
 
-                controller.createFlasker(størrelse,produkt, antalFlasker);
+                controller.createFlasker(størrelse, produkt, antalFlasker);
 
-
-                cobProduktTilFlasker.setItems(null);
                 txtFlaskeStørrelse.clear();
                 txtAntalFlasker.clear();
                 updateControls();
@@ -257,7 +252,7 @@ public class OpretWhiskyProduktPane extends GridPane {
         TextField txtFlaskeNr = new TextField();
         this.add(txtFlaskeNr, 6, 4);
 
-        Button btnFlaskeHistorik = new Button("vis historik");
+        Button btnFlaskeHistorik = new Button("Vis historik");
         this.add(btnFlaskeHistorik, 6, 5);
 
         TextArea txaHistorik = new TextArea();
@@ -282,7 +277,7 @@ public class OpretWhiskyProduktPane extends GridPane {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Fejl");
                 alert.setHeaderText("Ugyldigt tal");
-                alert.setContentText("Flaske nummeret skal være et hel tal.");
+                alert.setContentText("Flaskenummeret skal være et helt tal.");
                 alert.showAndWait();
 
             } catch (IllegalArgumentException e) {
@@ -293,9 +288,6 @@ public class OpretWhiskyProduktPane extends GridPane {
                 alert.showAndWait();
             }
         });
-
-
-
     }
 
     public void updateControls() {
