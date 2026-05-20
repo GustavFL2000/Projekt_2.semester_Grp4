@@ -33,7 +33,7 @@ public class Produkt {
         }
 
         if (kvalitetsStempel == null) {
-            throw new IllegalArgumentException("Kvalitetsstempel skal vælges");
+            throw new IllegalArgumentException("Kvalitetsstempel må ikke være null");
         }
         this.produktNr = produktNr;
         this.vandMængde = vandMængde;
@@ -57,13 +57,13 @@ public class Produkt {
 
     public WhiskySammensætning createWhiskySammensætning(double mængdeFraDestillat, Destillat destillat) {
         if (destillat == null) {
-            throw new IllegalArgumentException("Destillat må ikke være tom");
+            throw new IllegalArgumentException("Destillat må ikke være null");
         }
         if (mængdeFraDestillat <= 0) {
             throw new IllegalArgumentException("Mængde skal være større end 0");
         }
         if (!destillat.harNokTilProdukt(mængdeFraDestillat, LocalDate.now())) {
-            throw new IllegalArgumentException("Der er ikke nok tilgængeligt destillat");
+            throw new IllegalArgumentException("Der er ikke nok whisky i fadet");
         }
 
         return new WhiskySammensætning(mængdeFraDestillat, this, destillat);
