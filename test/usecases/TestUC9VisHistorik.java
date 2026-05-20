@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class TestUC9VisHistorik{
+class TestUC9VisHistorik {
 
     private IStorage storage;
     private Controller controller;
@@ -61,18 +61,25 @@ class TestUC9VisHistorik{
         when(destillat.getPåfyldninger())
                 .thenReturn(List.of(påfyldning));
 
+        when(destillat.getDestilleringsMængder())
+                .thenReturn(new ArrayList<>());
+
         when(påfyldning.getFad()).thenReturn(fad);
         when(påfyldning.getDato())
                 .thenReturn(LocalDate.of(2021, 1, 1));
+        when(påfyldning.getMængde())
+                .thenReturn(5.0);
 
         when(fad.getFadNr()).thenReturn(99);
         when(fad.getTidligereIndhold()).thenReturn("Sherry");
         when(fad.getLand()).thenReturn("Spanien");
 
+        when(fad.getReol()).thenReturn(null);
+
         when(storage.getFlasker()).thenReturn(List.of(flaske));
 
         // Act
-        String resultat = controller.visHistorik(1);
+        String resultat = controller.visHistorik(1, 10);
 
         // Assert
         assertTrue(resultat.contains("Historik for flaske 1"));
@@ -92,7 +99,7 @@ class TestUC9VisHistorik{
         // Act + Assert
         IllegalArgumentException exception =
                 assertThrows(IllegalArgumentException.class,
-                        () -> controller.visHistorik(1));
+                        () -> controller.visHistorik(1, 10));
 
         assertEquals("Flaske findes ikke", exception.getMessage());
     }
