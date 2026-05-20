@@ -63,6 +63,14 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         btnOpretProdukt.setOnAction(event -> {
             try {
+                if (txtVandMængde.getText().isBlank()) {
+                    throw new IllegalArgumentException("Vandmængde skal udfyldes");
+                }
+
+                if (txtAlkoholProcent.getText().isBlank()) {
+                    throw new IllegalArgumentException("Alkoholprocent skal udfyldes");
+                }
+
                 double vandMængde = Double.parseDouble(txtVandMængde.getText());
                 double alkoholProcent = Double.parseDouble(txtAlkoholProcent.getText());
                 String beskrivelse = txtBeskrivelse.getText();
@@ -257,7 +265,7 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         TextArea txaHistorik = new TextArea();
         txaHistorik.setEditable(false);
-        txaHistorik.setPrefHeight(300);
+        txaHistorik.setPrefHeight(450);
         this.add(txaHistorik, 6, 6,1,10);
 
         btnFlaskeHistorik.setOnAction(event -> {

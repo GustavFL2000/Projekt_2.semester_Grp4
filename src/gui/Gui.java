@@ -93,7 +93,7 @@ public class Gui extends Application {
                 tabLager
         );
 
-        Scene scene = new Scene(tabPane, 1100, 700);
+        Scene scene = new Scene(tabPane, 1300, 700);
 
         stage.setScene(scene);
         stage.show();
