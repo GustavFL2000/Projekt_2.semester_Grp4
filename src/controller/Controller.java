@@ -54,18 +54,6 @@ public class Controller {
         return storage.getFade();
     }
 
-    public List<Fad> getFadeKlarTilAftapning() {
-        List<Fad> klarFade = new ArrayList<>();
-
-        for (Fad fad : storage.getFade()) {
-            if (fad.erKlarTilAftapning(LocalDate.now())) {
-                klarFade.add(fad);
-            }
-        }
-
-        return klarFade;
-    }
-
     //Destillat
     public Destillat createDestillat(String destilatNavn, LocalDate dato, double alkoholProcent) {
         Destillat destillat = new Destillat(destilatNavn, dato, alkoholProcent);
