@@ -104,14 +104,6 @@ public class Fad {
         return land;
     }
 
-    public String getTræSort() {
-        return træSort;
-    }
-
-    public double getStørrelse() {
-        return størrelse;
-    }
-
     public String getTidligereIndhold() {
         return tidligereIndhold;
     }

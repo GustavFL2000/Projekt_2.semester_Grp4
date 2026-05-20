@@ -27,9 +27,6 @@ public class Leverandør {
         this.kontaktInfo = kontaktInfo;
     }
 
-    public List<Fad> getFade() {
-        return new ArrayList<>(fade);
-    }
 
      void addFad (Fad fad) {
         if (!fade.contains(fad)) {

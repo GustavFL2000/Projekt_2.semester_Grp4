@@ -73,14 +73,6 @@ public class Lager {
         return lagerNavn;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public LocalDate getOprettelsesDato() {
-        return oprettelsesDato;
-    }
-
     public int getLagerNr() {
         return lagerNr;
     }
