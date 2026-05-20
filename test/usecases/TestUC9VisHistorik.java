@@ -25,7 +25,7 @@ class TestUC9VisHistorik {
     }
 
     @org.junit.jupiter.api.Test
-    void visHistorik_returnererHistorik() {
+    void visHistorik_returnererHistorik_87() {
 
         // Arrange
         Produkt produkt = mock(Produkt.class);
@@ -91,7 +91,7 @@ class TestUC9VisHistorik {
     }
 
     @org.junit.jupiter.api.Test
-    void visHistorik_kasterExceptionHvisFlaskeIkkeFindes() {
+    void visHistorik_kasterExceptionHvisFlaskeIkkeFindes_tc90() {
 
         // Arrange
         when(storage.getFlasker()).thenReturn(new ArrayList<>());
