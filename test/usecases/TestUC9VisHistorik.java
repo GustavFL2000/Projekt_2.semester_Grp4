@@ -50,25 +50,20 @@ class TestUC9VisHistorik {
 
         when(produkt.getFlasker()).thenReturn(produktFlasker);
 
-        when(produkt.getWhiskySammensætninger())
-                .thenReturn(List.of(ws));
+        when(produkt.getWhiskySammensætninger()).thenReturn(List.of(ws));
 
         when(ws.getDestillat()).thenReturn(destillat);
         when(ws.getMængdeFraDestillat()).thenReturn(5.0);
 
         when(destillat.getDestilatNavn()).thenReturn("Destillat A");
         when(destillat.getDato()).thenReturn(LocalDate.of(2020, 1, 1));
-        when(destillat.getPåfyldninger())
-                .thenReturn(List.of(påfyldning));
+        when(destillat.getPåfyldninger()).thenReturn(List.of(påfyldning));
 
-        when(destillat.getDestilleringsMængder())
-                .thenReturn(new ArrayList<>());
+        when(destillat.getDestilleringsMængder()).thenReturn(new ArrayList<>());
 
         when(påfyldning.getFad()).thenReturn(fad);
-        when(påfyldning.getDato())
-                .thenReturn(LocalDate.of(2021, 1, 1));
-        when(påfyldning.getMængde())
-                .thenReturn(5.0);
+        when(påfyldning.getDato()).thenReturn(LocalDate.of(2021, 1, 1));
+        when(påfyldning.getMængde()).thenReturn(5.0);
 
         when(fad.getFadNr()).thenReturn(99);
         when(fad.getTidligereIndhold()).thenReturn("Sherry");
@@ -97,9 +92,7 @@ class TestUC9VisHistorik {
         when(storage.getFlasker()).thenReturn(new ArrayList<>());
 
         // Act + Assert
-        IllegalArgumentException exception =
-                assertThrows(IllegalArgumentException.class,
-                        () -> controller.visHistorik(1, 10));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> controller.visHistorik(1, 10));
 
         assertEquals("Flaske findes ikke", exception.getMessage());
     }
