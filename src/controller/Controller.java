@@ -17,6 +17,7 @@ public class Controller {
 
     //Destillering
     private int destilleringsID = 1;
+
     public Destillering createDestillering(LocalDate startDato, LocalDate slutDato, double alkoholProcent, boolean rygematriale, String kommentar, double væskeMængde, Maltbatch maltbatch) {
         Destillering destillering = new Destillering(destilleringsID, startDato, slutDato, alkoholProcent, rygematriale, kommentar, væskeMængde, maltbatch);
         destilleringsID++;
@@ -30,19 +31,21 @@ public class Controller {
 
     //Produkt
     private int produktNr = 1;
-    public Produkt createProdukt( double vandMængde , double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
+
+    public Produkt createProdukt(double vandMængde, double alkoholProcent, String beskrivelse, KvalitetsStempel kvalitetsStempel) {
         Produkt produkt = new Produkt(produktNr, vandMængde, alkoholProcent, beskrivelse, kvalitetsStempel);
         produktNr++;
         storage.addProdukt(produkt);
         return produkt;
     }
 
-    public List<Produkt> getProdukter(){
-        return  storage.getProdukter();
+    public List<Produkt> getProdukter() {
+        return storage.getProdukter();
     }
 
     //Fade
     private int fadNr = 1;
+
     public Fad createFad(String land, double størrelse, String tidligereIndhold, Leverandør leverandør) {
         Fad fad = new Fad(fadNr, land, størrelse, tidligereIndhold, leverandør);
         fadNr++;
@@ -54,18 +57,6 @@ public class Controller {
         return storage.getFade();
     }
 
-    public List<Fad> getFadeKlarTilAftapning() {
-        List<Fad> klarFade = new ArrayList<>();
-
-        for (Fad fad : storage.getFade()) {
-            if (fad.erKlarTilAftapning(LocalDate.now())) {
-                klarFade.add(fad);
-            }
-        }
-
-        return klarFade;
-    }
-
     //Destillat
     public Destillat createDestillat(String destilatNavn, LocalDate dato, double alkoholProcent) {
         Destillat destillat = new Destillat(destilatNavn, dato, alkoholProcent);
@@ -73,22 +64,23 @@ public class Controller {
         return destillat;
     }
 
-    public List<Destillat> getDestillater(){
+    public List<Destillat> getDestillater() {
         return storage.getDestillater();
     }
 
     //DestilleringsMængde
-    public DestilleringsMængde createDestilleringsMængde (double mængde, Destillering destillering, Destillat destillat){
+    public DestilleringsMængde createDestilleringsMængde(double mængde, Destillering destillering, Destillat destillat) {
         return destillering.createDestilleringsMængde(mængde, destillat);
     }
 
     //PåfyldningsMængde
-    public Påfyldning createPåfyldning (double mængdeFraDestillat, LocalDate dato, Destillat destillat, Fad fad){
+    public Påfyldning createPåfyldning(double mængdeFraDestillat, LocalDate dato, Destillat destillat, Fad fad) {
         return destillat.createPåfyldning(mængdeFraDestillat, dato, fad);
     }
 
     //lager
     private int lagerIdCount = 1;
+
     public Lager createLager(String lagerNavn, String adresse) {
         Lager lager = new Lager(lagerIdCount, lagerNavn, adresse);
         lagerIdCount++;
@@ -102,36 +94,37 @@ public class Controller {
         return lager;
     }
 
-    public List<Lager> getLager(){
+    public List<Lager> getLager() {
         return storage.getLagerListe();
     }
 
     //MaltBatch
     private int batchNr = 1;
-    public Maltbatch createMaltBatch (Kornsort kornsort){
+
+    public Maltbatch createMaltBatch(Kornsort kornsort) {
         Maltbatch maltbatch = new Maltbatch(batchNr, kornsort);
         batchNr++;
         storage.addMaltbatch(maltbatch);
         return maltbatch;
     }
 
-    public List<Maltbatch> getMaltbatches(){
+    public List<Maltbatch> getMaltbatches() {
         return storage.getMaltbatch();
     }
 
     //Leverandør
-    public Leverandør createLeverandør (String navn, String land, String kontaktInfo){
+    public Leverandør createLeverandør(String navn, String land, String kontaktInfo) {
         Leverandør leverandør = new Leverandør(navn, land, kontaktInfo);
         storage.addLeverandør(leverandør);
         return leverandør;
     }
 
-    public List<Leverandør> getLeverandører(){
+    public List<Leverandør> getLeverandører() {
         return storage.getLeverandør();
     }
 
 
-    public List<Flaske> createFlasker(int størrelse, Produkt produkt, int antalFlasker){
+    public List<Flaske> createFlasker(int størrelse, Produkt produkt, int antalFlasker) {
 
         List<Flaske> flasker = new ArrayList<>();
 
@@ -161,11 +154,7 @@ public class Controller {
         return flasker;
     }
 
-    public List<Flaske> getFlasker(){
-        return storage.getFlasker();
-    }
-
-    public WhiskySammensætning createWhiskySammensætning (double mængdeFraDestillat, Produkt produkt, Destillat destillat){
+    public WhiskySammensætning createWhiskySammensætning(double mængdeFraDestillat, Produkt produkt, Destillat destillat) {
         return produkt.createWhiskySammensætning(mængdeFraDestillat, destillat);
     }
 
@@ -180,8 +169,8 @@ public class Controller {
             if (fadNr != null && fad.getFadNr() != fadNr) {
                 matcher = false;
             }
-            if (lager != null ) {
-                if (fad.getReol() == null || fad.getReol().getLager() != lager){
+            if (lager != null) {
+                if (fad.getReol() == null || fad.getReol().getLager() != lager) {
                     matcher = false;
                 }
             }
@@ -190,8 +179,8 @@ public class Controller {
                     matcher = false;
                 }
             }
-            if (alder != null ){
-                if (fad.getPåfyldninger().isEmpty()){
+            if (alder != null) {
+                if (fad.getPåfyldninger().isEmpty()) {
                     matcher = false;
                 } else {
                     LocalDate sidsteDato = fad.getPåfyldninger().getLast().getDato();
@@ -310,5 +299,4 @@ public class Controller {
 
         return sb.toString();
     }
-
 }

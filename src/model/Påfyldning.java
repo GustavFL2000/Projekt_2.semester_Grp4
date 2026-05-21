@@ -14,7 +14,7 @@ public class Påfyldning {
         if (destillat == null) {
             throw new IllegalArgumentException("Destillat må ikke være null");
         }
-        if (dato == null){
+        if (dato == null) {
             throw new IllegalArgumentException("Dato må ikke være null");
         }
         if (fad == null) {

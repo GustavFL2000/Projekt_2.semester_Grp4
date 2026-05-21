@@ -37,8 +37,8 @@ public class Gui extends Application {
 
         //Opdaterer comboBoxne når du trykker på tabben for destillat pane
         tabDestillat.setOnSelectionChanged(event -> {
-            if (tabDestillat.isSelected()){
-             opretDestillatPane.updateControls();
+            if (tabDestillat.isSelected()) {
+                opretDestillatPane.updateControls();
             }
         });
 
@@ -49,7 +49,7 @@ public class Gui extends Application {
 
         //Opdaterer listview når du trykker på tabben for destillat pane
         tabFad.setOnSelectionChanged(event -> {
-            if (tabFad.isSelected()){
+            if (tabFad.isSelected()) {
                 fadPane.updateControls();
             }
         });
@@ -71,7 +71,7 @@ public class Gui extends Application {
         tabLager.setContent(lagerPane);
 
         tabLager.setOnSelectionChanged(event -> {
-            if (tabLager.isSelected()){
+            if (tabLager.isSelected()) {
                 lagerPane.updateControls();
             }
         });
@@ -93,7 +93,7 @@ public class Gui extends Application {
                 tabLager
         );
 
-        Scene scene = new Scene(tabPane, 1100, 700);
+        Scene scene = new Scene(tabPane, 1300, 700);
 
         stage.setScene(scene);
         stage.show();

@@ -63,6 +63,14 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         btnOpretProdukt.setOnAction(event -> {
             try {
+                if (txtVandMængde.getText().isBlank()) {
+                    throw new IllegalArgumentException("Vandmængde skal udfyldes");
+                }
+
+                if (txtAlkoholProcent.getText().isBlank()) {
+                    throw new IllegalArgumentException("Alkoholprocent skal udfyldes");
+                }
+
                 double vandMængde = Double.parseDouble(txtVandMængde.getText());
                 double alkoholProcent = Double.parseDouble(txtAlkoholProcent.getText());
                 String beskrivelse = txtBeskrivelse.getText();
@@ -210,10 +218,10 @@ public class OpretWhiskyProduktPane extends GridPane {
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succes");
-                if(antalFlasker == 1){
+                if (antalFlasker == 1) {
                     alert.setHeaderText("Flaske oprettet");
                     alert.setContentText(antalFlasker + " flaske blev oprettet.");
-                }else {
+                } else {
                     alert.setHeaderText("Flasker oprettet");
                     alert.setContentText(antalFlasker + " flasker blev oprettet.");
                 }
@@ -236,7 +244,7 @@ public class OpretWhiskyProduktPane extends GridPane {
         });
     }
 
-    public void visFlaskeHistorik(){
+    public void visFlaskeHistorik() {
         Label lblTitel = new Label("Flaske Historik");
         this.add(lblTitel, 6, 0);
 
@@ -245,7 +253,7 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         cobProduktTilHistorik = new ComboBox<>();
         cobProduktTilHistorik.setMaxWidth(300);
-        this.add(cobProduktTilHistorik, 6,2);
+        this.add(cobProduktTilHistorik, 6, 2);
 
         Label lblFlaskeNr = new Label("Indtast flaskenr");
         this.add(lblFlaskeNr, 6, 3);
@@ -257,8 +265,8 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         TextArea txaHistorik = new TextArea();
         txaHistorik.setEditable(false);
-        txaHistorik.setPrefHeight(300);
-        this.add(txaHistorik, 6, 6,1,10);
+        txaHistorik.setPrefHeight(450);
+        this.add(txaHistorik, 6, 6, 1, 10);
 
         btnFlaskeHistorik.setOnAction(event -> {
             try {
@@ -301,7 +309,7 @@ public class OpretWhiskyProduktPane extends GridPane {
 
         cobProduktTilHistorik.setItems
                 (FXCollections.observableArrayList(controller.getProdukter())
-        );
+                );
 
         cobDestillater.setItems(
                 FXCollections.observableArrayList(controller.getDestillaterKlarTilProdukt())

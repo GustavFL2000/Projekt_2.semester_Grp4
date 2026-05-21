@@ -71,10 +71,6 @@ public class Destillat {
     }
 
     // Whiskysammensætning metoder
-    public List<WhiskySammensætning> getWhiskySammensætninger() {
-        return new ArrayList<>(whiskySammensætninger);
-    }
-
     void addWhiskySammensætning(WhiskySammensætning whiskySammensætning) {
         if (!whiskySammensætninger.contains(whiskySammensætning)) {
             whiskySammensætninger.add(whiskySammensætning);

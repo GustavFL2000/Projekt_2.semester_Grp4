@@ -28,7 +28,7 @@ public class Destillering {
             throw new IllegalArgumentException("Slutdato må ikke være før startdato");
         if (alkoholProcent <= 0 || alkoholProcent > 100)
             throw new IllegalArgumentException("Alkoholprocent skal være mellem 0 og 100");
-        if (væskeMængde <= 0 )
+        if (væskeMængde <= 0)
             throw new IllegalArgumentException("Væskemængde skal være større end 0");
         if (maltbatch == null)
             throw new IllegalArgumentException("Maltbatch skal vælges");
@@ -44,10 +44,6 @@ public class Destillering {
     }
 
     //DestilleringsMængde metoder
-    public List<DestilleringsMængde> getDestilleringsMængder() {
-        return new ArrayList<>(destilleringsMængder);
-    }
-
     void addDestilleringsMængde(DestilleringsMængde destilleringsMængde) {
         if (!destilleringsMængder.contains(destilleringsMængde)) {
             destilleringsMængder.add(destilleringsMængde);
