@@ -37,6 +37,4 @@ public class WhiskySammensætning {
     public Destillat getDestillat() {
         return destillat;
     }
-
-
 }

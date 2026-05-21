@@ -13,7 +13,7 @@ public class Reol {
     // Composition --> 1 Lager
     private Lager lager;
 
-     Reol(int reolNr, Lager lager) {
+    Reol(int reolNr, Lager lager) {
 
         if (reolNr <= 0) {
             throw new IllegalArgumentException("Nummer skal være større end 0");

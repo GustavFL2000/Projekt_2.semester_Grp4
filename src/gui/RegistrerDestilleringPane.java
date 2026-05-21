@@ -25,15 +25,15 @@ public class RegistrerDestilleringPane extends GridPane {
 
         // StartDato
         Label lblStartDato = new Label("Vælg start dato");
-        this.add(lblStartDato,0, 1);
+        this.add(lblStartDato, 0, 1);
         DatePicker dpStartDato = new DatePicker();
-        this.add(dpStartDato, 0,2);
+        this.add(dpStartDato, 0, 2);
 
         //Slutdato
         Label lblslutDato = new Label("Vælg slut dato");
-        this.add(lblslutDato,0, 3);
+        this.add(lblslutDato, 0, 3);
         DatePicker dpSlutDato = new DatePicker();
-        this.add(dpSlutDato, 0,4);
+        this.add(dpSlutDato, 0, 4);
 
         //AlkoholProcent
         Label lblAlkoholProcent = new Label("Indtast alkoholprocent");
@@ -66,8 +66,8 @@ public class RegistrerDestilleringPane extends GridPane {
 
         //Opret knap
         Button btnOpretKnap = new Button("Opret destillering");
-        this.add(btnOpretKnap,0, 14);
-        btnOpretKnap.setOnAction(event ->{
+        this.add(btnOpretKnap, 0, 14);
+        btnOpretKnap.setOnAction(event -> {
             try {
                 LocalDate startDato = dpStartDato.getValue();
                 LocalDate sluttDato = dpSlutDato.getValue();

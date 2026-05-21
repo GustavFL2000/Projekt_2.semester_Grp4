@@ -34,36 +34,24 @@ public class LagerPane extends GridPane {
         // Liste med lagre
         lagerlist = new ListView<>();
 
-        lagerlist.setItems(
-                FXCollections.observableArrayList(
-                        controller.getLager()
-                )
-        );
+        lagerlist.setItems(FXCollections.observableArrayList(controller.getLager()));
 
         this.add(lagerlist, 2, 1, 1, 10);
 
         // Når man vælger et lager
-        lagerlist.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldLager, selectedLager) -> {
+        lagerlist.getSelectionModel().selectedItemProperty().addListener((observable, oldLager, selectedLager) -> {
 
-                    if (selectedLager != null) {
+            if (selectedLager != null) {
 
-                        // Vis reoler fra valgt lager
-                        reolList.setItems(
-                                FXCollections.observableArrayList(
-                                        selectedLager.getReoler()
-                                )
-                        );
-                    }
-                });
+                // Vis reoler fra valgt lager
+                reolList.setItems(FXCollections.observableArrayList(selectedLager.getReoler()));
+            }
+        });
     }
 
     public void placerFadpåLager() {
 
-        // =========================
         // VÆLG FAD
-        // =========================
-
         Label lblFad = new Label("Vælg fad");
         this.add(lblFad, 4, 0);
 
@@ -71,50 +59,34 @@ public class LagerPane extends GridPane {
         cobFad.setItems(FXCollections.observableArrayList(controller.getFade()));
         this.add(cobFad, 4, 1);
 
-        // =========================
-        // REOL LISTE
-        // =========================
 
+        // REOL LISTE
         Label lblReol = new Label("Vælg reol");
         this.add(lblReol, 3, 0);
 
         reolList = new ListView<>();
         this.add(reolList, 3, 1, 1, 10);
 
-        // =========================
-        // VÆLG HYLDE
-        // =========================
 
+        // VÆLG HYLDE
         Label lblHylde = new Label("Vælg hylde");
         this.add(lblHylde, 4, 2);
 
         cbHylde = new ComboBox<>();
-        cbHylde.setItems(FXCollections.observableArrayList(
-                "Hylde 1",
-                "Hylde 2",
-                "Hylde 3"
-        ));
+        cbHylde.setItems(FXCollections.observableArrayList("Hylde 1", "Hylde 2", "Hylde 3"));
         this.add(cbHylde, 4, 3);
 
-        // =========================
-        // VÆLG PLADS
-        // =========================
 
+        // VÆLG PLADS
         Label lblPlads = new Label("Vælg plads");
         this.add(lblPlads, 4, 4);
 
         cbPlads = new ComboBox<>();
-        cbPlads.setItems(FXCollections.observableArrayList(
-                "Plads 1",
-                "Plads 2",
-                "Plads 3"
-        ));
+        cbPlads.setItems(FXCollections.observableArrayList("Plads 1", "Plads 2", "Plads 3"));
         this.add(cbPlads, 4, 5);
 
-        // =========================
-        // KNAP
-        // =========================
 
+        // KNAP
         Button btnPlacerFad = new Button("Placer fad");
         this.add(btnPlacerFad, 4, 6);
 
@@ -128,12 +100,8 @@ public class LagerPane extends GridPane {
                 String hyldeString = cbHylde.getSelectionModel().getSelectedItem();
                 String pladsString = cbPlads.getSelectionModel().getSelectedItem();
 
-                if (fad == null || reol == null ||
-                        hyldeString == null || pladsString == null) {
-
-                    throw new IllegalArgumentException(
-                            "Du skal vælge fad, reol, hylde og plads"
-                    );
+                if (fad == null || reol == null || hyldeString == null || pladsString == null) {
+                    throw new IllegalArgumentException("Du skal vælge fad, reol, hylde og plads");
                 }
 
                 // Finder nummer fra tekst
@@ -150,12 +118,7 @@ public class LagerPane extends GridPane {
                 alert.setTitle("Succes");
                 alert.setHeaderText("Fad placeret");
 
-                alert.setContentText(
-                        "Fadet er nu placeret:\n\n" +
-                                "Lager: " + lagerNavn + "\n" +
-                                "Reol: " + reol.getReolNr() + "\n" +
-                                "Placering: " + hyldeString + ", " + pladsString
-                );
+                alert.setContentText("Fadet er nu placeret:\n\n" + "Lager: " + lagerNavn + "\n" + "Reol: " + reol.getReolNr() + "\n" + "Placering: " + hyldeString + ", " + pladsString);
 
                 alert.showAndWait();
 
@@ -169,6 +132,7 @@ public class LagerPane extends GridPane {
             }
         });
     }
+
     public void opretLager() {
 
         // String lagerNavn, String adresse
@@ -178,82 +142,62 @@ public class LagerPane extends GridPane {
 
         // lagerNavn
 
-        Label lblLagerNavn =
-                new Label("Indtast lagernavn");
+        Label lblLagerNavn = new Label("Indtast lagernavn");
 
         this.add(lblLagerNavn, 0, 1);
 
-        TextField txtLagerNavn =
-                new TextField();
+        TextField txtLagerNavn = new TextField();
 
         this.add(txtLagerNavn, 0, 2);
 
         // adresse
 
-        Label lblAdresse =
-                new Label("Indtast adresse");
+        Label lblAdresse = new Label("Indtast adresse");
 
         this.add(lblAdresse, 0, 3);
 
-        TextField txtAdresse =
-                new TextField();
+        TextField txtAdresse = new TextField();
 
         this.add(txtAdresse, 0, 4);
 
         // antal reoler
 
-        Label lblAntalReoler =
-                new Label("Indtast antal reoler");
+        Label lblAntalReoler = new Label("Indtast antal reoler");
 
         this.add(lblAntalReoler, 0, 5);
 
-        TextField txtAntalReoler =
-                new TextField();
+        TextField txtAntalReoler = new TextField();
 
         this.add(txtAntalReoler, 0, 6);
 
         // Knap til opretlager
 
-        Button btnFordel =
-                new Button("Opret lager");
+        Button btnFordel = new Button("Opret lager");
 
         this.add(btnFordel, 0, 7);
 
         btnFordel.setOnAction(event -> {
-
             try {
 
-                String lagerNavn =
-                        txtLagerNavn.getText();
+                String lagerNavn = txtLagerNavn.getText();
 
-                String adresse =
-                        txtAdresse.getText();
+                String adresse = txtAdresse.getText();
 
-                int antalReoler =
-                        Integer.parseInt(
-                                txtAntalReoler.getText()
-                        );
+                int antalReoler = Integer.parseInt(txtAntalReoler.getText());
 
-                controller.createLagerMedReoler(
-                        lagerNavn,
-                        adresse,
-                        antalReoler
-                );
+                controller.createLagerMedReoler(lagerNavn, adresse, antalReoler);
 
                 // Opdaterer ListView
 
                 updateControls();
 
-                Alert alert =
-                        new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
                 alert.setTitle("Succes");
 
                 alert.setHeaderText("Lager oprettet");
 
-                alert.setContentText(
-                        "Lager er nu oprettet"
-                );
+                alert.setContentText("Lager er nu oprettet");
 
                 alert.showAndWait();
 
@@ -265,8 +209,7 @@ public class LagerPane extends GridPane {
 
             } catch (IllegalArgumentException e) {
 
-                Alert alert =
-                        new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
 
                 alert.setTitle("Fejl");
 
@@ -281,16 +224,8 @@ public class LagerPane extends GridPane {
 
     public void updateControls() {
 
-        lagerlist.setItems(
-                FXCollections.observableArrayList(
-                        controller.getLager()
-                )
-        );
+        lagerlist.setItems(FXCollections.observableArrayList(controller.getLager()));
 
-        cobFad.setItems(
-                FXCollections.observableArrayList(
-                        controller.getFade()
-                )
-        );
+        cobFad.setItems(FXCollections.observableArrayList(controller.getFade()));
     }
 }

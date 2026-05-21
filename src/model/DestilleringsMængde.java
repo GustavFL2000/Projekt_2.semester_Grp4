@@ -7,16 +7,16 @@ public class DestilleringsMængde {
     private Destillering destillering;
     private Destillat destillat;
 
-     public DestilleringsMængde(double mængde, Destillering destillering, Destillat destillat) {
-         if (destillering == null) {
-             throw new IllegalArgumentException("Destillering må ikke være null");
-         }
-         if (destillat == null) {
-             throw new IllegalArgumentException("Destillat må ikke være null");
-         }
-         if (mængde <= 0) {
-             throw new IllegalArgumentException("Mængde skal være større end 0");
-         }
+    public DestilleringsMængde(double mængde, Destillering destillering, Destillat destillat) {
+        if (destillering == null) {
+            throw new IllegalArgumentException("Destillering må ikke være null");
+        }
+        if (destillat == null) {
+            throw new IllegalArgumentException("Destillat må ikke være null");
+        }
+        if (mængde <= 0) {
+            throw new IllegalArgumentException("Mængde skal være større end 0");
+        }
 
         this.mængde = mængde;
         this.destillering = destillering;

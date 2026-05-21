@@ -5,7 +5,7 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage implements IStorage{
+public class Storage implements IStorage {
     private List<Destillering> destilleringer = new ArrayList<>();
     private List<Produkt> produkter = new ArrayList<>();
     private List<Fad> fade = new ArrayList<>();
@@ -16,8 +16,8 @@ public class Storage implements IStorage{
     private List<Flaske> flasker = new ArrayList<>();
 
     @Override
-    public void addDestillering(Destillering destillering){
-        if(!destilleringer.contains(destillering)){
+    public void addDestillering(Destillering destillering) {
+        if (!destilleringer.contains(destillering)) {
             destilleringer.add(destillering);
         }
     }
@@ -30,7 +30,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addProdukt(Produkt produkt) {
-        if(!produkter.contains(produkt)){
+        if (!produkter.contains(produkt)) {
             produkter.add(produkt);
         }
     }
@@ -42,7 +42,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addFad(Fad fad) {
-        if(!fade.contains(fad)){
+        if (!fade.contains(fad)) {
             fade.add(fad);
         }
     }
@@ -54,7 +54,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addLager(Lager lager) {
-        if(!lagerListe.contains(lager)){
+        if (!lagerListe.contains(lager)) {
             lagerListe.add(lager);
         }
     }
@@ -66,7 +66,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addMaltbatch(Maltbatch maltbatch) {
-        if (!maltbatches.contains(maltbatch)){
+        if (!maltbatches.contains(maltbatch)) {
             maltbatches.add(maltbatch);
         }
     }
@@ -78,7 +78,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addLeverandør(Leverandør leverandør) {
-        if (!leverandører.contains(leverandør)){
+        if (!leverandører.contains(leverandør)) {
             leverandører.add(leverandør);
         }
     }
@@ -90,7 +90,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addDestillat(Destillat destillat) {
-        if (!destillater.contains(destillat)){
+        if (!destillater.contains(destillat)) {
             destillater.add(destillat);
         }
     }
@@ -102,7 +102,7 @@ public class Storage implements IStorage{
 
     @Override
     public void addFlaske(Flaske flaske) {
-        if (!flasker.contains(flaske)){
+        if (!flasker.contains(flaske)) {
             flasker.add(flaske);
         }
     }
@@ -111,6 +111,4 @@ public class Storage implements IStorage{
     public List<Flaske> getFlasker() {
         return new ArrayList<>(flasker);
     }
-
-
 }

@@ -19,19 +19,19 @@ public class Fad {
 
     public Fad(int fadNr, String land, double størrelse,
                String tidligereIndhold, Leverandør leverandør) {
-        if (fadNr <= 0){
+        if (fadNr <= 0) {
             throw new IllegalArgumentException("FadNr skal værre større end 0");
         }
-        if (land == null || land.isBlank()){
+        if (land == null || land.isBlank()) {
             throw new IllegalArgumentException("Land skal udfyldes");
         }
-        if (størrelse <= 0 ){
+        if (størrelse <= 0) {
             throw new IllegalArgumentException("Størrelse på fadet skal værre større end 0");
         }
-        if (tidligereIndhold == null || tidligereIndhold.isBlank()){
+        if (tidligereIndhold == null || tidligereIndhold.isBlank()) {
             throw new IllegalArgumentException("Tidligere indhold skal udfyldes");
         }
-        if (leverandør == null){
+        if (leverandør == null) {
             throw new IllegalArgumentException("Leverandør skal vælges");
         }
 
@@ -88,7 +88,7 @@ public class Fad {
         return leverandør;
     }
 
-     void setReol(Reol reol) {
+    void setReol(Reol reol) {
         this.reol = reol;
     }
 
